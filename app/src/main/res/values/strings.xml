@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MovieQuoteV2</string>
+    <string name="start_game">Start</string>
+    <string name="dodgeball_q1">It’s a bold strategy, Cotton. Let’s see if it pays off for ‘em.</string>
+    <string name="movie_1">Dodgeball</string>
+    <string name="movie_2">Accepted</string>
+    <string name="movie_3">Superbad</string>
+    <string name="movie_4">The Other Guys</string>
+    <string name="correct">Correct!</string>
+    <string name="incorrect">Incorrect!</string>
+</resources>
