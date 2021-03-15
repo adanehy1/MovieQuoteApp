@@ -20,6 +20,19 @@ public class DisplayMessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
+        //Sets the text for top left button
+        Button button1 = (Button)findViewById(R.id.button2);
+        button1.setText(getString(R.string.movie_1));
+
+        Button button2 = (Button)findViewById(R.id.button3);
+        button2.setText("movie_1");
+
+        Button button3 = (Button)findViewById(R.id.button4);
+        button3.setText("BBBB");
+
+        Button button4 = (Button)findViewById(R.id.button5);
+        button4.setText("CCCC");
+
         Intent intent = getIntent();
         startTimer();
         countdownText = findViewById(R.id.countdown_text);
@@ -28,9 +41,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     public void movie1Button(View view) {
         Intent intent = new Intent(this, DisplayCorrectActivity.class);
         startActivity(intent);
-        Button b = null;
-        b = (Button) view;
-        b.setText("test");
+
     }
     public void movie2Button(View view) {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);

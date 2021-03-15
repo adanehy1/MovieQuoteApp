@@ -8,4 +8,15 @@
     <string name="movie_4">The Other Guys</string>
     <string name="correct">Correct!</string>
     <string name="incorrect">Incorrect!</string>
+    <string name="movie_5">Zoolander</string>
+    <string name="movie_6">Step Brothers</string>
+    <string name="movie_7">Hot Tub Time Machine</string>
+    <string name="movie_8">Elf</string>
+    <string name="movie_9">The Interview</string>
+    <string name="movie_10">The Internship</string>
+    <string-array name="movies_array">
+        <item>Dodgeball</item>
+        <item>Superbad</item>
+
+    </string-array>
 </resources>
