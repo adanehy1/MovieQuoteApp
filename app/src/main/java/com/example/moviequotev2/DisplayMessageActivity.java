@@ -20,6 +20,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
+
+        TextView TextView1 = (TextView) findViewById(R.id.textView);
+        TextView1.setText("Welcome to Dynamic TextView");
+
         //Sets the text for top left button
         Button button1 = (Button)findViewById(R.id.button2);
         button1.setText(getString(R.string.movie_1));
