@@ -25,7 +25,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     int randomIndex = (int)(Math.random() * (quotes.length));
     String selectedQuote = "NOT SET";
     HashMap<String, String> quoteAndMovieUSed = new HashMap<String, String>();
-
+    int randNum = (int) (Math.random() * 4) + 1;
 
 
 
@@ -53,6 +53,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
+
+        TextView TextView1 = (TextView) findViewById(R.id.textView);
+        TextView1.setText("Welcome to Dynamic TextView");
         Set<String> keys = quoteDict.keySet();
         String buttonOneTxt = "NOT SET YET";
         String buttonOneQuote = "";
@@ -88,7 +91,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
             buttonFourTxt = quoteDict.get(quotes[randIButtonFour]);
         }
 
-        int randNum = (int) (Math.random() * 4) + 1;
 
         if(randNum == 1){
             selectedQuote = buttonOneQuote;
@@ -100,8 +102,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
             selectedQuote = buttonFourQuote;
         }
 
+
         System.out.println(quoteDict.get(buttonOneTxt));
-        TextView TextView1 = (TextView) findViewById(R.id.textView);
+        //TextView TextView2 = (TextView) findViewById(R.id.textView);
         TextView1.setText(selectedQuote);
 
         //Sets the text for top left button
@@ -123,20 +126,35 @@ public class DisplayMessageActivity extends AppCompatActivity {
     }
 
     public void movie1Button(View view) {
-        Intent intent = new Intent(this, DisplayCorrectActivity.class);
-        startActivity(intent);
+        Intent intent = new Intent(this, DisplayIncorrectActivity.class);
 
+        if(randNum == 1) {
+            intent = new Intent(this, DisplayCorrectActivity.class);
+        }
+        startActivity(intent);
     }
     public void movie2Button(View view) {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
+
+        if(randNum == 2) {
+            intent = new Intent(this, DisplayCorrectActivity.class);
+        }
         startActivity(intent);
     }
     public void movie3Button(View view) {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
+
+        if(randNum == 3) {
+            intent = new Intent(this, DisplayCorrectActivity.class);
+        }
         startActivity(intent);
     }
     public void movie4Button(View view) {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
+
+        if(randNum == 4) {
+            intent = new Intent(this, DisplayCorrectActivity.class);
+        }
         startActivity(intent);
     }
 
