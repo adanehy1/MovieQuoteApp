@@ -26,7 +26,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
     String selectedQuote = "NOT SET";
     HashMap<String, String> quoteAndMovieUSed = new HashMap<String, String>();
     int randNum = (int) (Math.random() * 4) + 1;
-
+    int roundNums = 3;
+    double playerScore = 0.0;
+    long timerLength = 10;
 
 
 
@@ -131,6 +133,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
         if(randNum == 1) {
             intent = new Intent(this, DisplayCorrectActivity.class);
         }
+        stopTimer();
+        startActivity(intent);
+        // pause for 2 seconds
+        // display nextRound activity \
+        // add counter for rounds
+        // make sure it doesn't include quote another time
+        intent = new Intent(this, DisplayMessageActivity.class);
         startActivity(intent);
     }
     public void movie2Button(View view) {
@@ -139,6 +148,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         if(randNum == 2) {
             intent = new Intent(this, DisplayCorrectActivity.class);
         }
+        stopTimer();
         startActivity(intent);
     }
     public void movie3Button(View view) {
@@ -147,6 +157,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         if(randNum == 3) {
             intent = new Intent(this, DisplayCorrectActivity.class);
         }
+        stopTimer();
         startActivity(intent);
     }
     public void movie4Button(View view) {
@@ -155,11 +166,12 @@ public class DisplayMessageActivity extends AppCompatActivity {
         if(randNum == 4) {
             intent = new Intent(this, DisplayCorrectActivity.class);
         }
+        stopTimer();
         startActivity(intent);
     }
 
     public void startTimer() {
-        countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 10) {
+        countDownTimer = new CountDownTimer(timeLeftInMilliseconds, timerLength) {
             @Override
             public void onTick(long l) {
                 timeLeftInMilliseconds = l;
