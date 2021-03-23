@@ -1,6 +1,8 @@
 package com.example.moviequotev2;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.widget.Button;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,37 +17,34 @@ import java.lang.Math;
 
 public class DisplayMessageActivity extends AppCompatActivity {
     private TextView countdownText;
-
     private CountDownTimer countDownTimer;
     private long timeLeftInMilliseconds = 10000;
     private boolean timerRunning;
     HashMap<String, String> quoteDict = new HashMap<String, String>();
-    String[] quotes = {"You are the one that stares at me. Why is this?", "Ask me about my wiener!", "I wasn't like every other kid, you know, who dreams about being an astronaut, I was always more interested in what bark was made out of on a tree"};
-    int randomIndex = (int)(Math.random() * (quotes.length + 1));
-    String selectedQuote;
+    String[] quotes = {"If you can dodge a wrench, you can dodge a ball.", "Uhh Earth to Matilda, I was at a day spa. Day, D-A-I-Y-E. Okay?", "It's called male bonding okay. Haven't you even seen 'Wild Hogs'?", "Prepare to be fucked by the long dick of the law!",  "You get bit in the ass. Well let me tell you: my ass looks like hamburger meat, but I can still sit down", "Glen, I love your wads!", "Great White Buffalo."};
+    int randomIndex = (int)(Math.random() * (quotes.length));
+    String selectedQuote = "NOT SET";
     HashMap<String, String> quoteAndMovieUSed = new HashMap<String, String>();
-    quoteDict.put("Key", "value");
-    quoteDict.put("If you can dodge a wrench, you can dodge a ball.", "Dodgeball”);
-    quoteDict.put("You get bit in the ass. Well let me tell you: my ass looks like hamburger meat, but I can still sit down", "Accepted”);
-    quoteDict.put("A sandwich? You’re the SHIT Sandwiches?", "Accepted”);
-    quoteDict.put("Glen, I love your wads!", "Accepted”);
-    quoteDict.put("I want to learn how to blow shit up with my mind.", "Accepted”);
-    quoteDict.put("Rufus, Brint, and Meekus were like brothers to me. And when I say brother, I don't mean, like, an actual brother, but I mean it like the way black people use it.", "Zoolander”);
-    quoteDict.put("Uhh Earth to Matilda, I was at a day spa. Day, D-A-I-Y-E. Okay?", "Zoolander”);
-    quoteDict.put("McLovin? What kind of a stupid name is that, Fogell? What, are you trying to be an Irish R&B singer?", "Superbad”);
-    quoteDict.put("Prepare to be fucked by the long dick of the law!", "Superbad”);
-    quoteDict.put("You know what I do? I flip my boner up into my waistband. It hides it AND it feels awesome. I almost blew a load into my belly button.", "Superbad”);
-    quoteDict.put("Great White Buffalo.", "Hot Tub Time Machine”);
-    quoteDict.put("It's called male bonding okay. Haven't you even seen 'Wild Hogs'?", "Hot Tub Time Machine”);
-    quoteDict.put("Wait, I know that squirrel. That’s a magic fuckin’ squirrel.", "Hot Tub Time Machine”);
 
 
 
-    // put value and pairs here
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        quoteDict.put("If you can dodge a wrench, you can dodge a ball.", "Dodgeball");
+        quoteDict.put("You get bit in the ass. Well let me tell you: my ass looks like hamburger meat, but I can still sit down", "Accepted");
+        quoteDict.put("A sandwich? You’re the SHIT Sandwiches?", "Accepted");
+        quoteDict.put("Glen, I love your wads!", "Accepted");
+        quoteDict.put("I want to learn how to blow shit up with my mind.", "Accepted");
+        quoteDict.put("Rufus, Brint, and Meekus were like brothers to me. And when I say brother, I don't mean, like, an actual brother, but I mean it like the way black people use it.", "Zoolander");
+        quoteDict.put("Uhh Earth to Matilda, I was at a day spa. Day, D-A-I-Y-E. Okay?", "Zoolander");
+        quoteDict.put("McLovin? What kind of a stupid name is that, Fogell? What, are you trying to be an Irish R&B singer?", "Superbad");
+        quoteDict.put("Prepare to be fucked by the long dick of the law!", "Superbad");
+        quoteDict.put("Great White Buffalo.", "Hot Tub Time Machine");
+        quoteDict.put("It's called male bonding okay. Haven't you even seen 'Wild Hogs'?", "Hot Tub Time Machine");
+        quoteDict.put("Wait, I know that squirrel. That’s a magic fuckin’ squirrel.", "Hot Tub Time Machine");
+
         if(!(randomIndex > quotes.length)){
             selectedQuote = quotes[randomIndex];
         } else {
@@ -55,29 +54,52 @@ public class DisplayMessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_message);
         Set<String> keys = quoteDict.keySet();
         String buttonOneTxt = "NOT SET YET";
+        String buttonOneQuote = "";
         String buttonTwoTxt = "NOT SET YET";
+        String buttonTwoQuote = "";
         String buttonThreeTxt = "NOT SET YET";
+        String buttonThreeQuote = "";
         String buttonFourTxt = "NOT SET YET";
+        String buttonFourQuote = "";
 
-       while(buttonOneTxt == buttonTwoTxt || buttonOneTxt == buttonThreeTxt || buttonOneTxt == buttonFourTxt ){
-           int randIButtonOne = (int)(Math.random() * (quotes.length + 1));
-           buttonOneTxt =  quoteDict.get(quotes[randIButtonOne]);
-       }
+        boolean fourInit = false;
+
+
+        while(buttonOneTxt == buttonTwoTxt || buttonOneTxt == buttonThreeTxt || buttonOneTxt == buttonFourTxt ) {
+           int randIButtonOne = (int) (Math.random() * (quotes.length));
+           buttonOneQuote = quotes[randIButtonOne];
+           buttonOneTxt = quoteDict.get(quotes[randIButtonOne]);
+        }
        while(buttonTwoTxt == buttonOneTxt || buttonTwoTxt == buttonThreeTxt || buttonTwoTxt == buttonFourTxt ){
-            int randIButtonTwo = (int)(Math.random() * (quotes.length + 1));
+            int randIButtonTwo = (int)(Math.random() * (quotes.length));
+            buttonTwoQuote = quotes[randIButtonTwo];
             buttonTwoTxt =  quoteDict.get(quotes[randIButtonTwo]);
         }
         while(buttonThreeTxt == buttonOneTxt || buttonThreeTxt == buttonTwoTxt || buttonThreeTxt == buttonFourTxt ){
-            int randIButtonThree = (int)(Math.random() * (quotes.length + 1));
+            int randIButtonThree = (int)(Math.random() * (quotes.length));
+            buttonThreeQuote = quotes[randIButtonThree];
             buttonThreeTxt =  quoteDict.get(quotes[randIButtonThree]);
         }
-        while(buttonFourTxt == buttonOneTxt || buttonFourTxt == buttonTwoTxt || buttonFourTxt == buttonThreeTxt ){
-            int randIButtonThree = (int)(Math.random() * (quotes.length + 1));
-            buttonThreeTxt =  quoteDict.get(quotes[randIButtonThree]);
+        while(buttonFourTxt == buttonOneTxt || buttonFourTxt == buttonTwoTxt || buttonFourTxt == buttonThreeTxt || !fourInit ) {
+            int randIButtonFour = (int) (Math.random() * (quotes.length));
+            buttonFourQuote = quotes[randIButtonFour];
+            fourInit = true;
+            buttonFourTxt = quoteDict.get(quotes[randIButtonFour]);
         }
 
+        int randNum = (int) (Math.random() * 4) + 1;
 
+        if(randNum == 1){
+            selectedQuote = buttonOneQuote;
+        } else if (randNum == 2){
+            selectedQuote = buttonTwoQuote;
+        } else if (randNum == 3){
+            selectedQuote = buttonThreeQuote;
+        } else {
+            selectedQuote = buttonFourQuote;
+        }
 
+        System.out.println(quoteDict.get(buttonOneTxt));
         TextView TextView1 = (TextView) findViewById(R.id.textView);
         TextView1.setText(selectedQuote);
 
