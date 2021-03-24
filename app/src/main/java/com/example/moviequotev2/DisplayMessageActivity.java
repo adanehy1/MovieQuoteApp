@@ -32,7 +32,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         quoteDict.put("If you can dodge a wrench, you can dodge a ball.", "Dodgeball");
@@ -125,9 +124,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         startTimer();
         countdownText = findViewById(R.id.countdown_text);
+
     }
 
-    public void movie1Button(View view) {
+    public void movie1Button(View view) throws InterruptedException {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
 
         if(randNum == 1) {
@@ -135,12 +135,16 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         stopTimer();
         startActivity(intent);
+
+        //intent = new Intent(this, DisplayMessageActivity.class);
+        //startActivity(intent);
+
         // pause for 2 seconds
         // display nextRound activity \
         // add counter for rounds
         // make sure it doesn't include quote another time
-        intent = new Intent(this, DisplayMessageActivity.class);
-        startActivity(intent);
+
+
     }
     public void movie2Button(View view) {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
@@ -150,6 +154,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         stopTimer();
         startActivity(intent);
+        // Add Pause
+        //intent = new Intent(this, DisplayMessageActivity.class);
+        //startActivity(intent);
     }
     public void movie3Button(View view) {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
@@ -159,6 +166,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         stopTimer();
         startActivity(intent);
+        // Add Pause
+        //intent = new Intent(this, DisplayMessageActivity.class);
+        //startActivity(intent);
     }
     public void movie4Button(View view) {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
@@ -168,6 +178,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         stopTimer();
         startActivity(intent);
+        // Add Pause
+        //intent = new Intent(this, DisplayMessageActivity.class);
+        //startActivity(intent);
     }
 
     public void startTimer() {

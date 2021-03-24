@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+
 
 public class DisplayIncorrectActivity extends AppCompatActivity {
 
@@ -12,5 +14,13 @@ public class DisplayIncorrectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_incorrect);
         Intent intent = getIntent();
+        Handler handler = new Handler();
+        final Intent intent2 = new Intent(this, DisplayMessageActivity.class);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(intent2);
+            }
+        }, 2000);
     }
 }
