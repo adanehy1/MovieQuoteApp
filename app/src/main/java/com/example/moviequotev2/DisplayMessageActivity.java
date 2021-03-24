@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Set;
 import java.lang.Math;
+import android.os.Handler;
 
 
 
@@ -29,11 +30,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
     int roundNums = 3;
     double playerScore = 0.0;
     long timerLength = 10;
+    private boolean pressed;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pressed = false;
+
         quoteDict.put("If you can dodge a wrench, you can dodge a ball.", "Dodgeball");
         quoteDict.put("You get bit in the ass. Well let me tell you: my ass looks like hamburger meat, but I can still sit down", "Accepted");
         quoteDict.put("A sandwich? You’re the SHIT Sandwiches?", "Accepted");
@@ -125,6 +129,18 @@ public class DisplayMessageActivity extends AppCompatActivity {
         startTimer();
         countdownText = findViewById(R.id.countdown_text);
 
+        // Delay to transition to "incorrect" after 10 seconds
+        //if (pressed == false) {
+        //    Handler handler = new Handler();
+        //    final Intent intent2 = new Intent(this, DisplayIncorrectActivity.class);
+        //    handler.postDelayed(new Runnable() {
+        //       @Override
+        //        public void run() {
+        //            startActivity(intent2);
+        //        }
+        //    }, 10000);
+        //}
+
     }
 
     public void movie1Button(View view) throws InterruptedException {
@@ -135,6 +151,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         stopTimer();
         startActivity(intent);
+        pressed = true;
 
         //intent = new Intent(this, DisplayMessageActivity.class);
         //startActivity(intent);
@@ -157,6 +174,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
         //startActivity(intent);
+        pressed = true;
     }
     public void movie3Button(View view) {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
@@ -169,6 +187,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
         //startActivity(intent);
+        pressed = true;
     }
     public void movie4Button(View view) {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
@@ -181,6 +200,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
         //startActivity(intent);
+        pressed = true;
     }
 
     public void startTimer() {

@@ -13,7 +13,7 @@ public class DisplayCorrectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_correct);
         Intent intent = getIntent();
         Handler handler = new Handler();
-        // This handler creates the delay of 2000 milliseconds
+        // This handler creates the delay of 3000 milliseconds
         final Intent intent2 = new Intent(this, NextRoundCounter.class);
         handler.postDelayed(new Runnable() {
             @Override
