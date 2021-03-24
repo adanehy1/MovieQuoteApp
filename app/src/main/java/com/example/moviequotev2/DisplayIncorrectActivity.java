@@ -15,12 +15,21 @@ public class DisplayIncorrectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_incorrect);
         Intent intent = getIntent();
         Handler handler = new Handler();
-        final Intent intent2 = new Intent(this, DisplayMessageActivity.class);
+        final Intent intent2 = new Intent(this, NextRoundCounter.class);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(intent2);
             }
-        }, 2000);
+        }, 1000);
+        Handler handler2 = new Handler();
+        final Intent intent3 = new Intent(this, DisplayMessageActivity.class);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(intent3);
+            }
+        }, 3000);
+
     }
 }

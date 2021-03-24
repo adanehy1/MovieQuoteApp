@@ -14,12 +14,21 @@ public class DisplayCorrectActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Handler handler = new Handler();
         // This handler creates the delay of 2000 milliseconds
-        final Intent intent2 = new Intent(this, DisplayMessageActivity.class);
+        final Intent intent2 = new Intent(this, NextRoundCounter.class);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(intent2);
             }
-        }, 2000);
+        }, 1000);
+        Handler handler2 = new Handler();
+        final Intent intent3 = new Intent(this, DisplayMessageActivity.class);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(intent3);
+            }
+        }, 3000);
+
     }
 }
