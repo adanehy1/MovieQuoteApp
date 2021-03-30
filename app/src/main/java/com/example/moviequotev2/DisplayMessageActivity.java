@@ -185,6 +185,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
             intent = new Intent(this, DisplayCorrectActivity.class);
         }
         stopTimer();
+        if(randNum == 1){
+            playerScore += calculateScore(timeLeftInMilliseconds);
+        }
+        System.out.println("Player score: " + playerScore);
         startActivity(intent);
         pressed = true;
 
@@ -273,5 +277,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         countdownText.setText(timeLeftText);
 
 
+    }
+    public double calculateScore(long timeRemaining){
+        double timeInSec = (timerLength * 1000) - (timeRemaining / 1000.0);
+        return (-0.1* (Math.pow(timeInSec, 3)))+10;
     }
 }
