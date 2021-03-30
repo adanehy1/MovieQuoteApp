@@ -276,7 +276,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         countdownText.setText(timeLeftText);
 
-
     }
     public double calculateScore(long timeRemaining){
         double timeInSec = (timerLength * 1000) - (timeRemaining / 1000.0);
