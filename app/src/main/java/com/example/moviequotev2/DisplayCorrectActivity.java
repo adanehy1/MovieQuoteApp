@@ -31,4 +31,7 @@ public class DisplayCorrectActivity extends AppCompatActivity {
         }, 3000);
 
     }
+    public void onBackPressed(){
+
+    }
 }

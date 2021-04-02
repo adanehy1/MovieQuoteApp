@@ -32,4 +32,7 @@ public class DisplayIncorrectActivity extends AppCompatActivity {
         }, 3000);
 
     }
+    public void onBackPressed(){
+
+    }
 }
