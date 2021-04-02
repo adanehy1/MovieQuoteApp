@@ -2,7 +2,6 @@ package com.example.moviequotev2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.widget.Button;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,8 +11,6 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Set;
 import java.lang.Math;
-import android.os.Handler;
-
 
 
 public class DisplayMessageActivity extends AppCompatActivity {
@@ -35,7 +32,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     double playerScore = 0.0;
     long timerLength = 10;
     private boolean pressed;
-
 
 
     @Override
@@ -242,6 +238,24 @@ public class DisplayMessageActivity extends AppCompatActivity {
         pressed = true;
     }
 
+    public void yesexitButton(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void noexitButton(View view){
+        View popup = findViewById(R.id.popup);
+        popup.setVisibility(View.INVISIBLE);
+        View areyousure = findViewById(R.id.areyousure);
+        areyousure.setVisibility(View.INVISIBLE);
+        View noexit = findViewById(R.id.noexit);
+        noexit.setVisibility(View.INVISIBLE);
+        View yesexit = findViewById(R.id.yesexit);
+        yesexit.setVisibility(View.INVISIBLE);
+
+    }
+
     public void startTimer() {
         countDownTimer = new CountDownTimer(timeLeftInMilliseconds, timerLength) {
             @Override
@@ -280,5 +294,16 @@ public class DisplayMessageActivity extends AppCompatActivity {
     public double calculateScore(long timeRemaining){
         double timeInSec = (timerLength * 1000) - (timeRemaining / 1000.0);
         return (-0.1* (Math.pow(timeInSec, 3)))+10;
+    }
+    @Override
+    public void onBackPressed(){
+        View popup = findViewById(R.id.popup);
+        popup.setVisibility(View.VISIBLE);
+        View areyousure = findViewById(R.id.areyousure);
+        areyousure.setVisibility(View.VISIBLE);
+        View noexit = findViewById(R.id.noexit);
+        noexit.setVisibility(View.VISIBLE);
+        View yesexit = findViewById(R.id.yesexit);
+        yesexit.setVisibility(View.VISIBLE);
     }
 }
