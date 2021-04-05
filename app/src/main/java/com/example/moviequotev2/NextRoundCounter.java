@@ -51,4 +51,8 @@ public class NextRoundCounter extends AppCompatActivity {
         mTextViewCountDown.setText(timeLeft);
 
     }
+    @Override
+    public void onBackPressed(){
+
+    }
 }
