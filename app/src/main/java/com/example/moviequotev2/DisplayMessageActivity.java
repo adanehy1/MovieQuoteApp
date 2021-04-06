@@ -11,7 +11,11 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Set;
 import java.lang.Math;
-
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+import  java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class DisplayMessageActivity extends AppCompatActivity {
     private TextView countdownText;
@@ -29,14 +33,17 @@ public class DisplayMessageActivity extends AppCompatActivity {
     String selectedQuote = "NOT SET";
     HashMap<String, String> quoteAndMovieUSed = new HashMap<String, String>();
     int randNum = (int) (Math.random() * 4) + 1;
-    int roundNums = 0;
-    double playerScore = 0.0;
+    int roundNums = 5;
     long timerLength = 10;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        try {
+            double playerScore = getPlayerScore();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         //Dodgeball Quotes
         quoteDict.put("If you can dodge a wrench, you can dodge a ball.", "Dodgeball");
         quoteDict.put("Are you reading the dictionary?", "Dodgeball");
@@ -175,23 +182,22 @@ public class DisplayMessageActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        roundNums =+ 1;
+        roundNums -= 1;
         Intent finish = new Intent(this, FinishScreen.class);
-        if (roundNums > 5) {
+        if (roundNums <= 0) {
             startActivity(finish);
         }
     }
-    public void movie1Button(View view) throws InterruptedException {
+    public void movie1Button(View view) throws InterruptedException, FileNotFoundException {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
-
         if(randNum == 1) {
             intent = new Intent(this, DisplayCorrectActivity.class);
         }
         stopTimer();
         if(randNum == 1){
-            playerScore += calculateScore(timeLeftInMilliseconds);
+            addScore(calculateScore(timeLeftInMilliseconds));
         }
-        System.out.println("Player score: " + playerScore);
+        System.out.println("Player score: " + getPlayerScore());
         startActivity(intent);
 
         //intent = new Intent(this, DisplayMessageActivity.class);
@@ -204,37 +210,49 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
 
     }
-    public void movie2Button(View view) {
+    public void movie2Button(View view) throws FileNotFoundException {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
 
         if(randNum == 2) {
             intent = new Intent(this, DisplayCorrectActivity.class);
         }
         stopTimer();
+       /* if(randNum == 2){
+            addScore(calculateScore(timeLeftInMilliseconds));
+        }
+        System.out.println("Player score: " + getPlayerScore());*/
         startActivity(intent);
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
         //startActivity(intent);
     }
-    public void movie3Button(View view) {
+    public void movie3Button(View view) throws FileNotFoundException {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
 
         if(randNum == 3) {
             intent = new Intent(this, DisplayCorrectActivity.class);
         }
         stopTimer();
+        /*if(randNum == 3){
+            addScore(calculateScore(timeLeftInMilliseconds));
+        }
+        System.out.println("Player score: " + getPlayerScore());*/
         startActivity(intent);
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
         //startActivity(intent);
     }
-    public void movie4Button(View view) {
+    public void movie4Button(View view) throws FileNotFoundException {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
 
         if(randNum == 4) {
             intent = new Intent(this, DisplayCorrectActivity.class);
         }
         stopTimer();
+        /*if(randNum == 4){
+            addScore(calculateScore(timeLeftInMilliseconds));
+        }
+        System.out.println("Player score: " + getPlayerScore());*/
         startActivity(intent);
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
@@ -295,8 +313,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     }
     public double calculateScore(long timeRemaining){
-        double timeInSec = (timerLength * 1000) - (timeRemaining / 1000.0);
-        return (-0.1* (Math.pow(timeInSec, 3)))+10;
+        double timeInSec = (timeRemaining)/1000.0;
+        //System.out.println("Score with " + timeInSec + " time remaining: " + ((-0.1* (Math.pow(timeInSec, 3)))+10)/10.0);
+        //return (-0.1* (Math.pow(timeInSec, 3)))+10;
+        return timeInSec*100;
     }
     @Override
     public void onBackPressed(){
@@ -309,4 +329,32 @@ public class DisplayMessageActivity extends AppCompatActivity {
         View yesexit = findViewById(R.id.yesexit);
         yesexit.setVisibility(View.VISIBLE);
     }
+    public void addScore(double score){
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
+        try{
+            FileWriter myWriter = new FileWriter("playerScore.txt");
+            myWriter.write(Double.toString(score));
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+    public double getPlayerScore() throws FileNotFoundException {
+        String score = "0.0";
+        try {
+            File myObj = new File("playerScore.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                 score = myReader.nextLine();
+            }
+            myReader.close();
+            return Double.parseDouble(score);
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return  0.0;
+    }
 }
+
