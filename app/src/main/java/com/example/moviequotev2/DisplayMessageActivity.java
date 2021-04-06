@@ -29,7 +29,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     String selectedQuote = "NOT SET";
     HashMap<String, String> quoteAndMovieUSed = new HashMap<String, String>();
     int randNum = (int) (Math.random() * 4) + 1;
-    int roundNums = 0;
     double playerScore = 0.0;
     long timerLength = 10;
 
@@ -172,15 +171,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
 
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        roundNums =+ 1;
-        Intent finish = new Intent(this, FinishScreen.class);
-        if (roundNums > 5) {
-            startActivity(finish);
-        }
-    }
+
     public void movie1Button(View view) throws InterruptedException {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
 
