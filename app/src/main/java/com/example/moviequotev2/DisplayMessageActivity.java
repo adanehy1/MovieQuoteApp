@@ -304,10 +304,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         countdownText.setText(timeLeftText);
         Intent incorrect = new Intent(this, DisplayIncorrectActivity.class);
- //       if (seconds <= 0) {
-        //           startActivity(incorrect);
-//
-        //       }
+        if (seconds <= 0) {
+            startActivity(incorrect);
+            stopTimer();
+               }
 
     }
     public double calculateScore(long timeRemaining){
