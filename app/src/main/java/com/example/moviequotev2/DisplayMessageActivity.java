@@ -2,12 +2,18 @@ package com.example.moviequotev2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.widget.Button;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.TextView;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Set;
 import java.lang.Math;
@@ -93,7 +99,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
         quoteDict.put("Aaron, are you inside the tiger?", "The Interview");
         //quoteDict.put("", "");
 
-
+        writeToScoresFile("0.0");
+        System.out.println("Score " + loadScore());
 
 
 
@@ -217,10 +224,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
             intent = new Intent(this, DisplayCorrectActivity.class);
         }
         stopTimer();
-       /* if(randNum == 2){
+       if(randNum == 2){
             addScore(calculateScore(timeLeftInMilliseconds));
         }
-        System.out.println("Player score: " + getPlayerScore());*/
+        System.out.println("Player score: " + loadScore());
         startActivity(intent);
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
@@ -312,6 +319,45 @@ public class DisplayMessageActivity extends AppCompatActivity {
         countdownText.setText(timeLeftText);
 
     }
+    public String loadScore(){
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput("scores.txt");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+            while((text = br.readLine()) != null){
+                return text;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+    public void writeToScoresFile(String score){
+        String FILENAME = "scores.txt";
+        String string = score;
+
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.write(string.getBytes())    ;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public double calculateScore(long timeRemaining){
         double timeInSec = (timeRemaining)/1000.0;
         //System.out.println("Score with " + timeInSec + " time remaining: " + ((-0.1* (Math.pow(timeInSec, 3)))+10)/10.0);
@@ -330,31 +376,41 @@ public class DisplayMessageActivity extends AppCompatActivity {
         yesexit.setVisibility(View.VISIBLE);
     }
     public void addScore(double score){
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
-        try{
-            FileWriter myWriter = new FileWriter("playerScore.txt");
-            myWriter.write(Double.toString(score));
-            myWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
+        double curScore =  Double.parseDouble(loadScore());
+        score += curScore;
+        writeToScoresFile(String.valueOf(score));
     }
     public double getPlayerScore() throws FileNotFoundException {
-        String score = "0.0";
-        try {
+        return 0.0;
+        /*String score = "0.0";
+            System.out.println("jere1");
             File myObj = new File("playerScore.txt");
+            System.out.println("jere2");
             Scanner myReader = new Scanner(myObj);
+            System.out.println("jere3");
+            while (myReader.hasNextLine()) {
+                score = myReader.nextLine();
+            }
+            myReader.close();
+            System.out.println("score: " + Double.parseDouble(score));
+            return Double.parseDouble(score);*/
+        /*String score = "0.0";
+        try {
+            System.out.println("jere1");
+            File myObj = new File("playerScore.txt");
+            System.out.println("jere2");
+            Scanner myReader = new Scanner(myObj);
+            System.out.println("jere3");
             while (myReader.hasNextLine()) {
                  score = myReader.nextLine();
             }
             myReader.close();
+            System.out.println("score: " + Double.parseDouble(score));
             return Double.parseDouble(score);
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
-        }
-        return  0.0;
+        }*/
     }
 }
 
