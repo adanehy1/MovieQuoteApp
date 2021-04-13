@@ -181,6 +181,17 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        roundNums--;
+        Intent intent3 = new Intent(this,FinishScreen.class);
+        if (roundNums <=0){
+            startActivity(intent3);
+        }
+
+    }
+
     public void movie1Button(View view) throws InterruptedException {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
         if(randNum == 1) {
