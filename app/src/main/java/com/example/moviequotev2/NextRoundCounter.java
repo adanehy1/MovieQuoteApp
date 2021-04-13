@@ -55,7 +55,7 @@ public class NextRoundCounter extends AppCompatActivity {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         if (seconds <= 0) {
             startActivity(intent);
-
+            stopTimer();
         }
     }
     public void stopTimer() {

@@ -188,17 +188,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        roundNums--;
-        Intent intent3 = new Intent(this,FinishScreen.class);
-        if (roundNums <=0){
-            startActivity(intent3);
-        }
-
-    }
-
     public void movie1Button(View view) throws InterruptedException {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
         if(randNum == 1) {
@@ -208,7 +197,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         if(randNum == 1){
             addScore(calculateScore(timeLeftInMilliseconds));
         }
-        System.out.println("Player score: " + getPlayerScore());
+//        System.out.println("Player score: " + getPlayerScore());
         startActivity(intent);
 
         //intent = new Intent(this, DisplayMessageActivity.class);
@@ -321,6 +310,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
         timeLeftText += milli;
 
         countdownText.setText(timeLeftText);
+        Intent incorrect = new Intent(this, DisplayIncorrectActivity.class);
+        if (seconds <= 0) {
+            startActivity(incorrect);
+            stopTimer();
+               }
 
     }
     public String loadScore(){
