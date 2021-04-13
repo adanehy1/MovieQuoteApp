@@ -195,7 +195,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         if(randNum == 1){
             addScore(calculateScore(timeLeftInMilliseconds));
         }
-        //System.out.println("Player score: " + getPlayerScore());
+        System.out.println("Player score: " + loadScore());
         startActivity(intent);
 
         //intent = new Intent(this, DisplayMessageActivity.class);
@@ -231,10 +231,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
             intent = new Intent(this, DisplayCorrectActivity.class);
         }
         stopTimer();
-        /*if(randNum == 3){
+        if(randNum == 3){
             addScore(calculateScore(timeLeftInMilliseconds));
         }
-        System.out.println("Player score: " + getPlayerScore());*/
+        System.out.println("Player score: " + loadScore());
         startActivity(intent);
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
@@ -247,10 +247,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
             intent = new Intent(this, DisplayCorrectActivity.class);
         }
         stopTimer();
-        /*if(randNum == 4){
+        if(randNum == 4){
             addScore(calculateScore(timeLeftInMilliseconds));
         }
-        System.out.println("Player score: " + getPlayerScore());*/
+        System.out.println("Player score: " + loadScore());
         startActivity(intent);
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
