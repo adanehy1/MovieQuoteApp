@@ -2,6 +2,7 @@ package com.example.moviequotev2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ public class NextRoundCounter extends AppCompatActivity {
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning; //true/false of whether the timer is running
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS; //Variable of the time left
+    static int roundNums = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +46,32 @@ public class NextRoundCounter extends AppCompatActivity {
 
     private void updateCountDownText(){
         int seconds = (int) mTimeLeftInMillis/1000;
+        System.out.println(seconds);
 
         String timeLeft;
         timeLeft = "" + seconds;
 
         mTextViewCountDown.setText(timeLeft);
+        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        if (seconds <= 0) {
+            startActivity(intent);
 
+        }
+    }
+    public void stopTimer() {
+        mCountDownTimer.cancel();
+        mTimerRunning = false;
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        roundNums--;
+        System.out.println(roundNums);
+        Intent finish = new Intent(this, FinishScreen.class);
+        if (roundNums <= 0) {
+            startActivity(finish);
+            stopTimer();
+        }
     }
     @Override
     public void onBackPressed(){

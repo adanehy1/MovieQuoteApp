@@ -40,6 +40,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     HashMap<String, String> quoteAndMovieUSed = new HashMap<String, String>();
     int randNum = (int) (Math.random() * 4) + 1;
     int roundNums = 5;
+    double playerScore = 0.0;
     long timerLength = 10;
 
 
@@ -186,16 +187,19 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
 
     }
+
     @Override
-    protected void onResume() {
+    public void onResume(){
         super.onResume();
-        roundNums -= 1;
-        Intent finish = new Intent(this, FinishScreen.class);
-        if (roundNums <= 0) {
-            startActivity(finish);
+        roundNums--;
+        Intent intent3 = new Intent(this,FinishScreen.class);
+        if (roundNums <=0){
+            startActivity(intent3);
         }
+
     }
-    public void movie1Button(View view) throws InterruptedException, FileNotFoundException {
+
+    public void movie1Button(View view) throws InterruptedException {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
         if(randNum == 1) {
             intent = new Intent(this, DisplayCorrectActivity.class);

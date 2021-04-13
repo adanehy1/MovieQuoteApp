@@ -22,7 +22,7 @@ public class DisplayIncorrectActivity extends AppCompatActivity {
                 startActivity(intent2);
             }
         }, 1000);
-        Handler handler2 = new Handler();
+/*        Handler handler2 = new Handler();
         final Intent intent3 = new Intent(this, DisplayMessageActivity.class);
         handler.postDelayed(new Runnable() {
             @Override
@@ -30,7 +30,7 @@ public class DisplayIncorrectActivity extends AppCompatActivity {
                 startActivity(intent3);
             }
         }, 3000);
-
+*/
     }
     public void onBackPressed(){
 
