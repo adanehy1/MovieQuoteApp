@@ -2,10 +2,15 @@ package com.example.moviequotev2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.TextView;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class NextRoundCounter extends AppCompatActivity {
     private static final long START_TIME_IN_MILLIS = 3000; //Inital start time of the timer
@@ -69,6 +74,7 @@ public class NextRoundCounter extends AppCompatActivity {
         System.out.println(roundNums);
         Intent finish = new Intent(this, FinishScreen.class);
         if (roundNums <= 0) {
+            resetScoresToZero();
             startActivity(finish);
             stopTimer();
         }
@@ -76,5 +82,26 @@ public class NextRoundCounter extends AppCompatActivity {
     @Override
     public void onBackPressed(){
 
+    }
+    public void resetScoresToZero(){
+        String FILENAME = "scores.txt";
+        String string = "0.0";
+
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.write(string.getBytes())    ;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

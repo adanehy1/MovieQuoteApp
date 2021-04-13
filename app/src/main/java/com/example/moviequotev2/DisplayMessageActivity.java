@@ -99,8 +99,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         quoteDict.put("Eminem's gay on our show!", "The Interview");
         quoteDict.put("Aaron, are you inside the tiger?", "The Interview");
         //quoteDict.put("", "");
-
-        writeToScoresFile("0.0");
         System.out.println("Score " + loadScore());
 
 
@@ -197,7 +195,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         if(randNum == 1){
             addScore(calculateScore(timeLeftInMilliseconds));
         }
-//        System.out.println("Player score: " + getPlayerScore());
+        //System.out.println("Player score: " + getPlayerScore());
         startActivity(intent);
 
         //intent = new Intent(this, DisplayMessageActivity.class);
@@ -380,35 +378,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     }
     public double getPlayerScore() throws FileNotFoundException {
         return 0.0;
-        /*String score = "0.0";
-            System.out.println("jere1");
-            File myObj = new File("playerScore.txt");
-            System.out.println("jere2");
-            Scanner myReader = new Scanner(myObj);
-            System.out.println("jere3");
-            while (myReader.hasNextLine()) {
-                score = myReader.nextLine();
-            }
-            myReader.close();
-            System.out.println("score: " + Double.parseDouble(score));
-            return Double.parseDouble(score);*/
-        /*String score = "0.0";
-        try {
-            System.out.println("jere1");
-            File myObj = new File("playerScore.txt");
-            System.out.println("jere2");
-            Scanner myReader = new Scanner(myObj);
-            System.out.println("jere3");
-            while (myReader.hasNextLine()) {
-                 score = myReader.nextLine();
-            }
-            myReader.close();
-            System.out.println("score: " + Double.parseDouble(score));
-            return Double.parseDouble(score);
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }*/
     }
 }
 
