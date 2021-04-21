@@ -77,6 +77,7 @@ public class NextRoundCounter extends AppCompatActivity {
             resetScoresToZero();
             startActivity(finish);
             stopTimer();
+            roundNums = 5;
         }
     }
     @Override
