@@ -1,27 +1,31 @@
 package com.example.moviequotev2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
-import android.widget.Button;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
-import java.lang.Math;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
-import  java.io.FileNotFoundException;
-import java.util.Scanner;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class DisplayMessageActivity extends AppCompatActivity {
     private TextView countdownText;
@@ -54,7 +58,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         // Reading an Excel File
 
-
+        try {
+            getQuotes(); // initializes quotes array and QuoteDict
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         //Dodgeball Quotes
         quoteDict.put("If you can dodge a wrench, you can dodge a ball.", "Dodgeball");
         quoteDict.put("Are you reading the dictionary?", "Dodgeball");
@@ -322,7 +330,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     public String loadScore(){
         FileInputStream fis = null;
         try {
-            fis = openFileInput("scores.txt");
+            fis = openFileInput(    "scores.txt");
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
@@ -382,6 +390,35 @@ public class DisplayMessageActivity extends AppCompatActivity {
     }
     public double getPlayerScore() throws FileNotFoundException {
         return 0.0;
+    }
+    public void getQuotes() throws JSONException {
+        String jsonStr = getJsonFromAssets(getApplicationContext(), "quotes.json");
+        JSONObject json = new JSONObject(jsonStr);
+        Iterator<String> keys = json.keys();
+
+        while(keys.hasNext()) {
+            String key = keys.next();
+            JSONArray jsonArray = (JSONArray) json.get(key);
+            System.out.println(jsonArray);
+        }
+    }
+    static String getJsonFromAssets(Context context, String fileName) {
+        String jsonString;
+        try {
+            InputStream is = context.getAssets().open(fileName);
+
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+
+            jsonString = new String(buffer, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return jsonString;
     }
 }
 
