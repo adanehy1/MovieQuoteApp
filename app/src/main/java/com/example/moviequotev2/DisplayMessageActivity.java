@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -38,19 +36,15 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private long timeLeftInMilliseconds = 10000;
     private boolean timerRunning;
     HashMap<String, String> quoteDict = new HashMap<String, String>();
-    String[] quotes = {"If you can dodge a wrench, you can dodge a ball.", "Uhh Earth to Matilda, I was at a day spa. Day, D-A-I-Y-E. Okay?", "It's called male bonding okay. Haven't you even seen 'Wild Hogs'?", "Prepare to be fucked by the long dick of the law!",  "You get bit in the ass. Well let me tell you: my ass looks like hamburger meat, but I can still sit down", "Glen, I love your wads!", "Great White Buffalo.",
-            "Are you reading the dictionary?","“L” for love! Good times","Hang on a second. You wanna become a cheerleader to prove you are not a loser?","God damn you, Bernice!","That's it boy. Get in there all nice and deep-like.","I have shareholders. You haven’t even got cup holders.","I’m going to take a pillowcase and fill it full of bars of soap and beat the shit out of you!","I swear, I’m so pissed at my mom. As soon as she’s of age, I’m putting her in a home.",
-            "Robert better not get in my face… ‘cause I’ll drop that motherfucker!", "You and your mom are hillbillies. This is a house of learned doctors.", "Did we just become best friends?", "Mom, I honestly thought I was gonna be raped for a second. He had the craziest look in his eyes. And at one point he said, “Lets get it on.”","Your drum set is a whore! I teabagged your drum set!", "They hate us cause they ain’t us!","You know what's more destructive than a nuclear bomb?... Words.",
-            "Team Skylark never backs down from a jerkoff.", "This is 2014, women are smart now!", "He does not have a butt hole. He has no need for one","When you score a Bin Laden, or a Hitler, or an Un, you take it by the balls! It's the first rule of journalism. You give the people what they waaant!","Do not fight that tiger, you WILL die!","Eminem's gay on our show!","Aaron, are you inside the tiger?"
-                };
-    int randomIndex = (int)(Math.random() * (quotes.length));
+    List<String> quotesList = new ArrayList<String>();
+    List<String> usedQuotes = new ArrayList<String>();
+    int randomIndex;
     String selectedQuote = "NOT SET";
     HashMap<String, String> quoteAndMovieUSed = new HashMap<String, String>();
     int randNum = (int) (Math.random() * 4) + 1;
     int roundNums = 5;
     double playerScore = 0.0;
     long timerLength = 10;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,68 +55,22 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
 
         // Reading an Excel File
-        readQuoteData();
-        
 
         try {
             getQuotes(); // initializes quotes array and QuoteDict
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //Dodgeball Quotes
-        quoteDict.put("If you can dodge a wrench, you can dodge a ball.", "Dodgeball");
-        quoteDict.put("Are you reading the dictionary?", "Dodgeball");
-        quoteDict.put("“L” for love! Good times", "Dodgeball");
-        quoteDict.put("Hang on a second. You wanna become a cheerleader to prove you are not a loser?", "Dodgeball");
-        quoteDict.put("God damn you, Bernice!", "Dodgeball");
-        quoteDict.put("That's it boy. Get in there all nice and deep-like.", "Dodgeball");
-        quoteDict.put("I have shareholders. You haven’t even got cup holders.", "Dodgeball");
-
-        //Accepted Quotes
-        quoteDict.put("You get bit in the ass. Well let me tell you: my ass looks like hamburger meat, but I can still sit down", "Accepted");
-        quoteDict.put("A sandwich? You’re the SHIT Sandwiches?", "Accepted");
-        quoteDict.put("Glen, I love your wads!", "Accepted");
-        quoteDict.put("I want to learn how to blow shit up with my mind.", "Accepted");
-
-        //Zoolander Quotes
-        quoteDict.put("Rufus, Brint, and Meekus were like brothers to me. And when I say brother, I don't mean, like, an actual brother, but I mean it like the way black people use it.", "Zoolander");
-        quoteDict.put("Uhh Earth to Matilda, I was at a day spa. Day, D-A-I-Y-E. Okay?", "Zoolander");
-
-        //Super Bad Quotes
-        quoteDict.put("McLovin? What kind of a stupid name is that, Fogell? What, are you trying to be an Irish R&B singer?", "Superbad");
-        quoteDict.put("Prepare to be fucked by the long dick of the law!", "Superbad");
-
-        //Hot Tub Time Machine Quotes
-        quoteDict.put("Great White Buffalo.", "Hot Tub Time Machine");
-        quoteDict.put("It's called male bonding okay. Haven't you even seen 'Wild Hogs'?", "Hot Tub Time Machine");
-        quoteDict.put("Wait, I know that squirrel. That’s a magic fuckin’ squirrel.", "Hot Tub Time Machine");
-
-        //Step Brothers Quotes
-        quoteDict.put("I’m going to take a pillowcase and fill it full of bars of soap and beat the shit out of you!", "Step Brothers");
-        quoteDict.put("I swear, I’m so pissed at my mom. As soon as she’s of age, I’m putting her in a home.", "Step Brothers");
-        quoteDict.put("Robert better not get in my face… ‘cause I’ll drop that motherfucker!", "Step Brothers");
-        quoteDict.put("You and your mom are hillbillies. This is a house of learned doctors.", "Step Brothers");
-        quoteDict.put("Did we just become best friends?", "Step Brothers");
-        quoteDict.put("Mom, I honestly thought I was gonna be raped for a second. He had the craziest look in his eyes. And at one point he said, “Lets get it on.”", "Step Brothers");
-        quoteDict.put("Your drum set is a whore! I teabagged your drum set!", "Step Brothers");
-
-        //The Interview Quotes
-        quoteDict.put("They hate us cause they ain’t us!", "The Interview");
-        quoteDict.put("You know what's more destructive than a nuclear bomb?... Words.", "The Interview");
-        quoteDict.put("Team Skylark never backs down from a jerkoff.", "The Interview");
-        quoteDict.put("This is 2014, women are smart now!", "The Interview");
-        quoteDict.put("He does not have a butt hole. He has no need for one", "The Interview");
-        quoteDict.put("When you score a Bin Laden, or a Hitler, or an Un, you take it by the balls! It's the first rule of journalism. You give the people what they waaant!", "The Interview");
-        quoteDict.put("Do not fight that tiger, you WILL die!", "The Interview");
-        quoteDict.put("Eminem's gay on our show!", "The Interview");
-        quoteDict.put("Aaron, are you inside the tiger?", "The Interview");
-        //quoteDict.put("", "");
         System.out.println("Score " + loadScore());
-
-
-
-        if(!(randomIndex > quotes.length)){
-            selectedQuote = quotes[randomIndex];
+        randomIndex = (int)(Math.random() * (quotesList.size()));
+        if(!(randomIndex > quotesList.size())){
+            selectedQuote = quotesList.get(randomIndex);
+            while(!usedQuote(selectedQuote)){
+                randomIndex = (int)(Math.random() * (quotesList.size()));
+                selectedQuote = quotesList.get(randomIndex);
+            }
+            addUsedQuote(quotesList.get(randomIndex));
+            printUsedQuotes();
         } else {
             System.out.println("ERROR on selecting random quote");
         }
@@ -145,27 +93,29 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
 
         while(buttonOneTxt == buttonTwoTxt || buttonOneTxt == buttonThreeTxt || buttonOneTxt == buttonFourTxt ) {
-           int randIButtonOne = (int) (Math.random() * (quotes.length));
-           buttonOneQuote = quotes[randIButtonOne];
-           buttonOneTxt = quoteDict.get(quotes[randIButtonOne]);
+           int randIButtonOne = (int) (Math.random() * (quotesList.size()));
+           buttonOneQuote = quotesList.get(randIButtonOne);
+           buttonOneTxt = quoteDict.get(quotesList.get(randIButtonOne));
         }
        while(buttonTwoTxt == buttonOneTxt || buttonTwoTxt == buttonThreeTxt || buttonTwoTxt == buttonFourTxt ){
-            int randIButtonTwo = (int)(Math.random() * (quotes.length));
-            buttonTwoQuote = quotes[randIButtonTwo];
-            buttonTwoTxt =  quoteDict.get(quotes[randIButtonTwo]);
+            int randIButtonTwo = (int)(Math.random() * (quotesList.size()));
+            buttonTwoQuote = quotesList.get(randIButtonTwo);;
+            buttonTwoTxt =  quoteDict.get(quotesList.get(randIButtonTwo));
         }
         while(buttonThreeTxt == buttonOneTxt || buttonThreeTxt == buttonTwoTxt || buttonThreeTxt == buttonFourTxt ){
-            int randIButtonThree = (int)(Math.random() * (quotes.length));
-            buttonThreeQuote = quotes[randIButtonThree];
-            buttonThreeTxt =  quoteDict.get(quotes[randIButtonThree]);
+            int randIButtonThree = (int)(Math.random() * (quotesList.size()));
+            buttonThreeQuote = quotesList.get(randIButtonThree);;
+            buttonThreeTxt =  quoteDict.get(quotesList.get(randIButtonThree));
         }
         while(buttonFourTxt == buttonOneTxt || buttonFourTxt == buttonTwoTxt || buttonFourTxt == buttonThreeTxt || !fourInit ) {
-            int randIButtonFour = (int) (Math.random() * (quotes.length));
-            buttonFourQuote = quotes[randIButtonFour];
+            int randIButtonFour = (int) (Math.random() * (quotesList.size()));
+            buttonFourQuote = quotesList.get(randIButtonFour);;
             fourInit = true;
-            buttonFourTxt = quoteDict.get(quotes[randIButtonFour]);
+            buttonFourTxt = quoteDict.get(quotesList.get(randIButtonFour));
         }
-
+        System.out.println("GLOBAL " + ((globalClass) this.getApplication()).getTest());
+        ((globalClass) this.getApplication()).setTest("hello");
+        System.out.println("GLOBAL " +  ((globalClass) this.getApplication()).getTest());
 
         if(randNum == 1){
             selectedQuote = buttonOneQuote;
@@ -203,36 +153,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
 
     }
-
-
-    // Getting Quotes from CSV file
-    private List<QuotesSample> quotesSamples = new ArrayList<>();
-    private void readQuoteData() {
-        InputStream is = getResources().openRawResource(R.raw.quotes1);
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(is, Charset.forName("UTF-8"))
-        );
-
-        String line = "";
-            try {
-                while ((line = reader.readLine()) != null) {
-                    // Spliting the quotes data by ','
-                    String[] tokens = line.split(",");
-
-                    // Reading the quotes data
-                    QuotesSample sample = new QuotesSample();
-                    sample.setQuote(tokens[0]);
-                    sample.setMovie(tokens[1]);
-                    quotesSamples.add(sample);
-
-                    Log.d("MyActivity", "Just Created: " + sample);
-                }
-            }catch (IOException e) {
-                Log.wtf("MyActivity", "Error reading file on line " + line, e);
-
-                e.printStackTrace();
-            }
-        }
 
     public void movie1Button(View view) throws InterruptedException {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
@@ -308,7 +228,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     public void yesexitButton(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        stopTimer();
 
     }
 
@@ -436,8 +355,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
         while(keys.hasNext()) {
             String key = keys.next();
             JSONArray jsonArray = (JSONArray) json.get(key);
-            System.out.println(jsonArray);
+            for(int i = 0; i < jsonArray.length(); i++){
+                quotesList.add(jsonArray.getString(i));
+                quoteDict.put(jsonArray.getString(i), key);
+            }
         }
+
+
     }
     static String getJsonFromAssets(Context context, String fileName) {
         String jsonString;
@@ -456,6 +380,85 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
 
         return jsonString;
+    }
+    public void addUsedQuote(String quote){
+        String FILENAME = "usedQuotes.txt";
+
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.write(quote.getBytes())    ;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public boolean usedQuote(String quote){
+       FileInputStream fis = null;
+        try {
+            fis = openFileInput("usedQuotes.txt");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            System.out.println("USED");
+            while((line = br.readLine()) != null){
+                if(line == quote){
+                    return true;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+    public void printUsedQuotes(){
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput("usedQuotes.txt");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            System.out.println("USED");
+            while((line = br.readLine()) != null){
+                System.out.println(line);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void createFile(){
+        String FILENAME = "usedQuotes.txt";
+        String blank = "";
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.write(blank.getBytes())    ;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
