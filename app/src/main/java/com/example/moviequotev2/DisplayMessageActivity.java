@@ -228,6 +228,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     public void yesexitButton(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        stopTimer();
 
     }
 
