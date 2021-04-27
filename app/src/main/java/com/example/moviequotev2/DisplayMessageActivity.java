@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,8 +19,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.json.JSONArray;
@@ -57,6 +61,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
 
         // Reading an Excel File
+        readQuoteData();
+        
 
         try {
             getQuotes(); // initializes quotes array and QuoteDict
@@ -197,6 +203,36 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
 
     }
+
+
+    // Getting Quotes from CSV file
+    private List<QuotesSample> quotesSamples = new ArrayList<>();
+    private void readQuoteData() {
+        InputStream is = getResources().openRawResource(R.raw.quotes1);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8"))
+        );
+
+        String line = "";
+            try {
+                while ((line = reader.readLine()) != null) {
+                    // Spliting the quotes data by ','
+                    String[] tokens = line.split(",");
+
+                    // Reading the quotes data
+                    QuotesSample sample = new QuotesSample();
+                    sample.setQuote(tokens[0]);
+                    sample.setMovie(tokens[1]);
+                    quotesSamples.add(sample);
+
+                    Log.d("MyActivity", "Just Created: " + sample);
+                }
+            }catch (IOException e) {
+                Log.wtf("MyActivity", "Error reading file on line " + line, e);
+
+                e.printStackTrace();
+            }
+        }
 
     public void movie1Button(View view) throws InterruptedException {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
