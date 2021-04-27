@@ -6,7 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class DisplayCorrectActivity extends AppCompatActivity {
     private static final long START_TIME_IN_MILLIS = 1500; //Inital start time of the timer
@@ -19,6 +26,10 @@ public class DisplayCorrectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_correct);
         Intent intent = getIntent();
         startTimer();
+        loadScore();
+        System.out.println("Create" + loadScore());
+        TextView textView = (TextView) findViewById(R.id.textView4);
+        textView.setText(loadScore());
 
     }
 
@@ -57,5 +68,23 @@ public class DisplayCorrectActivity extends AppCompatActivity {
 
     public void onBackPressed(){
 
+    }
+    public String loadScore(){
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(    "scores.txt");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+            while((text = br.readLine()) != null){
+                return text;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
