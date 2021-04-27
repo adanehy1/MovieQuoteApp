@@ -46,7 +46,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     double playerScore = 0.0;
     long timerLength = 10;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
@@ -114,7 +113,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
             fourInit = true;
             buttonFourTxt = quoteDict.get(quotesList.get(randIButtonFour));
         }
-
+        System.out.println("GLOBAL " + ((globalClass) this.getApplication()).getTest());
+        ((globalClass) this.getApplication()).setTest("hello");
+        System.out.println("GLOBAL " +  ((globalClass) this.getApplication()).getTest());
 
         if(randNum == 1){
             selectedQuote = buttonOneQuote;
@@ -435,6 +436,26 @@ public class DisplayMessageActivity extends AppCompatActivity {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void createFile(){
+        String FILENAME = "usedQuotes.txt";
+        String blank = "";
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.write(blank.getBytes())    ;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
