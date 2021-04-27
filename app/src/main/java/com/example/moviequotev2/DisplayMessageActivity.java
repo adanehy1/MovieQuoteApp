@@ -48,6 +48,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+       loadScore();
         try {
             double playerScore = getPlayerScore();
         } catch (FileNotFoundException e) {
@@ -113,9 +114,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
             fourInit = true;
             buttonFourTxt = quoteDict.get(quotesList.get(randIButtonFour));
         }
-        System.out.println("GLOBAL " + ((globalClass) this.getApplication()).getTest());
+        /*System.out.println("GLOBAL " + ((globalClass) this.getApplication()).getTest());
         ((globalClass) this.getApplication()).setTest("hello");
-        System.out.println("GLOBAL " +  ((globalClass) this.getApplication()).getTest());
+        System.out.println("GLOBAL " +  ((globalClass) this.getApplication()).getTest());*/
 
         if(randNum == 1){
             selectedQuote = buttonOneQuote;
@@ -312,7 +313,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         try {
-            fos.write(string.getBytes())    ;
+            fos.write(string.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -391,7 +392,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         try {
-            fos.write(quote.getBytes())    ;
+            fos.write(quote.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
