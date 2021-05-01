@@ -48,6 +48,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // loads score from file
        loadScore();
         try {
             double playerScore = getPlayerScore();
@@ -55,26 +56,26 @@ public class DisplayMessageActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        // Reading an Excel File
-
+        // gets quotes form json file
         try {
             getQuotes(); // initializes quotes array and QuoteDict
         } catch (JSONException e) {
             e.printStackTrace();
         }
         System.out.println("Score " + loadScore());
-        randomIndex = (int)(Math.random() * (quotesList.size()));
+        /*randomIndex = (int)(Math.random() * (quotesList.size()));
         if(!(randomIndex > quotesList.size())){
             selectedQuote = quotesList.get(randomIndex);
-            while(!usedQuote(selectedQuote)){
+            while(((globalClass) this.getApplication()).contains(selectedQuote)){
                 randomIndex = (int)(Math.random() * (quotesList.size()));
                 selectedQuote = quotesList.get(randomIndex);
             }
-            addUsedQuote(quotesList.get(randomIndex));
-            printUsedQuotes();
+            System.out.println("Used Quote: " + selectedQuote);
+            ((globalClass) this.getApplication()).addQuote(selectedQuote);
+            //((globalClass) this.getApplication()).printQuotes();
         } else {
             System.out.println("ERROR on selecting random quote");
-        }
+        }*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
 
@@ -92,33 +93,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         boolean fourInit = false;
 
-
-        while(buttonOneTxt == buttonTwoTxt || buttonOneTxt == buttonThreeTxt || buttonOneTxt == buttonFourTxt ) {
-           int randIButtonOne = (int) (Math.random() * (quotesList.size()));
-           buttonOneQuote = quotesList.get(randIButtonOne);
-           buttonOneTxt = quoteDict.get(quotesList.get(randIButtonOne));
-        }
-       while(buttonTwoTxt == buttonOneTxt || buttonTwoTxt == buttonThreeTxt || buttonTwoTxt == buttonFourTxt ){
-            int randIButtonTwo = (int)(Math.random() * (quotesList.size()));
-            buttonTwoQuote = quotesList.get(randIButtonTwo);;
-            buttonTwoTxt =  quoteDict.get(quotesList.get(randIButtonTwo));
-        }
-        while(buttonThreeTxt == buttonOneTxt || buttonThreeTxt == buttonTwoTxt || buttonThreeTxt == buttonFourTxt ){
-            int randIButtonThree = (int)(Math.random() * (quotesList.size()));
-            buttonThreeQuote = quotesList.get(randIButtonThree);;
-            buttonThreeTxt =  quoteDict.get(quotesList.get(randIButtonThree));
-        }
-        while(buttonFourTxt == buttonOneTxt || buttonFourTxt == buttonTwoTxt || buttonFourTxt == buttonThreeTxt || !fourInit ) {
-            int randIButtonFour = (int) (Math.random() * (quotesList.size()));
-            buttonFourQuote = quotesList.get(randIButtonFour);;
-            fourInit = true;
-            buttonFourTxt = quoteDict.get(quotesList.get(randIButtonFour));
-        }
-        /*System.out.println("GLOBAL " + ((globalClass) this.getApplication()).getTest());
-        ((globalClass) this.getApplication()).setTest("hello");
-        System.out.println("GLOBAL " +  ((globalClass) this.getApplication()).getTest());*/
-
-        if(randNum == 1){
+        /*if(randNum == 1){
             selectedQuote = buttonOneQuote;
         } else if (randNum == 2){
             selectedQuote = buttonTwoQuote;
@@ -126,10 +101,54 @@ public class DisplayMessageActivity extends AppCompatActivity {
             selectedQuote = buttonThreeQuote;
         } else {
             selectedQuote = buttonFourQuote;
+        }*/
+        while(buttonOneTxt == buttonTwoTxt || buttonOneTxt == buttonThreeTxt || buttonOneTxt == buttonFourTxt ) {
+           int randIButtonOne = (int) (Math.random() * (quotesList.size()));
+           if(randNum == 1) {
+               while (((globalClass) this.getApplication()).contains(quotesList.get(randIButtonOne))) {
+                   randIButtonOne = (int) (Math.random() * (quotesList.size()));
+               }
+               selectedQuote = quotesList.get(randIButtonOne);
+           }
+           buttonOneTxt = quoteDict.get(quotesList.get(randIButtonOne));
+
+        }
+       while(buttonTwoTxt == buttonOneTxt || buttonTwoTxt == buttonThreeTxt || buttonTwoTxt == buttonFourTxt ) {
+           int randIButtonTwo = (int) (Math.random() * (quotesList.size()));
+           if (randNum == 2) {
+               while (((globalClass) this.getApplication()).contains(quotesList.get(randIButtonTwo))) {
+                   randIButtonTwo = (int) (Math.random() * (quotesList.size()));
+               }
+               selectedQuote = quotesList.get(randIButtonTwo);
+           }
+           buttonTwoTxt = quoteDict.get(quotesList.get(randIButtonTwo));
+       }
+        while(buttonThreeTxt == buttonOneTxt || buttonThreeTxt == buttonTwoTxt || buttonThreeTxt == buttonFourTxt ){
+            int randIButtonThree = (int)(Math.random() * (quotesList.size()));
+            if(randNum == 3) {
+                while (((globalClass) this.getApplication()).contains(quotesList.get(randIButtonThree))) {
+                    randIButtonThree = (int) (Math.random() * (quotesList.size()));
+                }
+                selectedQuote = quotesList.get(randIButtonThree);
+            }
+            buttonThreeTxt = quoteDict.get(quotesList.get(randIButtonThree));
+        }
+        while(buttonFourTxt == buttonOneTxt || buttonFourTxt == buttonTwoTxt || buttonFourTxt == buttonThreeTxt || !fourInit ) {
+            int randIButtonFour = (int) (Math.random() * (quotesList.size()));
+            if(randNum == 4) {
+                while (((globalClass) this.getApplication()).contains(quotesList.get(randIButtonFour))) {
+                    randIButtonFour = (int) (Math.random() * (quotesList.size()));
+                }
+                selectedQuote = quotesList.get(randIButtonFour);
+            }
+            buttonFourTxt = quoteDict.get(quotesList.get(randIButtonFour));
+            fourInit = true;
+
         }
 
 
-        System.out.println(quoteDict.get(buttonOneTxt));
+
+        //System.out.println(quoteDict.get(buttonOneTxt));
         //TextView TextView2 = (TextView) findViewById(R.id.textView);
         TextView1.setText(selectedQuote);
 
@@ -383,6 +402,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         return jsonString;
     }
+    /*
     public void addUsedQuote(String quote){
         String FILENAME = "usedQuotes.txt";
 
@@ -461,6 +481,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
 
