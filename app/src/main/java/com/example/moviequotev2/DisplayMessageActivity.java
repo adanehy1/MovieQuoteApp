@@ -43,39 +43,16 @@ public class DisplayMessageActivity extends AppCompatActivity {
     HashMap<String, String> quoteAndMovieUSed = new HashMap<String, String>();
     int randNum = (int) (Math.random() * 4) + 1;
     int roundNums = 5;
-    double playerScore = 0.0;
     long timerLength = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // loads score from file
-       loadScore();
-        try {
-            double playerScore = getPlayerScore();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
         // gets quotes form json file
         try {
             getQuotes(); // initializes quotes array and QuoteDict
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println("Score " + loadScore());
-        /*randomIndex = (int)(Math.random() * (quotesList.size()));
-        if(!(randomIndex > quotesList.size())){
-            selectedQuote = quotesList.get(randomIndex);
-            while(((globalClass) this.getApplication()).contains(selectedQuote)){
-                randomIndex = (int)(Math.random() * (quotesList.size()));
-                selectedQuote = quotesList.get(randomIndex);
-            }
-            System.out.println("Used Quote: " + selectedQuote);
-            ((globalClass) this.getApplication()).addQuote(selectedQuote);
-            //((globalClass) this.getApplication()).printQuotes();
-        } else {
-            System.out.println("ERROR on selecting random quote");
-        }*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
 
@@ -93,15 +70,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         boolean fourInit = false;
 
-        /*if(randNum == 1){
-            selectedQuote = buttonOneQuote;
-        } else if (randNum == 2){
-            selectedQuote = buttonTwoQuote;
-        } else if (randNum == 3){
-            selectedQuote = buttonThreeQuote;
-        } else {
-            selectedQuote = buttonFourQuote;
-        }*/
         while(buttonOneTxt == buttonTwoTxt || buttonOneTxt == buttonThreeTxt || buttonOneTxt == buttonFourTxt ) {
            int randIButtonOne = (int) (Math.random() * (quotesList.size()));
            if(randNum == 1) {
@@ -181,9 +149,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         stopTimer();
         if(randNum == 1){
-            addScore(calculateScore(timeLeftInMilliseconds));
+            ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         }
-        System.out.println("Player score: " + loadScore());
+        System.out.println("Player score: " + ((globalClass) this.getApplication()).getScore());
         startActivity(intent);
 
         //intent = new Intent(this, DisplayMessageActivity.class);
@@ -204,9 +172,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         stopTimer();
        if(randNum == 2){
-            addScore(calculateScore(timeLeftInMilliseconds));
+           ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         }
-        System.out.println("Player score: " + loadScore());
+        System.out.println("Player score: " + ((globalClass) this.getApplication()).getScore());
         startActivity(intent);
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
@@ -220,9 +188,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         stopTimer();
         if(randNum == 3){
-            addScore(calculateScore(timeLeftInMilliseconds));
+            ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         }
-        System.out.println("Player score: " + loadScore());
+        ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         startActivity(intent);
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
@@ -236,9 +204,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         stopTimer();
         if(randNum == 4){
-            addScore(calculateScore(timeLeftInMilliseconds));
+            ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         }
-        System.out.println("Player score: " + loadScore());
+        ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         startActivity(intent);
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
@@ -304,45 +272,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
                }
 
     }
-    public String loadScore(){
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(    "scores.txt");
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String text;
-            while((text = br.readLine()) != null){
-                return text;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-    public void writeToScoresFile(String score){
-        String FILENAME = "scores.txt";
-        String string = score;
-
-        FileOutputStream fos = null;
-        try {
-            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            fos.write(string.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     public double calculateScore(long timeRemaining){
         double timeInSec = (timeRemaining)/1000.0;
         //System.out.println("Score with " + timeInSec + " time remaining: " + ((-0.1* (Math.pow(timeInSec, 3)))+10)/10.0);
@@ -359,14 +288,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         noexit.setVisibility(View.VISIBLE);
         View yesexit = findViewById(R.id.yesexit);
         yesexit.setVisibility(View.VISIBLE);
-    }
-    public void addScore(double score){
-        double curScore =  Double.parseDouble(loadScore());
-        score += curScore;
-        writeToScoresFile(String.valueOf(score));
-    }
-    public double getPlayerScore() throws FileNotFoundException {
-        return 0.0;
     }
     public void getQuotes() throws JSONException {
         String jsonStr = getJsonFromAssets(getApplicationContext(), "quotes.json");
@@ -402,85 +323,5 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         return jsonString;
     }
-    /*
-    public void addUsedQuote(String quote){
-        String FILENAME = "usedQuotes.txt";
-
-        FileOutputStream fos = null;
-        try {
-            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            fos.write(quote.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public boolean usedQuote(String quote){
-       FileInputStream fis = null;
-        try {
-            fis = openFileInput("usedQuotes.txt");
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String line;
-            System.out.println("USED");
-            while((line = br.readLine()) != null){
-                if(line == quote){
-                    return true;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
-    public void printUsedQuotes(){
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput("usedQuotes.txt");
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String line;
-            System.out.println("USED");
-            while((line = br.readLine()) != null){
-                System.out.println(line);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public void createFile(){
-        String FILENAME = "usedQuotes.txt";
-        String blank = "";
-        FileOutputStream fos = null;
-        try {
-            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            fos.write(blank.getBytes())    ;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 }
 

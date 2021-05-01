@@ -26,10 +26,8 @@ public class DisplayCorrectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_correct);
         Intent intent = getIntent();
         startTimer();
-        loadScore();
-        System.out.println("Create" + loadScore());
         TextView textView = (TextView) findViewById(R.id.textView4);
-        textView.setText(loadScore());
+        textView.setText(String.valueOf(((globalClass) this.getApplication()).getScore()));
 
     }
 

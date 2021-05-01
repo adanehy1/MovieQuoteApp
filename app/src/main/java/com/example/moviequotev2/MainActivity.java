@@ -16,6 +16,7 @@ public static final String EXTRA_MESSAGE = "com.example.moviequotev2.MESSAGE";
         setContentView(R.layout.activity_main);
         Button button = (Button)findViewById(R.id.button);
         button.setText("Start");
+        ((globalClass) this.getApplication()).scoreClear();
     }
     /** When the Open Button is pressed*/
     public void openButton(View view) {

@@ -7,6 +7,7 @@ import java.util.List;
 
 public class globalClass extends Application {
     List<String> usedQuotes = new ArrayList<String>();
+    double score = 0.0;
     public void addQuote(String quote){
         usedQuotes.add(quote);
     }
@@ -26,5 +27,14 @@ public class globalClass extends Application {
             }
         }
         return false;
+    }
+    public double getScore(){
+        return Math.floor(score * 100) / 100;
+    }
+    public void setScore(double newScore){
+        score += newScore;
+    }
+    public void scoreClear(){
+        score = 0.0;
     }
 }
