@@ -37,10 +37,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private boolean timerRunning;
     HashMap<String, String> quoteDict = new HashMap<String, String>();
     List<String> quotesList = new ArrayList<String>();
-    List<String> usedQuotes = new ArrayList<String>();
-    int randomIndex;
     String selectedQuote = "NOT SET";
-    HashMap<String, String> quoteAndMovieUSed = new HashMap<String, String>();
     int randNum = (int) (Math.random() * 4) + 1;
     int roundNums = 5;
     long timerLength = 10;
@@ -48,8 +45,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // gets quotes form json file
+        String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad"};
         try {
-            getQuotes(); // initializes quotes array and QuoteDict
+            getQuotes(testNames); // initializes quotes array and QuoteDict
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -289,18 +287,21 @@ public class DisplayMessageActivity extends AppCompatActivity {
         View yesexit = findViewById(R.id.yesexit);
         yesexit.setVisibility(View.VISIBLE);
     }
-    public void getQuotes() throws JSONException {
+    public void getQuotes(String[] movieNames) throws JSONException {
         String jsonStr = getJsonFromAssets(getApplicationContext(), "quotes.json");
         JSONObject json = new JSONObject(jsonStr);
         Iterator<String> keys = json.keys();
 
         while(keys.hasNext()) {
             String key = keys.next();
-            JSONArray jsonArray = (JSONArray) json.get(key);
-            for(int i = 0; i < jsonArray.length(); i++){
-                quotesList.add(jsonArray.getString(i));
-                quoteDict.put(jsonArray.getString(i), key);
+            if(arrContains(movieNames, key)) {
+                JSONArray jsonArray = (JSONArray) json.get(key);
+                for(int i = 0; i < jsonArray.length(); i++){
+                    quotesList.add(jsonArray.getString(i));
+                    quoteDict.put(jsonArray.getString(i), key);
+                }
             }
+
         }
 
 
@@ -323,5 +324,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         return jsonString;
     }
+    public boolean arrContains(String[] arr, String value){
+        for(String s : arr){
+            if(s.equals(value)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
 
