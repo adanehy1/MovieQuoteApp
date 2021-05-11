@@ -113,7 +113,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
 
         TextView textView = (TextView) findViewById(R.id.textScore2);
-        textView.setText(String.valueOf(((globalClass) this.getApplication()).getScore()));
+        textView.setText("Score: " + String.valueOf(((globalClass) this.getApplication()).getScore()));
         //string with the title of "globalClass" creates the score
 
         //System.out.println(quoteDict.get(buttonOneTxt));
@@ -305,8 +305,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
             }
 
         }
-
-
     }
     static String getJsonFromAssets(Context context, String fileName) {
         String jsonString;
