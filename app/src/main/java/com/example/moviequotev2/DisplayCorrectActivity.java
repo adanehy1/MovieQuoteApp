@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -26,8 +25,9 @@ public class DisplayCorrectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_correct);
         Intent intent = getIntent();
         startTimer();
-        TextView textView = (TextView) findViewById(R.id.textView4);
+        TextView textView = (TextView) findViewById(R.id.score);
         textView.setText(String.valueOf(((globalClass) this.getApplication()).getScore()));
+        //string with the title of "globalClass" creates the score
 
     }
 

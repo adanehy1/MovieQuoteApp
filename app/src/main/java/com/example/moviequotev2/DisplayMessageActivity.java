@@ -112,7 +112,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         }
 
-
+        TextView textView = (TextView) findViewById(R.id.textScore2);
+        textView.setText(String.valueOf(((globalClass) this.getApplication()).getScore()));
+        //string with the title of "globalClass" creates the score
 
         //System.out.println(quoteDict.get(buttonOneTxt));
         //TextView TextView2 = (TextView) findViewById(R.id.textView);

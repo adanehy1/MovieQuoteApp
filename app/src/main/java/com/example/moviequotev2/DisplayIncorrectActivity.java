@@ -21,6 +21,9 @@ public class DisplayIncorrectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_incorrect);
         Intent intent = getIntent();
         startTimer();
+        TextView textView = (TextView) findViewById(R.id.textScore1);
+        textView.setText(String.valueOf(((globalClass) this.getApplication()).getScore()));
+        //string with the title of "globalClass" creates the score
 
     }
 
