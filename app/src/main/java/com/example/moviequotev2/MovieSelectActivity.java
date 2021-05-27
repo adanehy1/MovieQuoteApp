@@ -21,14 +21,13 @@ public class MovieSelectActivity extends AppCompatActivity {
         //int[] yearToAdd = {2000, 2001, 2002, 2003};
         //LinearLayout parentLayout = (LinearLayout)findViewById(R.id.button_parent);
         //for (int i =0; i< yearToAdd.length; i++){
-        //   int yearToAdd = yearToAdd[i];
+        //   int yearToAdd = yearToAdd[i];git
         //    Button myButton = new Button(this);
         //    myButton.setText(String.valueOf(yearToAdd));
         //    yearButtons.add(myButton);
         //    yearButtons.setOnClickListener(this);
         //    parentLayout.addView(myButton);
-        }
-
+        //}
 
 
     }
