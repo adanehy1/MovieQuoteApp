@@ -14,6 +14,7 @@ public class DisplayIncorrectActivity extends AppCompatActivity {
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning; //true/false of whether the timer is running
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS; //Variable of the time left
+    static int roundNums = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

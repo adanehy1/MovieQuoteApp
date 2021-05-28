@@ -23,4 +23,9 @@ public static final String EXTRA_MESSAGE = "com.example.moviequotev2.MESSAGE";
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         startActivity(intent);
     }
+
+    public void highScore(View view) {
+        Intent intent2 = new Intent(this, HighScoreActivity.class);
+        startActivity(intent2);
+    }
 }
