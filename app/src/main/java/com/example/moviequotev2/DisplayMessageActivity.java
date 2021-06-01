@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -44,7 +46,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // gets quotes form json file
+        //getHighScore();
+
         String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad"};
         try {
             getQuotes(testNames); // initializes quotes array and QuoteDict
@@ -306,6 +309,22 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         }
     }
+    public double getHighScore(){
+        String curHighScore = getHighScoreFromAssets(getApplicationContext(), "highScore.txt");
+
+        return 0.0;
+    }
+    public void checkNewHighScore(double curScore){
+        if(curScore <= 0.0){
+            return;
+        }
+        else if(getHighScore() > curScore){
+            setHighScore(curScore);
+        }
+    }
+    public void setHighScore(double newScore){
+        //getFilesDir()
+    }
     static String getJsonFromAssets(Context context, String fileName) {
         String jsonString;
         try {
@@ -323,6 +342,24 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
 
         return jsonString;
+    }
+    static String getHighScoreFromAssets(Context context, String fileName){
+        String retString;
+        try {
+            InputStream is = context.getAssets().open(fileName);
+
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+
+            retString = new String(buffer, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return retString;
     }
     public boolean arrContains(String[] arr, String value){
         for(String s : arr){
