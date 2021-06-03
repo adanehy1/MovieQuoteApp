@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
 public static final String EXTRA_MESSAGE = "com.example.moviequotev2.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ((globalClass) this.getApplication()).clear();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button button = (Button)findViewById(R.id.button);

@@ -50,7 +50,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("HIGH " + getHighScore());
-
+        ((globalClass) this.getApplication()).printQuotes();
         String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
         try {
             getQuotes(testNames); // initializes quotes array and QuoteDict
@@ -64,13 +64,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         TextView1.setText("Welcome to Dynamic TextView");
         Set<String> keys = quoteDict.keySet();
         String buttonOneTxt = "NOT SET YET";
-        String buttonOneQuote = "";
         String buttonTwoTxt = "NOT SET YET";
-        String buttonTwoQuote = "";
         String buttonThreeTxt = "NOT SET YET";
-        String buttonThreeQuote = "";
         String buttonFourTxt = "NOT SET YET";
-        String buttonFourQuote = "";
 
         boolean fourInit = false;
 
@@ -81,6 +77,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
                    randIButtonOne = (int) (Math.random() * (quotesList.size()));
                }
                selectedQuote = quotesList.get(randIButtonOne);
+               ((globalClass) this.getApplication()).addQuote(selectedQuote);
            }
            buttonOneTxt = quoteDict.get(quotesList.get(randIButtonOne));
 
@@ -92,6 +89,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
                    randIButtonTwo = (int) (Math.random() * (quotesList.size()));
                }
                selectedQuote = quotesList.get(randIButtonTwo);
+               ((globalClass) this.getApplication()).addQuote(selectedQuote);
            }
            buttonTwoTxt = quoteDict.get(quotesList.get(randIButtonTwo));
        }
@@ -102,6 +100,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
                     randIButtonThree = (int) (Math.random() * (quotesList.size()));
                 }
                 selectedQuote = quotesList.get(randIButtonThree);
+                ((globalClass) this.getApplication()).addQuote(selectedQuote);
             }
             buttonThreeTxt = quoteDict.get(quotesList.get(randIButtonThree));
         }
@@ -112,6 +111,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
                     randIButtonFour = (int) (Math.random() * (quotesList.size()));
                 }
                 selectedQuote = quotesList.get(randIButtonFour);
+                ((globalClass) this.getApplication()).addQuote(selectedQuote);
             }
             buttonFourTxt = quoteDict.get(quotesList.get(randIButtonFour));
             fourInit = true;

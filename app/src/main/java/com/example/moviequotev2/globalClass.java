@@ -28,6 +28,9 @@ public class globalClass extends Application {
         }
         return false;
     }
+    public void clear(){
+        usedQuotes.clear();
+    }
     public double getScore(){
         return Math.floor(score * 100) / 100;
     }

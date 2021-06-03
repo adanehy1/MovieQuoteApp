@@ -23,6 +23,7 @@ public class FinishScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ((globalClass) this.getApplication()).clear();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish_screen);
 
