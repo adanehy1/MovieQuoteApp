@@ -2,6 +2,7 @@ package com.example.moviequotev2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -43,12 +44,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
     int randNum = (int) (Math.random() * 4) + 1;
     int roundNums = 5;
     long timerLength = 10;
+    public static final String SHARED_PREFS = "highScore";
+    public static final String HIGH_SCORE = "highScore";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //getHighScore();
+        System.out.println("HIGH " + getHighScore());
 
-        String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad"};
+        String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
         try {
             getQuotes(testNames); // initializes quotes array and QuoteDict
         } catch (JSONException e) {
@@ -154,7 +157,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         if(randNum == 1){
             ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         }
-        System.out.println("Player score: " + ((globalClass) this.getApplication()).getScore());
+        checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
         startActivity(intent);
 
         //intent = new Intent(this, DisplayMessageActivity.class);
@@ -177,8 +180,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
        if(randNum == 2){
            ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         }
-        System.out.println("Player score: " + ((globalClass) this.getApplication()).getScore());
         startActivity(intent);
+        checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
         //startActivity(intent);
@@ -195,6 +198,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         startActivity(intent);
+        checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
         //startActivity(intent);
@@ -211,6 +215,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         startActivity(intent);
+        checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
         // Add Pause
         //intent = new Intent(this, DisplayMessageActivity.class);
         //startActivity(intent);
@@ -309,21 +314,27 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         }
     }
-    public double getHighScore(){
-        String curHighScore = getHighScoreFromAssets(getApplicationContext(), "highScore.txt");
-
-        return 0.0;
+    public double getHighScore() {
+        float score;
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        score = sharedPreferences.getFloat(HIGH_SCORE, 12);
+        return score;
     }
     public void checkNewHighScore(double curScore){
         if(curScore <= 0.0){
             return;
         }
-        else if(getHighScore() > curScore){
+        if(getHighScore() < curScore){
             setHighScore(curScore);
         }
     }
     public void setHighScore(double newScore){
-        //getFilesDir()
+        float truncSore = (float) round(newScore, 2);
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putFloat(HIGH_SCORE, truncSore);
+        editor.apply();
     }
     static String getJsonFromAssets(Context context, String fileName) {
         String jsonString;
@@ -368,6 +379,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 }
 
