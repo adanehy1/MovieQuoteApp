@@ -49,7 +49,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // made change
+        // made change from arrons branch
         System.out.println("HIGH " + getHighScore());
         ((globalClass) this.getApplication()).printQuotes();
         String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
