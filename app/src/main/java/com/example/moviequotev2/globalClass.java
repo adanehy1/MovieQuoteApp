@@ -35,6 +35,7 @@ public class globalClass extends Application {
         return Math.floor(score * 100) / 100;
     }
     public void setScore(double newScore){
+        System.out.println("ADDING "+  newScore + " to score");
         score += newScore;
     }
     public void scoreClear(){

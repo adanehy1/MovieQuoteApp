@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -42,14 +43,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
     List<String> quotesList = new ArrayList<String>();
     String selectedQuote = "NOT SET";
     int randNum = (int) (Math.random() * 4) + 1;
-    int roundNums = 5;
+    // int roundNums = 5;
     long timerLength = 10;
     public static final String SHARED_PREFS = "highScore";
     public static final String HIGH_SCORE = "highScore";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // made change from arrons branch
         System.out.println("HIGH " + getHighScore());
         ((globalClass) this.getApplication()).printQuotes();
         String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
@@ -63,7 +63,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         TextView TextView1 = (TextView) findViewById(R.id.textView);
         TextView1.setText("Welcome to Dynamic TextView");
-        Set<String> keys = quoteDict.keySet();
         String buttonOneTxt = "NOT SET YET";
         String buttonTwoTxt = "NOT SET YET";
         String buttonThreeTxt = "NOT SET YET";
@@ -116,7 +115,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
             }
             buttonFourTxt = quoteDict.get(quotesList.get(randIButtonFour));
             fourInit = true;
-
         }
 
         TextView textView = (TextView) findViewById(R.id.textScore2);
@@ -160,17 +158,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
         startActivity(intent);
-
-        //intent = new Intent(this, DisplayMessageActivity.class);
-        //startActivity(intent);
-
-        // pause for 2 seconds
-        // display nextRound activity \
-        // add counter for rounds
-        // make sure it doesn't include quote another time
-
-
     }
+
     public void movie2Button(View view) throws FileNotFoundException {
         Intent intent = new Intent(this, DisplayIncorrectActivity.class);
 
@@ -197,7 +186,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         if(randNum == 3){
             ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         }
-        ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         startActivity(intent);
         checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
         // Add Pause
@@ -214,7 +202,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         if(randNum == 4){
             ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         }
-        ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         startActivity(intent);
         checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
         // Add Pause
@@ -317,8 +304,12 @@ public class DisplayMessageActivity extends AppCompatActivity {
     }
     public double getHighScore() {
         float score;
+        Set<String> temp = new HashSet<>();
+
+
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         score = sharedPreferences.getFloat(HIGH_SCORE, 12);
+
         return score;
     }
     public void checkNewHighScore(double curScore){
@@ -354,24 +345,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
 
         return jsonString;
-    }
-    static String getHighScoreFromAssets(Context context, String fileName){
-        String retString;
-        try {
-            InputStream is = context.getAssets().open(fileName);
-
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-
-            retString = new String(buffer, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return retString;
     }
     public boolean arrContains(String[] arr, String value){
         for(String s : arr){
