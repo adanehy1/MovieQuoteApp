@@ -37,22 +37,19 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private TextView countdownText;
     private TextView round;
     private CountDownTimer countDownTimer;
-    private long timeLeftInMilliseconds = 10000;
-    private boolean timerRunning;
     HashMap<String, String> quoteDict = new HashMap<String, String>();
     List<String> quotesList = new ArrayList<String>();
     String selectedQuote = "NOT SET";
-    int randNum = (int) (Math.random() * 4) + 1;
-    // int roundNums = 5;
     long timerLength = 10;
+    private long timeLeftInMilliseconds = 10000;
+    private boolean timerRunning;
+    public static final int randNum = (int) (Math.random() * 4) + 1;
     public static final String SHARED_PREFS = "highScore";
     public static final String HIGH_SCORE = "highScore";
+    final String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("HIGH " + getHighScore());
-        ((globalClass) this.getApplication()).printQuotes();
-        String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
         try {
             getQuotes(testNames); // initializes quotes array and QuoteDict
         } catch (JSONException e) {
@@ -71,49 +68,17 @@ public class DisplayMessageActivity extends AppCompatActivity {
         boolean fourInit = false;
 
         while(buttonOneTxt == buttonTwoTxt || buttonOneTxt == buttonThreeTxt || buttonOneTxt == buttonFourTxt ) {
-           int randIButtonOne = (int) (Math.random() * (quotesList.size()));
-           if(randNum == 1) {
-               while (((globalClass) this.getApplication()).contains(quotesList.get(randIButtonOne))) {
-                   randIButtonOne = (int) (Math.random() * (quotesList.size()));
-               }
-               selectedQuote = quotesList.get(randIButtonOne);
-               ((globalClass) this.getApplication()).addQuote(selectedQuote);
-           }
-           buttonOneTxt = quoteDict.get(quotesList.get(randIButtonOne));
+           buttonOneTxt = setBtnQuotes(1);
 
         }
        while(buttonTwoTxt == buttonOneTxt || buttonTwoTxt == buttonThreeTxt || buttonTwoTxt == buttonFourTxt ) {
-           int randIButtonTwo = (int) (Math.random() * (quotesList.size()));
-           if (randNum == 2) {
-               while (((globalClass) this.getApplication()).contains(quotesList.get(randIButtonTwo))) {
-                   randIButtonTwo = (int) (Math.random() * (quotesList.size()));
-               }
-               selectedQuote = quotesList.get(randIButtonTwo);
-               ((globalClass) this.getApplication()).addQuote(selectedQuote);
-           }
-           buttonTwoTxt = quoteDict.get(quotesList.get(randIButtonTwo));
+           buttonTwoTxt = setBtnQuotes(2);
        }
         while(buttonThreeTxt == buttonOneTxt || buttonThreeTxt == buttonTwoTxt || buttonThreeTxt == buttonFourTxt ){
-            int randIButtonThree = (int)(Math.random() * (quotesList.size()));
-            if(randNum == 3) {
-                while (((globalClass) this.getApplication()).contains(quotesList.get(randIButtonThree))) {
-                    randIButtonThree = (int) (Math.random() * (quotesList.size()));
-                }
-                selectedQuote = quotesList.get(randIButtonThree);
-                ((globalClass) this.getApplication()).addQuote(selectedQuote);
-            }
-            buttonThreeTxt = quoteDict.get(quotesList.get(randIButtonThree));
+            buttonThreeTxt = setBtnQuotes(3);
         }
         while(buttonFourTxt == buttonOneTxt || buttonFourTxt == buttonTwoTxt || buttonFourTxt == buttonThreeTxt || !fourInit ) {
-            int randIButtonFour = (int) (Math.random() * (quotesList.size()));
-            if(randNum == 4) {
-                while (((globalClass) this.getApplication()).contains(quotesList.get(randIButtonFour))) {
-                    randIButtonFour = (int) (Math.random() * (quotesList.size()));
-                }
-                selectedQuote = quotesList.get(randIButtonFour);
-                ((globalClass) this.getApplication()).addQuote(selectedQuote);
-            }
-            buttonFourTxt = quoteDict.get(quotesList.get(randIButtonFour));
+            buttonFourTxt = setBtnQuotes(4);
             fourInit = true;
         }
 
@@ -121,8 +86,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         textView.setText("Score: " + String.valueOf(((globalClass) this.getApplication()).getScore()));
         //string with the title of "globalClass" creates the score
 
-        //System.out.println(quoteDict.get(buttonOneTxt));
-        //TextView TextView2 = (TextView) findViewById(R.id.textView);
         TextView1.setText(selectedQuote);
 
         //Sets the text for top left button
@@ -148,65 +111,17 @@ public class DisplayMessageActivity extends AppCompatActivity {
     }
 
     public void movie1Button(View view) throws InterruptedException {
-        Intent intent = new Intent(this, DisplayIncorrectActivity.class);
-        if(randNum == 1) {
-            intent = new Intent(this, DisplayCorrectActivity.class);
-        }
-        stopTimer();
-        if(randNum == 1){
-            ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
-        }
-        checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
-        startActivity(intent);
+        setBtns(1);
     }
 
     public void movie2Button(View view) throws FileNotFoundException {
-        Intent intent = new Intent(this, DisplayIncorrectActivity.class);
-
-        if(randNum == 2) {
-            intent = new Intent(this, DisplayCorrectActivity.class);
-        }
-        stopTimer();
-       if(randNum == 2){
-           ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
-        }
-        startActivity(intent);
-        checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
-        // Add Pause
-        //intent = new Intent(this, DisplayMessageActivity.class);
-        //startActivity(intent);
+        setBtns(2);
     }
     public void movie3Button(View view) throws FileNotFoundException {
-        Intent intent = new Intent(this, DisplayIncorrectActivity.class);
-
-        if(randNum == 3) {
-            intent = new Intent(this, DisplayCorrectActivity.class);
-        }
-        stopTimer();
-        if(randNum == 3){
-            ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
-        }
-        startActivity(intent);
-        checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
-        // Add Pause
-        //intent = new Intent(this, DisplayMessageActivity.class);
-        //startActivity(intent);
+        setBtns(3);
     }
     public void movie4Button(View view) throws FileNotFoundException {
-        Intent intent = new Intent(this, DisplayIncorrectActivity.class);
-
-        if(randNum == 4) {
-            intent = new Intent(this, DisplayCorrectActivity.class);
-        }
-        stopTimer();
-        if(randNum == 4){
-            ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
-        }
-        startActivity(intent);
-        checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
-        // Add Pause
-        //intent = new Intent(this, DisplayMessageActivity.class);
-        //startActivity(intent);
+        setBtns(4);
     }
 
     public void yesexitButton(View view){
@@ -227,7 +142,29 @@ public class DisplayMessageActivity extends AppCompatActivity {
         yesexit.setVisibility(View.INVISIBLE);
 
     }
-
+    public String setBtnQuotes(int r){
+        int randIButtonFour = (int) (Math.random() * (quotesList.size()));
+        if(randNum == r) {
+            while (((globalClass) this.getApplication()).contains(quotesList.get(randIButtonFour))) {
+                randIButtonFour = (int) (Math.random() * (quotesList.size()));
+            }
+            selectedQuote = quotesList.get(randIButtonFour);
+            ((globalClass) this.getApplication()).addQuote(selectedQuote);
+        }
+        return quoteDict.get(quotesList.get(randIButtonFour));
+    }
+    public void setBtns(int round){
+        Intent intent = new Intent(this, DisplayIncorrectActivity.class);
+        if(randNum == round) {
+            intent = new Intent(this, DisplayCorrectActivity.class);
+        }
+        stopTimer();
+        if(randNum == round){
+            ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
+        }
+        checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
+        startActivity(intent);
+    }
     public void startTimer() {
         countDownTimer = new CountDownTimer(timeLeftInMilliseconds, timerLength) {
             @Override
@@ -266,12 +203,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
             startActivity(incorrect);
             stopTimer();
                }
-
     }
     public double calculateScore(long timeRemaining){
         double timeInSec = (timeRemaining)/1000.0;
-        //System.out.println("Score with " + timeInSec + " time remaining: " + ((-0.1* (Math.pow(timeInSec, 3)))+10)/10.0);
-        //return (-0.1* (Math.pow(timeInSec, 3)))+10;
         return timeInSec*100;
     }
     @Override
@@ -289,7 +223,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         String jsonStr = getJsonFromAssets(getApplicationContext(), "quotes.json");
         JSONObject json = new JSONObject(jsonStr);
         Iterator<String> keys = json.keys();
-
         while(keys.hasNext()) {
             String key = keys.next();
             if(arrContains(movieNames, key)) {
@@ -299,17 +232,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
                     quoteDict.put(jsonArray.getString(i), key);
                 }
             }
-
         }
     }
     public double getHighScore() {
         float score;
         Set<String> temp = new HashSet<>();
-
-
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         score = sharedPreferences.getFloat(HIGH_SCORE, 12);
-
         return score;
     }
     public void checkNewHighScore(double curScore){
@@ -324,7 +253,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         float truncSore = (float) round(newScore, 2);
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-
         editor.putFloat(HIGH_SCORE, truncSore);
         editor.apply();
     }
