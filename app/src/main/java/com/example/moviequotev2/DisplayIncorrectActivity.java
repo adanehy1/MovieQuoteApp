@@ -35,7 +35,6 @@ public class DisplayIncorrectActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 mTimeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
-
             }
 
             @Override
