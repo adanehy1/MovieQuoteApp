@@ -29,4 +29,10 @@ public static final String EXTRA_MESSAGE = "com.example.moviequotev2.MESSAGE";
         Intent intent2 = new Intent(this, HighScoreActivity.class);
         startActivity(intent2);
     }
+
+    public void movieSelect(View view) {
+        Intent intent3 = new Intent(this, MovieSelectActivity.class);
+        startActivity(intent3);
+    }
+
 }
