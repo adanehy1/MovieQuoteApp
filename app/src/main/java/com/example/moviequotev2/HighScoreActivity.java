@@ -32,31 +32,9 @@ public class HighScoreActivity extends AppCompatActivity {
     @Override
 
     public void onBackPressed(){
-        View popup = findViewById(R.id.popup);
-        popup.setVisibility(View.VISIBLE);
-        View areyousure = findViewById(R.id.areyousure);
-        areyousure.setVisibility(View.VISIBLE);
-        View noexit = findViewById(R.id.noexit);
-        noexit.setVisibility(View.VISIBLE);
-        View yesexit = findViewById(R.id.yesexit);
-        yesexit.setVisibility(View.VISIBLE);
-    }
-
-    public void yesexitButton(View view){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        Intent intent2 = new Intent(this, MainActivity.class);
+                startActivity(intent2);
 
     }
 
-    public void noexitButton(View view){
-        View popup = findViewById(R.id.popup);
-        popup.setVisibility(View.INVISIBLE);
-        View areyousure = findViewById(R.id.areyousure);
-        areyousure.setVisibility(View.INVISIBLE);
-        View noexit = findViewById(R.id.noexit);
-        noexit.setVisibility(View.INVISIBLE);
-        View yesexit = findViewById(R.id.yesexit);
-        yesexit.setVisibility(View.INVISIBLE);
-
-    }
 }
