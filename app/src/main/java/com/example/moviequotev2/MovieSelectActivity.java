@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -124,8 +125,11 @@ public class MovieSelectActivity extends AppCompatActivity {
                 CurrentActivity.this.startActivity(myIntent);
                 */
 
+                //
+                // String[] T = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
+
                 Intent myIntent = new Intent(MovieSelectActivity.this, DisplayMessageActivity.class);
-                myIntent.putExtra("selectedMovies", selectedMovies);
+                //myIntent.putExtra("selectedMovies", T);
                 MovieSelectActivity.this.startActivity(myIntent);
                 System.out.println(selectedMovies);
             }

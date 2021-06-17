@@ -52,11 +52,12 @@ public class DisplayMessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         //Intent intentMovie = getIntent();
-        //String selectedMovies = intentMovie.getStringExtra("selectedMovies");
+        //String[] selectedMovies = intentMovie.getStringArrayExtra("selectedMovies");
         //String[] selectedMoviesSeparated = selectedMovies.split(",");
 
         try{
             JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), testNames);
+            //JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), selectedMovies);
             quotesList = jQuotes.getQList();
             quoteDict = jQuotes.getQDict();
             jQuotes.getMovieNames();
