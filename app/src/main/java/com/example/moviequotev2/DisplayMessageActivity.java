@@ -55,6 +55,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), testNames);
             quotesList = jQuotes.getQList();
             quoteDict = jQuotes.getQDict();
+            jQuotes.getMovieNames();
         } catch(JSONException e){
             e.printStackTrace();
         }

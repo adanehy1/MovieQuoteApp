@@ -11,19 +11,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 
 public class JsonQuotes {
-    HashMap<String, String> quoteDictionary = new HashMap<String, String>();
-    List<String> quotesArrList = new ArrayList<String>();
+    HashMap<String, String> quoteDictionary = new HashMap<>();
+    List<String> quotesArrList = new ArrayList<>();
+    List<String> allMovieNames = new ArrayList<>();
 
     public JsonQuotes(Context context, String[] movieNames) throws JSONException {
-     String jsonStr = getJsonFromAssets(context.getApplicationContext(), "quotes.json");
+        String jsonStr = getJsonFromAssets(context.getApplicationContext(), "quotes.json");
         JSONObject json = new JSONObject(jsonStr);
         Iterator<String> keys = json.keys();
         while(keys.hasNext()) {
             String key = keys.next();
+            allMovieNames.add(key);
             if(arrContains(movieNames, key)) {
                 JSONArray jsonArray = (JSONArray) json.get(key);
                 for(int i = 0; i < jsonArray.length(); i++){
@@ -33,7 +36,16 @@ public class JsonQuotes {
             }
         }
     }
-    static String getJsonFromAssets(Context context, String fileName) {
+    public JsonQuotes(Context context) throws JSONException {
+        String jsonStr = getJsonFromAssets(context.getApplicationContext(), "quotes.json");
+        JSONObject json = new JSONObject(jsonStr);
+        Iterator<String> keys = json.keys();
+        while(keys.hasNext()) {
+            String key = keys.next();
+            allMovieNames.add(key);
+        }
+    }
+        static String getJsonFromAssets(Context context, String fileName) {
         String jsonString;
         try {
             InputStream is = context.getAssets().open(fileName);
@@ -58,6 +70,9 @@ public class JsonQuotes {
             }
         }
         return false;
+    }
+    public List<String> getMovieNames(){
+        return allMovieNames;
     }
     public List<String> getQList(){
         return quotesArrList;
