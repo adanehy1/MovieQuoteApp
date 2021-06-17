@@ -50,11 +50,16 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        try {
-            getQuotes(testNames); // initializes quotes array and QuoteDict
-        } catch (JSONException e) {
+
+        try{
+            JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), testNames);
+            quotesList = jQuotes.getQList();
+            quoteDict = jQuotes.getQDict();
+            jQuotes.getMovieNames();
+        } catch(JSONException e){
             e.printStackTrace();
         }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
 
@@ -219,21 +224,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         View yesexit = findViewById(R.id.yesexit);
         yesexit.setVisibility(View.VISIBLE);
     }
-    public void getQuotes(String[] movieNames) throws JSONException {
-        String jsonStr = getJsonFromAssets(getApplicationContext(), "quotes.json");
-        JSONObject json = new JSONObject(jsonStr);
-        Iterator<String> keys = json.keys();
-        while(keys.hasNext()) {
-            String key = keys.next();
-            if(arrContains(movieNames, key)) {
-                JSONArray jsonArray = (JSONArray) json.get(key);
-                for(int i = 0; i < jsonArray.length(); i++){
-                    quotesList.add(jsonArray.getString(i));
-                    quoteDict.put(jsonArray.getString(i), key);
-                }
-            }
-        }
-    }
     public double getHighScore() {
         float score;
         Set<String> temp = new HashSet<>();
@@ -255,32 +245,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putFloat(HIGH_SCORE, truncSore);
         editor.apply();
-    }
-    static String getJsonFromAssets(Context context, String fileName) {
-        String jsonString;
-        try {
-            InputStream is = context.getAssets().open(fileName);
-
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-
-            jsonString = new String(buffer, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return jsonString;
-    }
-    public boolean arrContains(String[] arr, String value){
-        for(String s : arr){
-            if(s.equals(value)){
-                return true;
-            }
-        }
-        return false;
     }
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();

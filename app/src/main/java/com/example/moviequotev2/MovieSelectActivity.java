@@ -19,6 +19,7 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -56,34 +57,23 @@ public class MovieSelectActivity extends AppCompatActivity {
         total.addView(scroll);
         total.addView(button2);
         scroll.addView(layout);
+        List<String> movieNames = new ArrayList<>();
+        try {
+            JsonQuotes jQuotes = new JsonQuotes(getApplicationContext());
+            movieNames = jQuotes.getMovieNames();
 
-        List<String> list = new ArrayList<String>();
-        list.add("Movie one");
-        list.add("Movie two");
-        list.add("Movie three");
-        list.add("Movie four");
-        list.add("Movie one");
-        list.add("Movie two");
-        list.add("Movie three");
-        list.add("Movie four");
-        list.add("Movie one");
-        list.add("Movie two");
-        list.add("Movie three");
-        list.add("Movie four");
-        list.add("Movie one");
-        list.add("Movie two");
-        list.add("Movie three");
-        list.add("Movie four");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        System.out.println("For Loop");
-        for (int counter = 0; counter < list.size(); counter++) {
-            System.out.println(list.get(counter));
+        for (int counter = 0; counter < movieNames.size(); counter++) {
+            System.out.println(movieNames.get(counter));
             LinearLayout row = new LinearLayout(this);
 
             Button button = new Button(this);
 
             int id = counter;
-            button.setText(list.get(counter));
+            button.setText(movieNames.get(counter));
             button.setId(id);
             button.setWidth(1200);
             row.addView(button);
@@ -94,33 +84,5 @@ public class MovieSelectActivity extends AppCompatActivity {
 
         setContentView(total);
 
-    }
-
-    public void getMovies() throws JSONException{
-        String jsonStr = getJsonFromAssets(getApplicationContext(), "quotes.json");
-        JSONObject json = new JSONObject(jsonStr);
-        Iterator<String> keys = json.keys();
-        while(keys.hasNext()){
-            String key = keys.next();
-            movies.add(key);
-        }
-    }
-    static String getJsonFromAssets(Context context, String fileName) {
-        String jsonString;
-        try {
-            InputStream is = context.getAssets().open(fileName);
-
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-
-            jsonString = new String(buffer, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return jsonString;
     }
 }
