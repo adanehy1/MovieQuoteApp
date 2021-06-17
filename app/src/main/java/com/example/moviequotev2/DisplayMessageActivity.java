@@ -51,8 +51,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Intent intentMovie = getIntent();
-        String finalMovies = intentMovie.getStringExtra("finalMovieNames");
+        //Intent intentMovie = getIntent();
+        //String selectedMovies = intentMovie.getStringExtra("selectedMovies");
+        //String[] selectedMoviesSeparated = selectedMovies.split(",");
 
         try{
             JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), testNames);

@@ -113,6 +113,7 @@ public class MovieSelectActivity extends AppCompatActivity {
             layout.addView(row);
 
         }
+        final String[] selectedMovies = finalMovieNames.toArray(new String[0]);
 
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -124,7 +125,9 @@ public class MovieSelectActivity extends AppCompatActivity {
                 */
 
                 Intent myIntent = new Intent(MovieSelectActivity.this, DisplayMessageActivity.class);
+                myIntent.putExtra("selectedMovies", selectedMovies);
                 MovieSelectActivity.this.startActivity(myIntent);
+                System.out.println(selectedMovies);
             }
             });
 
