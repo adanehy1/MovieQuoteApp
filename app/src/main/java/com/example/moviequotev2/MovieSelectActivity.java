@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -19,6 +22,7 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -58,6 +62,7 @@ public class MovieSelectActivity extends AppCompatActivity {
         total.addView(button2);
         scroll.addView(layout);
         List<String> movieNames = new ArrayList<>();
+        final List<String> finalMovieNames = new ArrayList<>();
         try {
             JsonQuotes jQuotes = new JsonQuotes(getApplicationContext());
             movieNames = jQuotes.getMovieNames();
@@ -70,17 +75,58 @@ public class MovieSelectActivity extends AppCompatActivity {
             System.out.println(movieNames.get(counter));
             LinearLayout row = new LinearLayout(this);
 
-            Button button = new Button(this);
+            final Button button = new Button(this);
 
             int id = counter;
             button.setText(movieNames.get(counter));
             button.setId(id);
             button.setWidth(1200);
+            final int[] num = {3};
+            final int finalCounter = counter;
+            final List<String> finalMovieNames1 = movieNames;
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (num[0] %2==0){
+                        //First Click (ADD)
+                        num[0]++;
+                        //System.out.println(num[0]);
+                        button.setBackgroundColor(Color.WHITE);
+                        button.setTextColor(Color.BLACK);
+                        finalMovieNames.remove(finalMovieNames1.get(finalCounter));
+                        System.out.println(finalMovieNames.toString());
+                    }
+                    else{
+                        //Second Click (REMOVE)
+                        num[0]++;
+                        //System.out.println(num[0]);
+                        button.setBackgroundColor(Color.BLACK);
+                        button.setTextColor(Color.WHITE);
+                        finalMovieNames.add(finalMovieNames1.get(finalCounter));
+                        System.out.println(finalMovieNames.toString());
+                    }
+                    }
+            });
+
             row.addView(button);
 
             layout.addView(row);
 
         }
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                /*
+                Intent myIntent = new Intent(CurrentActivity.this, NextActivity.class);
+                myIntent.putExtra("key", value); //Optional parameters
+                CurrentActivity.this.startActivity(myIntent);
+                */
+
+                Intent myIntent = new Intent(MovieSelectActivity.this, DisplayMessageActivity.class);
+                MovieSelectActivity.this.startActivity(myIntent);
+            }
+            });
 
         setContentView(total);
 
