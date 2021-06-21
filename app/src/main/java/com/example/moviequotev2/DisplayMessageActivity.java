@@ -50,7 +50,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        System.out.println("HIGH " + getHighScore());
         //Intent intentMovie = getIntent();
         //String[] selectedMovies = intentMovie.getStringArrayExtra("selectedMovies");
         //String[] selectedMoviesSeparated = selectedMovies.split(",");
@@ -231,7 +231,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     }
     public double getHighScore() {
         float score;
-        Set<String> temp = new HashSet<>();
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         score = sharedPreferences.getFloat(HIGH_SCORE, 12);
         return score;
