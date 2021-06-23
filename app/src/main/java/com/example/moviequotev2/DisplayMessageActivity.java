@@ -3,6 +3,7 @@ package com.example.moviequotev2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -43,9 +44,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
     long timerLength = 10;
     private long timeLeftInMilliseconds = 10000;
     private boolean timerRunning;
-    public static final int randNum = (int) (Math.random() * 4) + 1;
-    public static final String SHARED_PREFS = "highScore";
-    public static final String HIGH_SCORE = "highScore";
+    int randNum = (int) (Math.random() * 4) + 1;
+    static final String SHARED_PREFS = "highScore";
+    static final String HIGH_SCORE = "highScore";
+    final boolean debug  = true;
     final String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
 
     @Override
@@ -110,6 +112,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         Button button4 = (Button)findViewById(R.id.button5);
         button4.setText(buttonFourTxt);
+
+        debug(button1, button2,button3, button4);
 
         Intent intent = getIntent();
         startTimer();
@@ -258,6 +262,21 @@ public class DisplayMessageActivity extends AppCompatActivity {
         value = value * factor;
         long tmp = Math.round(value);
         return (double) tmp / factor;
+    }
+    public void debug(Button b1, Button b2, Button b3, Button b4){
+        if(debug) {
+            if (randNum == 1) {
+                b1.setBackgroundColor(Color.GREEN);
+            } else if (randNum == 2) {
+                b2.setBackgroundColor(Color.GREEN);
+            } else if (randNum == 3) {
+                b3.setBackgroundColor(Color.GREEN);
+            } else if (randNum == 4) {
+                b4.setBackgroundColor(Color.GREEN);
+            } else {
+                System.out.println("Error with debug randNum");
+            }
+        } else {return;}
     }
 }
 
