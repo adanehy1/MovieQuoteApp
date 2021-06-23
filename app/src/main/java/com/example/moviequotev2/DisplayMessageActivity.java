@@ -54,6 +54,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         stats = new Stats(getApplicationContext());
+        stats.incrRoundsPlayed();
+        System.out.println(stats);
         //System.out.println("HIGH " + stats.getHighScore());
         //Intent intentMovie = getIntent();
         //String[] selectedMovies = intentMovie.getStringArrayExtra("selectedMovies");
@@ -174,8 +176,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
         stopTimer();
         if(randNum == round){
             ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
+            stats.incrTotalAccumPoints(((globalClass) this.getApplication()).getScore());
+            stats.incrCorrectGuesses();
+
         }
-        System.out.println(stats);
         stats.checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
         startActivity(intent);
     }
