@@ -44,10 +44,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
     long timerLength = 10;
     private long timeLeftInMilliseconds = 10000;
     private boolean timerRunning;
-    static final int randNum = (int) (Math.random() * 4) + 1;
+
+    int randNum = (int) (Math.random() * 4) + 1;
     static final String SHARED_PREFS = "highScore";
     static final String HIGH_SCORE = "highScore";
-    Stats stats;
+    final boolean debug  = true;
     final String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
 
     @Override
@@ -114,6 +115,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         Button button4 = (Button)findViewById(R.id.button5);
         button4.setText(buttonFourTxt);
 
+        debug(button1, button2, button3, button4);
         Intent intent = getIntent();
         startTimer();
         countdownText = findViewById(R.id.countdown_text);
@@ -231,6 +233,21 @@ public class DisplayMessageActivity extends AppCompatActivity {
         noexit.setVisibility(View.VISIBLE);
         View yesexit = findViewById(R.id.yesexit);
         yesexit.setVisibility(View.VISIBLE);
+    }
+    public void debug(Button b1, Button b2, Button b3, Button b4){
+        if(debug) {
+            if (randNum == 1) {
+                b1.setBackgroundColor(Color.GREEN);
+            } else if (randNum == 2) {
+                b2.setBackgroundColor(Color.GREEN);
+            } else if (randNum == 3) {
+                b3.setBackgroundColor(Color.GREEN);
+            } else if (randNum == 4) {
+                b4.setBackgroundColor(Color.GREEN);
+            } else {
+                System.out.println("Error with debug randNum");
+            }
+        } else {return;}
     }
 //    public double getHighScore() {
 //        float score;
