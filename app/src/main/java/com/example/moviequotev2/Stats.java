@@ -8,8 +8,8 @@ public class Stats {
     Context context;
     public static final String SHARED_PREFS = "Statistics";
     SharedPreferences sharedPreferences;
-    public Stats(Context context){
-        context = context;
+    public Stats(Context cntx){
+        context = cntx;
         sharedPreferences = context.getSharedPreferences(SHARED_PREFS, context.MODE_PRIVATE);
         score = sharedPreferences.getFloat("highScore", 0);
     }
@@ -21,6 +21,7 @@ public class Stats {
             return;
         }
         if(getHighScore() < curScore){
+            System.out.println("Prev Score: " +  score + " New HighScore: " + curScore);
             setHighScore(curScore);
         }
     }
@@ -42,5 +43,11 @@ public class Stats {
     }
     public String toString(){
         return "Invoked";
+    }
+    public void resetScore(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat("highScore", 0);
+        editor.apply();
     }
 }

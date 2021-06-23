@@ -176,7 +176,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         }
         System.out.println(stats);
-        //stats.checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
+        stats.checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
         startActivity(intent);
     }
     public void startTimer() {
