@@ -27,7 +27,7 @@ public class Stats {
     public void setHighScore(double newScore){
         float truncSore = (float) round(newScore, 2);
         System.out.println(this);
-        sharedPreferences = context.getSharedPreferences(SHARED_PREFS, context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS, context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putFloat("highScore", truncSore);
         editor.apply();
