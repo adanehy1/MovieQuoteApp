@@ -48,11 +48,12 @@ public class DisplayMessageActivity extends AppCompatActivity {
     static final String SHARED_PREFS = "highScore";
     static final String HIGH_SCORE = "highScore";
     final boolean debug  = true;
+
     final String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        System.out.println("Rand " + randNum );
         //Intent intentMovie = getIntent();
         //String[] selectedMovies = intentMovie.getStringArrayExtra("selectedMovies");
         //String[] selectedMoviesSeparated = selectedMovies.split(",");
