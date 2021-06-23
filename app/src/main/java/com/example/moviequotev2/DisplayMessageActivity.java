@@ -43,14 +43,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
     long timerLength = 10;
     private long timeLeftInMilliseconds = 10000;
     private boolean timerRunning;
-    public static final int randNum = (int) (Math.random() * 4) + 1;
+    int randNum = (int) (Math.random() * 4) + 1;
     public static final String SHARED_PREFS = "highScore";
     public static final String HIGH_SCORE = "highScore";
     final String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        System.out.println("Rand " + randNum );
         //Intent intentMovie = getIntent();
         //String[] selectedMovies = intentMovie.getStringArrayExtra("selectedMovies");
         //String[] selectedMoviesSeparated = selectedMovies.split(",");
