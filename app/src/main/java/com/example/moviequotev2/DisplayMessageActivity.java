@@ -114,8 +114,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         Button button4 = (Button)findViewById(R.id.button5);
         button4.setText(buttonFourTxt);
 
-        debug(button1, button2,button3, button4);
-
+        debug(button1, button2, button3, button4);
         Intent intent = getIntent();
         startTimer();
         countdownText = findViewById(R.id.countdown_text);
@@ -128,7 +127,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     public void movie1Button(View view) throws InterruptedException {
         setBtns(1);
     }
-
     public void movie2Button(View view) throws FileNotFoundException {
         setBtns(2);
     }
