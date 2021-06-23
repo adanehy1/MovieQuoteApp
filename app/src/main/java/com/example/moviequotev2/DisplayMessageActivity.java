@@ -44,7 +44,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     long timerLength = 10;
     private long timeLeftInMilliseconds = 10000;
     private boolean timerRunning;
-
+    Stats stats;
     int randNum = (int) (Math.random() * 4) + 1;
     static final String SHARED_PREFS = "highScore";
     static final String HIGH_SCORE = "highScore";
@@ -104,7 +104,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         //Sets the text for top left button
         Button button1 = (Button)findViewById(R.id.button2);
         button1.setText(buttonOneTxt);
-        button1.setBackgroundColor(Color.GREEN);
 
         Button button2 = (Button)findViewById(R.id.button3);
         button2.setText(buttonTwoTxt);
@@ -177,7 +176,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         }
         System.out.println(stats);
-        stats.checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
+        //stats.checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
         startActivity(intent);
     }
     public void startTimer() {
