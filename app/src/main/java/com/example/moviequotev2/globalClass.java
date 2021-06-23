@@ -12,7 +12,7 @@ public class globalClass extends Application {
         usedQuotes.add(quote);
     }
     public String getQuote(int i){
-        return usedQuotes.get(i);
+        return  usedQuotes.get(i);
     }
     public void printQuotes(){
 

@@ -44,16 +44,17 @@ public class DisplayMessageActivity extends AppCompatActivity {
     long timerLength = 10;
     private long timeLeftInMilliseconds = 10000;
     private boolean timerRunning;
+
     int randNum = (int) (Math.random() * 4) + 1;
     static final String SHARED_PREFS = "highScore";
     static final String HIGH_SCORE = "highScore";
     final boolean debug  = true;
-
     final String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("Rand " + randNum );
+        stats = new Stats(getApplicationContext());
+        //System.out.println("HIGH " + stats.getHighScore());
         //Intent intentMovie = getIntent();
         //String[] selectedMovies = intentMovie.getStringArrayExtra("selectedMovies");
         //String[] selectedMoviesSeparated = selectedMovies.split(",");
@@ -82,7 +83,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         while(buttonOneTxt == buttonTwoTxt || buttonOneTxt == buttonThreeTxt || buttonOneTxt == buttonFourTxt ) {
            buttonOneTxt = setBtnQuotes(1);
-
         }
        while(buttonTwoTxt == buttonOneTxt || buttonTwoTxt == buttonThreeTxt || buttonTwoTxt == buttonFourTxt ) {
            buttonTwoTxt = setBtnQuotes(2);
@@ -104,6 +104,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         //Sets the text for top left button
         Button button1 = (Button)findViewById(R.id.button2);
         button1.setText(buttonOneTxt);
+        button1.setBackgroundColor(Color.GREEN);
 
         Button button2 = (Button)findViewById(R.id.button3);
         button2.setText(buttonTwoTxt);
@@ -175,7 +176,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
         if(randNum == round){
             ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
         }
-        checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
+        System.out.println(stats);
+        stats.checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
         startActivity(intent);
     }
     public void startTimer() {
@@ -232,36 +234,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         View yesexit = findViewById(R.id.yesexit);
         yesexit.setVisibility(View.VISIBLE);
     }
-    public double getHighScore() {
-        float score;
-        Set<String> temp = new HashSet<>();
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        score = sharedPreferences.getFloat(HIGH_SCORE, 12);
-        return score;
-    }
-    public void checkNewHighScore(double curScore){
-        if(curScore <= 0.0){
-            return;
-        }
-        if(getHighScore() < curScore){
-            setHighScore(curScore);
-        }
-    }
-    public void setHighScore(double newScore){
-        float truncSore = (float) round(newScore, 2);
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putFloat(HIGH_SCORE, truncSore);
-        editor.apply();
-    }
-    public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        long factor = (long) Math.pow(10, places);
-        value = value * factor;
-        long tmp = Math.round(value);
-        return (double) tmp / factor;
-    }
     public void debug(Button b1, Button b2, Button b3, Button b4){
         if(debug) {
             if (randNum == 1) {
@@ -277,6 +249,35 @@ public class DisplayMessageActivity extends AppCompatActivity {
             }
         } else {return;}
     }
+//    public double getHighScore() {
+//        float score;
+//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+//        score = sharedPreferences.getFloat(HIGH_SCORE, 12);
+//        return score;
+//    }
+//    public void checkNewHighScore(double curScore){
+//        if(curScore <= 0.0){
+//            return;
+//        }
+//        if(getHighScore() < curScore){
+//            setHighScore(curScore);
+//        }
+//    }
+//    public void setHighScore(double newScore){
+//        float truncSore = (float) round(newScore, 2);
+//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putFloat(HIGH_SCORE, truncSore);
+//        editor.apply();
+//    }
+//    public static double round(double value, int places) {
+//        if (places < 0) throw new IllegalArgumentException();
+//
+//        long factor = (long) Math.pow(10, places);
+//        value = value * factor;
+//        long tmp = Math.round(value);
+//        return (double) tmp / factor;
+//    }
 }
 
 
