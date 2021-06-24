@@ -28,6 +28,30 @@ public class HighScoreActivity extends AppCompatActivity {
 
         TextView textView5 = (TextView) findViewById(R.id.HS5);
         textView5.setText("Fifth High Score");
+
+        TextView stat1 = (TextView) findViewById(R.id.stat1);
+        stat1.setText("First Statistic Title");
+
+        TextView stat2 = (TextView) findViewById(R.id.stat2);
+        stat2.setText("Second Statistic Title");
+
+        TextView stat3 = (TextView) findViewById(R.id.stat3);
+        stat3.setText("Third Statistic Title");
+
+        TextView stat4 = (TextView) findViewById(R.id.stat4);
+        stat4.setText("Fourth Statistic Title");
+
+        TextView insStat1 = (TextView) findViewById(R.id.actualStat1);
+        insStat1.setText("Insert Stat 1");
+
+        TextView insStat2 = (TextView) findViewById(R.id.actualStat2);
+        insStat2.setText("Insert Stat 2");
+
+        TextView insStat3 = (TextView) findViewById(R.id.actualStat3);
+        insStat3.setText("Insert Stat 3");
+
+        TextView insStat4 = (TextView) findViewById(R.id.actualStat4);
+        insStat4.setText("Insert Stat 4");
     }
     @Override
 

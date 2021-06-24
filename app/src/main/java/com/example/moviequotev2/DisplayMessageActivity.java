@@ -38,22 +38,29 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private TextView countdownText;
     private TextView round;
     private CountDownTimer countDownTimer;
+    private CountDownTimer countDownTimerPause;
     HashMap<String, String> quoteDict = new HashMap<String, String>();
     List<String> quotesList = new ArrayList<String>();
     String selectedQuote = "NOT SET";
     long timerLength = 10;
     private long timeLeftInMilliseconds = 10000;
+    private long timeLeftInMillisecondsPause = 2000;
     private boolean timerRunning;
+    private boolean timerRunningPause;
     Stats stats;
     int randNum = (int) (Math.random() * 4) + 1;
     static final String SHARED_PREFS = "highScore";
     static final String HIGH_SCORE = "highScore";
     final boolean debug  = true;
-    final String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
+    final String[] testNames = {"Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        stats = new Stats(getApplicationContext());
+        //Bundle bundle = getIntent().getExtras();
+        //String finalMovieNames = bundle.getString("string-array");
+        //System.out.println(finalMovieNames);
+
+        stats = new Stats(getApplicationContext()); 
         stats.incrRoundsPlayed();
         System.out.println(stats);
         //System.out.println("HIGH " + stats.getHighScore());
@@ -103,17 +110,20 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         TextView1.setText(selectedQuote);
 
+        final TextView textViewScore = (TextView) findViewById(R.id.addedScore);
+        textViewScore.setVisibility(View.INVISIBLE);
+
         //Sets the text for top left button
-        Button button1 = (Button)findViewById(R.id.button2);
+        final Button button1 = (Button)findViewById(R.id.button2);
         button1.setText(buttonOneTxt);
 
-        Button button2 = (Button)findViewById(R.id.button3);
+        final Button button2 = (Button)findViewById(R.id.button3);
         button2.setText(buttonTwoTxt);
 
-        Button button3 = (Button)findViewById(R.id.button4);
+        final Button button3 = (Button)findViewById(R.id.button4);
         button3.setText(buttonThreeTxt);
 
-        Button button4 = (Button)findViewById(R.id.button5);
+        final Button button4 = (Button)findViewById(R.id.button5);
         button4.setText(buttonFourTxt);
 
         debug(button1, button2, button3, button4);
@@ -123,9 +133,73 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         // Delay to transition to "incorrect" after 10 seconds
 
+        button1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setBtns(1);
+                textViewScore.setVisibility(View.VISIBLE);
+                textViewScore.setText("Added Score");
+                //Makes the other 3 buttons unclickable
+                button2.setEnabled(false);
+                button3.setEnabled(false);
+                button4.setEnabled(false);
+                //initially sets color to red meaning incorrect
+                button1.setBackgroundColor(Color.RED);
+                //if statement makes it so color is different if correct
+                if(randNum == 1) {
+                    button1.setBackgroundColor(Color.DKGRAY);
+                }
+                            }
+        });
 
+        button2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setBtns(2);
+                textViewScore.setVisibility(View.VISIBLE);
+                textViewScore.setText("Added Score");
+                button2.setBackgroundColor(Color.RED);
+                //Makes the other 3 buttons unclickable
+                button1.setEnabled(false);
+                button3.setEnabled(false);
+                button4.setEnabled(false);
+                if(randNum == 2) {
+                    button2.setBackgroundColor(Color.DKGRAY);
+                }
+            }
+        });
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setBtns(3);
+                textViewScore.setVisibility(View.VISIBLE);
+                textViewScore.setText("Added Score");
+                button3.setBackgroundColor(Color.RED);
+                //Makes the other 3 buttons unclickable
+                button1.setEnabled(false);
+                button2.setEnabled(false);
+                button4.setEnabled(false);
+                if(randNum == 3) {
+                    button3.setBackgroundColor(Color.DKGRAY);
+                }
+            }
+        });
+
+        button4.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setBtns(4);
+                textViewScore.setVisibility(View.VISIBLE);
+                textViewScore.setText("Added Score");
+                button4.setBackgroundColor(Color.RED);
+                //Makes the other 3 buttons unclickable
+                button1.setEnabled(false);
+                button2.setEnabled(false);
+                button3.setEnabled(false);
+                if(randNum == 4) {
+                    button4.setBackgroundColor(Color.DKGRAY);
+                }
+            }
+        });
     }
-
+/*
     public void movie1Button(View view) throws InterruptedException {
         setBtns(1);
     }
@@ -138,7 +212,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     public void movie4Button(View view) throws FileNotFoundException {
         setBtns(4);
     }
-
+*/
     public void yesexitButton(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -169,9 +243,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
         return quoteDict.get(quotesList.get(randIButtonFour));
     }
     public void setBtns(int round){
-        Intent intent = new Intent(this, DisplayIncorrectActivity.class);
+        startPauseTimer();
+        //Intent intent = new Intent(this, DisplayIncorrectActivity.class);
         if(randNum == round) {
-            intent = new Intent(this, DisplayCorrectActivity.class);
+        //    intent = new Intent(this, DisplayCorrectActivity.class);
         }
         stopTimer();
         if(randNum == round){
@@ -181,7 +256,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         }
         stats.checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
-        startActivity(intent);
+        //startActivity(intent);
     }
     public void startTimer() {
         countDownTimer = new CountDownTimer(timeLeftInMilliseconds, timerLength) {
@@ -222,6 +297,40 @@ public class DisplayMessageActivity extends AppCompatActivity {
             stopTimer();
                }
     }
+
+    public void startPauseTimer() {
+        countDownTimerPause = new CountDownTimer(timeLeftInMillisecondsPause, timerLength) {
+            @Override
+            public void onTick(long l) {
+                timeLeftInMillisecondsPause = l;
+                updatePauseTimer();
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+
+        timerRunningPause = true;
+    }
+
+    public void stopPauseTimer() {
+        countDownTimerPause.cancel();
+        timerRunningPause = false;
+    }
+
+    public void updatePauseTimer() {
+        int seconds = (int) timeLeftInMillisecondsPause / 1000;
+
+        Intent next = new Intent(this, NextRoundCounter.class);
+        if (seconds <= 0) {
+            startActivity(next);
+            stopPauseTimer();
+        }
+    }
+
+
     public double calculateScore(long timeRemaining){
         double timeInSec = (timeRemaining)/1000.0;
         return timeInSec*100;
@@ -252,6 +361,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
             }
         } else {return;}
     }
+
+
 //    public double getHighScore() {
 //        float score;
 //        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);

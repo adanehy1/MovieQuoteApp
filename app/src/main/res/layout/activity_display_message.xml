@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="332dp"
         android:layout_height="180dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="52dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/dodgeball_q1"
         android:textAlignment="center"
@@ -26,7 +26,6 @@
         android:layout_height="70dp"
         android:layout_marginStart="60dp"
         android:layout_marginBottom="50dp"
-        android:onClick="movie1Button"
         android:text="@string/movie_1"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/button4"
@@ -38,7 +37,6 @@
         android:layout_height="70dp"
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="50dp"
-        android:onClick="movie2Button"
         android:text="@string/movie_2"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/button5"
@@ -50,7 +48,6 @@
         android:layout_height="70dp"
         android:layout_marginStart="60dp"
         android:layout_marginBottom="40dp"
-        android:onClick="movie3Button"
         android:text="@string/movie_3"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +59,6 @@
         android:layout_height="70dp"
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="40dp"
-        android:onClick="movie4Button"
         android:text="@string/movie_4"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -138,5 +134,14 @@
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/addedScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textScore2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
