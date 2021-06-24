@@ -60,7 +60,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
         //String finalMovieNames = bundle.getString("string-array");
         //System.out.println(finalMovieNames);
 
-        stats = new Stats(getApplicationContext());
+        stats = new Stats(getApplicationContext()); 
+        stats.incrRoundsPlayed();
+        System.out.println(stats);
+        //System.out.println("HIGH " + stats.getHighScore());
+        //Intent intentMovie = getIntent();
+        //String[] selectedMovies = intentMovie.getStringArrayExtra("selectedMovies");
+        //String[] selectedMoviesSeparated = selectedMovies.split(",");
 
         try{
             JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), testNames);
@@ -245,8 +251,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
         stopTimer();
         if(randNum == round){
             ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
+            stats.incrTotalAccumPoints(((globalClass) this.getApplication()).getScore());
+            stats.incrCorrectGuesses();
+
         }
-        System.out.println(stats);
         stats.checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
         //startActivity(intent);
     }
