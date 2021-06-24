@@ -56,9 +56,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Bundle bundle = getIntent().getExtras();
-        //String finalMovieNames = bundle.getString("string-array");
-        //System.out.println(finalMovieNames);
+//        Bundle b = getIntent().getExtras();
+//        String[] movNames;
+//        if(b != null){
+//            movNames = b.getStringArray("movNames");
+//            System.out.println(movNames);
+//        }
+
+
 
         stats = new Stats(getApplicationContext()); 
         stats.incrRoundsPlayed();

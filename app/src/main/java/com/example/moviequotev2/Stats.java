@@ -116,4 +116,16 @@ public class Stats {
     public double getHighScore() {
         return score;
     }
+    public int getRoundsPlayed(){
+        return roundsPlayed;
+    }
+    public double getAvgPointsPerRound(){
+        return (roundsPlayed > 0 ? (totalAccumPoints/roundsPlayed) : 0);
+    }
+    public long getTotalPoints(){
+        return totalAccumPoints;
+    }
+    public double getCorrectGuessAvg(){
+        return correctGuessAvg;
+    }
 }
