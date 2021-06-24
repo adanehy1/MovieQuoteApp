@@ -132,7 +132,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 setBtns(1);
                 textViewScore.setVisibility(View.VISIBLE);
                 textViewScore.setText("Added Score");
+                //Makes the other 3 buttons unclickable
+                button2.setEnabled(false);
+                button3.setEnabled(false);
+                button4.setEnabled(false);
+                //initially sets color to red meaning incorrect
                 button1.setBackgroundColor(Color.RED);
+                //if statement makes it so color is different if correct
                 if(randNum == 1) {
                     button1.setBackgroundColor(Color.DKGRAY);
                 }
@@ -145,6 +151,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 textViewScore.setVisibility(View.VISIBLE);
                 textViewScore.setText("Added Score");
                 button2.setBackgroundColor(Color.RED);
+                //Makes the other 3 buttons unclickable
+                button1.setEnabled(false);
+                button3.setEnabled(false);
+                button4.setEnabled(false);
                 if(randNum == 2) {
                     button2.setBackgroundColor(Color.DKGRAY);
                 }
@@ -157,6 +167,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 textViewScore.setVisibility(View.VISIBLE);
                 textViewScore.setText("Added Score");
                 button3.setBackgroundColor(Color.RED);
+                //Makes the other 3 buttons unclickable
+                button1.setEnabled(false);
+                button2.setEnabled(false);
+                button4.setEnabled(false);
                 if(randNum == 3) {
                     button3.setBackgroundColor(Color.DKGRAY);
                 }
@@ -169,6 +183,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 textViewScore.setVisibility(View.VISIBLE);
                 textViewScore.setText("Added Score");
                 button4.setBackgroundColor(Color.RED);
+                //Makes the other 3 buttons unclickable
+                button1.setEnabled(false);
+                button2.setEnabled(false);
+                button3.setEnabled(false);
                 if(randNum == 4) {
                     button4.setBackgroundColor(Color.DKGRAY);
                 }
