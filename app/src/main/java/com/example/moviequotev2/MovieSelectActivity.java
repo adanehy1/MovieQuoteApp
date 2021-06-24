@@ -46,8 +46,9 @@ public class MovieSelectActivity extends AppCompatActivity {
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(34);
 
-        Button button2 = new Button(this);
+        final Button button2 = new Button(this);
         button2.setText("Start Game");
+        button2.setEnabled(false);
         button2.setHeight(400);
 
         ScrollView scroll = new ScrollView(this);
@@ -105,6 +106,13 @@ public class MovieSelectActivity extends AppCompatActivity {
                         button.setTextColor(Color.WHITE);
                         finalMovieNames.add(finalMovieNames1.get(finalCounter));
                         System.out.println(finalMovieNames.toString());
+                    }
+                    final int size = finalMovieNames.size();
+                    if(size >= 4){
+                        button2.setEnabled(true);
+                    }
+                    if(size == 3){
+                        button2.setEnabled(false);
                     }
                     }
             });
