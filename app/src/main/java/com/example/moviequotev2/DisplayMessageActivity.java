@@ -52,15 +52,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
     static final String SHARED_PREFS = "highScore";
     static final String HIGH_SCORE = "highScore";
     final boolean debug  = true;
-    final String[] testNames = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
+    final String[] testNames = {"Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         stats = new Stats(getApplicationContext());
-        //System.out.println("HIGH " + stats.getHighScore());
-        //Intent intentMovie = getIntent();
-        //String[] selectedMovies = intentMovie.getStringArrayExtra("selectedMovies");
-        //String[] selectedMoviesSeparated = selectedMovies.split(",");
 
         try{
             JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), testNames);
@@ -147,7 +143,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setBtns(1);
+                setBtns(2);
                 textViewScore.setVisibility(View.VISIBLE);
                 textViewScore.setText("Added Score");
                 button2.setBackgroundColor(Color.RED);

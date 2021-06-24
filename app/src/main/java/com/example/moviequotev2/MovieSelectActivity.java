@@ -122,7 +122,7 @@ public class MovieSelectActivity extends AppCompatActivity {
             layout.addView(row);
 
         }
-        final String[] selectedMovies = finalMovieNames.toArray(new String[0]);
+        //final String[] selectedMovies = finalMovieNames.toArray(new String[0]);
 
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -137,9 +137,8 @@ public class MovieSelectActivity extends AppCompatActivity {
                 // String[] T = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
 
                 Intent myIntent = new Intent(MovieSelectActivity.this, DisplayMessageActivity.class);
-                //myIntent.putExtra("selectedMovies", T);
                 MovieSelectActivity.this.startActivity(myIntent);
-                System.out.println(selectedMovies);
+                //System.out.println(selectedMovies);
             }
             });
 
