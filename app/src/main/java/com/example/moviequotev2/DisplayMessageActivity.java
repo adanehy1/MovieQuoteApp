@@ -56,6 +56,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Bundle bundle = getIntent().getExtras();
+        String finalMovieNames = bundle.getString("string-array");
+        System.out.println(finalMovieNames);
+
         stats = new Stats(getApplicationContext());
 
         try{
@@ -349,6 +353,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
             }
         } else {return;}
     }
+
+
 //    public double getHighScore() {
 //        float score;
 //        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);

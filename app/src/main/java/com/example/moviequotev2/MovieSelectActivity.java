@@ -122,7 +122,7 @@ public class MovieSelectActivity extends AppCompatActivity {
             layout.addView(row);
 
         }
-        //final String[] selectedMovies = finalMovieNames.toArray(new String[0]);
+        final String[] selectedMovies = finalMovieNames.toString().split(",");
 
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -133,11 +133,11 @@ public class MovieSelectActivity extends AppCompatActivity {
                 CurrentActivity.this.startActivity(myIntent);
                 */
 
-                //
-                // String[] T = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
+                //String[] T = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
 
                 Intent myIntent = new Intent(MovieSelectActivity.this, DisplayMessageActivity.class);
-                MovieSelectActivity.this.startActivity(myIntent);
+                myIntent.putExtra("string-array", finalMovieNames.toString());
+                startActivity(myIntent);
                 //System.out.println(selectedMovies);
             }
             });
