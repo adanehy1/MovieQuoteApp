@@ -136,7 +136,7 @@ public class MovieSelectActivity extends AppCompatActivity {
                 //String[] T = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
 
                 Intent myIntent = new Intent(MovieSelectActivity.this, DisplayMessageActivity.class);
-                myIntent.putExtra("string-array", finalMovieNames.toString());
+                //myIntent.putExtra("string-array", finalMovieNames.toString());
                 startActivity(myIntent);
                 //System.out.println(selectedMovies);
             }
