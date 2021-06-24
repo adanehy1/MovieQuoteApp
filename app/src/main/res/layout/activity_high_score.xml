@@ -10,7 +10,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="300dp"
         android:text="High Scores"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -126,6 +126,82 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:onClick="noexitButton" />
+
+    <TextView
+        android:id="@+id/stat1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="50dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/stat3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="50dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stat1" />
+
+    <TextView
+        android:id="@+id/stat2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="50dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/stat1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/stat4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="50dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/stat3"
+        app:layout_constraintTop_toBottomOf="@+id/stat2" />
+
+    <TextView
+        android:id="@+id/actualStat1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stat1" />
+
+    <TextView
+        android:id="@+id/actualStat2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/actualStat1"
+        app:layout_constraintTop_toBottomOf="@+id/stat2" />
+
+    <TextView
+        android:id="@+id/actualStat3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stat3" />
+
+    <TextView
+        android:id="@+id/actualStat4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/actualStat3"
+        app:layout_constraintTop_toBottomOf="@+id/stat4" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

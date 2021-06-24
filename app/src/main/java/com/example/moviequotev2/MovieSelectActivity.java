@@ -42,7 +42,7 @@ public class MovieSelectActivity extends AppCompatActivity {
         total.setOrientation(LinearLayout.VERTICAL);
 
         TextView textView = new TextView(this);
-        textView.setText("Select Movies");
+        textView.setText("Select 4 or More Movies");
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(34);
 
