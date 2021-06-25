@@ -21,7 +21,7 @@ public static final String EXTRA_MESSAGE = "com.example.moviequotev2.MESSAGE";
     }
     /** When the Open Button is pressed*/
     public void openButton(View view) {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        Intent intent = new Intent(this, MovieSelectActivity.class);
         startActivity(intent);
     }
 

@@ -3,6 +3,7 @@ package com.example.moviequotev2;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -96,7 +97,7 @@ public class MovieSelectActivity extends AppCompatActivity {
                         button.setBackgroundColor(Color.WHITE);
                         button.setTextColor(Color.BLACK);
                         finalMovieNames.remove(finalMovieNames1.get(finalCounter));
-                        //System.out.println(finalMovieNames.toString());
+                        System.out.println(finalMovieNames.toString());
                     }
                     else{
                         //Second Click (REMOVE)
@@ -105,7 +106,7 @@ public class MovieSelectActivity extends AppCompatActivity {
                         button.setBackgroundColor(Color.BLACK);
                         button.setTextColor(Color.WHITE);
                         finalMovieNames.add(finalMovieNames1.get(finalCounter));
-                        //System.out.println(finalMovieNames.toString());
+                        System.out.println(finalMovieNames.toString());
                     }
                     final int size = finalMovieNames.size();
                     if(size >= 4){
@@ -126,27 +127,15 @@ public class MovieSelectActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                final String[] selectedMovies = finalMovieNames.toString().split(",");
-                for(String s : selectedMovies){
-                    System.out.println(s);
-                }
-                //String[] selectedMovies = n
-                System.out.println(selectedMovies);
-                /*
-                Intent myIntent = new Intent(CurrentActivity.this, NextActivity.class);
-                myIntent.putExtra("key", value); //Optional parameters
-                CurrentActivity.this.startActivity(myIntent);
-                */
+                String[] selectedMovies = finalMovieNames.toArray(new String[0]);
 
-                //String[] T = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
+                String[] T = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
 
                 Intent myIntent = new Intent(MovieSelectActivity.this, DisplayMessageActivity.class);
-                //Bundle b = new Bundle();
-                myIntent.putExtra("movieNames", selectedMovies);
-                //myIntent.putExtras(b);
-                //myIntent.putExtra("string-array", finalMovieNames.toString());
+                Bundle bundle = new Bundle();
+                bundle.putStringArray("passedMovies", T);
+                myIntent.putExtras(bundle);
                 startActivity(myIntent);
-                finish();
 
                 //System.out.println(selectedMovies);
             }

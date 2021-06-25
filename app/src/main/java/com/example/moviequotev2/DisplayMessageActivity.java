@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -53,17 +54,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
     static final String HIGH_SCORE = "highScore";
     final boolean debug  = true;
     final String[] testNames = {"Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
+    boolean firstRound = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        Bundle b = getIntent().getExtras();
-//        String[] movNames;
-//        if(b != null){
-//            movNames = b.getStringArray("movNames");
-//            System.out.println(movNames);
-//        }
-
-
+        Bundle bundle = getIntent().getExtras();
+        String[] selectedMovies = bundle.getStringArray("passedMovies");
+        System.out.println(Arrays.toString(selectedMovies));
 
         stats = new Stats(getApplicationContext()); 
         stats.incrRoundsPlayed();
@@ -74,8 +71,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
         //String[] selectedMoviesSeparated = selectedMovies.split(",");
 
         try{
-            JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), testNames);
-            //JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), selectedMovies);
+            //JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), testNames);
+            JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), selectedMovies);
             quotesList = jQuotes.getQList();
             quoteDict = jQuotes.getQDict();
             jQuotes.getMovieNames();
@@ -296,10 +293,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         timeLeftText += milli;
 
         countdownText.setText(timeLeftText);
-        Intent incorrect = new Intent(this, DisplayIncorrectActivity.class);
         if (seconds <= 0) {
-            startActivity(incorrect);
             stopTimer();
+            startPauseTimer();
                }
     }
 
