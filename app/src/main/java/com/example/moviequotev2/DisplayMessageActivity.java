@@ -71,8 +71,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
         //String[] selectedMoviesSeparated = selectedMovies.split(",");
 
         try{
-            //JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), testNames);
-            JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), selectedMovies);
+            JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), testNames);
+            //JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), selectedMovies);
             quotesList = jQuotes.getQList();
             quoteDict = jQuotes.getQDict();
             jQuotes.getMovieNames();
