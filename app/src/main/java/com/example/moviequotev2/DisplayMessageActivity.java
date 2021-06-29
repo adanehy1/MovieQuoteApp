@@ -58,8 +58,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Bundle bundle = getIntent().getExtras();
-        String[] selectedMovies = bundle.getStringArray("passedMovies");
+        Intent intent = getIntent();
+        String[] selectedMovies = intent.getStringArrayExtra("SelMovies");
         System.out.println(Arrays.toString(selectedMovies));
 
         stats = new Stats(getApplicationContext()); 
@@ -71,7 +71,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         //String[] selectedMoviesSeparated = selectedMovies.split(",");
 
         try{
-            JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), testNames);
+            JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), selectedMovies);
             //JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), selectedMovies);
             quotesList = jQuotes.getQList();
             quoteDict = jQuotes.getQDict();
@@ -129,7 +129,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         button4.setText(buttonFourTxt);
 
         debug(button1, button2, button3, button4);
-        Intent intent = getIntent();
+        //Intent intent = getIntent();
         startTimer();
         countdownText = findViewById(R.id.countdown_text);
 

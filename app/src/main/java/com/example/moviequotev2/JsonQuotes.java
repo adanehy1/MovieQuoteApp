@@ -64,9 +64,11 @@ public class JsonQuotes {
         return jsonString;
     }
     public boolean arrContains(String[] arr, String value){
-        for(String s : arr){
-            if(s.equals(value)){
-                return true;
+        if (arr != null) {
+            for(String s : arr){
+                if(s.equals(value)){
+                    return true;
+                }
             }
         }
         return false;
