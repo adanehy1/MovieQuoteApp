@@ -13,6 +13,7 @@ public class HighScoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_high_score);
+        Stats stats = new Stats(getApplicationContext());
 
         TextView textView1 = (TextView) findViewById(R.id.HS1);
         textView1.setText("First High Score");
@@ -28,6 +29,30 @@ public class HighScoreActivity extends AppCompatActivity {
 
         TextView textView5 = (TextView) findViewById(R.id.HS5);
         textView5.setText("Fifth High Score");
+
+        TextView stat1 = (TextView) findViewById(R.id.stat1);
+        stat1.setText("Rounds Played");
+
+        TextView stat2 = (TextView) findViewById(R.id.stat2);
+        stat2.setText("Average Points Per Round");
+
+        TextView stat3 = (TextView) findViewById(R.id.stat3);
+        stat3.setText("Total Points Accumulated");
+
+        TextView stat4 = (TextView) findViewById(R.id.stat4);
+        stat4.setText("Correct Guess Average");
+
+        TextView insStat1 = (TextView) findViewById(R.id.actualStat1);
+        insStat1.setText(String.valueOf(stats.getRoundsPlayed()));
+
+        TextView insStat2 = (TextView) findViewById(R.id.actualStat2);
+        insStat2.setText(String.valueOf(stats.getAvgPointsPerRound()));
+
+        TextView insStat3 = (TextView) findViewById(R.id.actualStat3);
+        insStat3.setText(String.valueOf(stats.getTotalPoints()));
+
+        TextView insStat4 = (TextView) findViewById(R.id.actualStat4);
+        insStat4.setText(String.valueOf(stats.getCorrectGuessAvg()));
     }
     @Override
 

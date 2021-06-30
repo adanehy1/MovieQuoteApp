@@ -3,9 +3,11 @@ package com.example.moviequotev2;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Movie;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.Gravity;
@@ -42,12 +44,13 @@ public class MovieSelectActivity extends AppCompatActivity {
         total.setOrientation(LinearLayout.VERTICAL);
 
         TextView textView = new TextView(this);
-        textView.setText("Select Movies");
+        textView.setText("Select 4 or More Movies");
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(34);
 
-        Button button2 = new Button(this);
+        final Button button2 = new Button(this);
         button2.setText("Start Game");
+        button2.setEnabled(false);
         button2.setHeight(400);
 
         ScrollView scroll = new ScrollView(this);
@@ -106,6 +109,13 @@ public class MovieSelectActivity extends AppCompatActivity {
                         finalMovieNames.add(finalMovieNames1.get(finalCounter));
                         System.out.println(finalMovieNames.toString());
                     }
+                    final int size = finalMovieNames.size();
+                    if(size >= 4){
+                        button2.setEnabled(true);
+                    }
+                    if(size == 3){
+                        button2.setEnabled(false);
+                    }
                     }
             });
 
@@ -114,24 +124,15 @@ public class MovieSelectActivity extends AppCompatActivity {
             layout.addView(row);
 
         }
-        final String[] selectedMovies = finalMovieNames.toArray(new String[0]);
 
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                /*
-                Intent myIntent = new Intent(CurrentActivity.this, NextActivity.class);
-                myIntent.putExtra("key", value); //Optional parameters
-                CurrentActivity.this.startActivity(myIntent);
-                */
-
-                //
-                // String[] T = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
-
+               String[] selectedMovies = finalMovieNames.toArray(new String[0]);
+                ((globalClass) MovieSelectActivity.this.getApplication()).setSelectedMovies(selectedMovies);
                 Intent myIntent = new Intent(MovieSelectActivity.this, DisplayMessageActivity.class);
-                //myIntent.putExtra("selectedMovies", T);
-                MovieSelectActivity.this.startActivity(myIntent);
-                System.out.println(selectedMovies);
+                startActivity(myIntent);
+
             }
             });
 
