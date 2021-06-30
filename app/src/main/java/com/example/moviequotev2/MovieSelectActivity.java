@@ -7,6 +7,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Movie;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.Gravity;
@@ -128,14 +129,10 @@ public class MovieSelectActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                String[] selectedMovies = finalMovieNames.toArray(new String[0]);
-                //List<String> selectedMovies = new ArrayList<>();
-                String[] T = {"Step Brothers", "The Interview", "Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
-
+                ((globalClass) MovieSelectActivity.this.getApplication()).setSelectedMovies(selectedMovies);
                 Intent myIntent = new Intent(MovieSelectActivity.this, DisplayMessageActivity.class);
-                myIntent.putExtra("SelMovies", selectedMovies);
                 startActivity(myIntent);
 
-                //System.out.println(selectedMovies);
             }
             });
 

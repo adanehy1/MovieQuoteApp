@@ -58,21 +58,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Intent intent = getIntent();
-        String[] selectedMovies = intent.getStringArrayExtra("SelMovies");
-        System.out.println(Arrays.toString(selectedMovies));
 
+        String[] selectedMovies = ((globalClass) this.getApplication()).getSelectedMovies();
         stats = new Stats(getApplicationContext()); 
         stats.incrRoundsPlayed();
-        System.out.println(stats);
-        //System.out.println("HIGH " + stats.getHighScore());
-        //Intent intentMovie = getIntent();
-        //String[] selectedMovies = intentMovie.getStringArrayExtra("selectedMovies");
-        //String[] selectedMoviesSeparated = selectedMovies.split(",");
 
         try{
             JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), selectedMovies);
-            //JsonQuotes jQuotes = new JsonQuotes(getApplicationContext(), selectedMovies);
             quotesList = jQuotes.getQList();
             quoteDict = jQuotes.getQDict();
             jQuotes.getMovieNames();
@@ -244,6 +236,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         return quoteDict.get(quotesList.get(randIButtonFour));
     }
+
     public void setBtns(int round){
         startPauseTimer();
         //Intent intent = new Intent(this, DisplayIncorrectActivity.class);
