@@ -52,9 +52,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
     int randNum = (int) (Math.random() * 4) + 1;
     static final String SHARED_PREFS = "highScore";
     static final String HIGH_SCORE = "highScore";
-    final boolean debug  = false;
-    //final boolean debug  = true;
-    final String[] testNames = {"Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
+    final boolean debug  = true;
+   // final String[] testNames = {"Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
     boolean firstRound = true;
 
     @Override
@@ -131,8 +130,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setBtns(1);
-                textViewScore.setVisibility(View.VISIBLE);
-                textViewScore.setText("Added Score");
                 //Makes the other 3 buttons unclickable
                 button1.setEnabled(false);
                 button2.setEnabled(false);
@@ -143,15 +140,15 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 //if statement makes it so color is different if correct
                 if(randNum == 1) {
                     button1.setBackgroundColor(Color.GREEN);
+                    textViewScore.setVisibility(View.VISIBLE);
+                    textViewScore.setText("Added " + calculateScore(timeLeftInMilliseconds) + " to score");
                 }
-                            }
+            }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setBtns(2);
-                textViewScore.setVisibility(View.VISIBLE);
-                textViewScore.setText("Added Score");
                 button2.setBackgroundColor(Color.RED);
                 //Makes the other 3 buttons unclickable
                 button1.setEnabled(false);
@@ -160,6 +157,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 button4.setEnabled(false);
                 if(randNum == 2) {
                     button2.setBackgroundColor(Color.GREEN);
+                    textViewScore.setVisibility(View.VISIBLE);
+                    textViewScore.setText("Added " + calculateScore(timeLeftInMilliseconds) + " to score");
                 }
             }
         });
@@ -167,8 +166,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setBtns(3);
-                textViewScore.setVisibility(View.VISIBLE);
-                textViewScore.setText("Added Score");
                 button3.setBackgroundColor(Color.RED);
                 //Makes the other 3 buttons unclickable
                 button1.setEnabled(false);
@@ -177,6 +174,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 button4.setEnabled(false);
                 if(randNum == 3) {
                     button3.setBackgroundColor(Color.GREEN);
+                    textViewScore.setVisibility(View.VISIBLE);
+                    textViewScore.setText("Added " + calculateScore(timeLeftInMilliseconds) + " to score");
                 }
             }
         });
@@ -184,8 +183,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setBtns(4);
-                textViewScore.setVisibility(View.VISIBLE);
-                textViewScore.setText("Added Score");
                 button4.setBackgroundColor(Color.RED);
                 //Makes the other 3 buttons unclickable
                 button1.setEnabled(false);
@@ -194,6 +191,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 button4.setEnabled(false);
                 if(randNum == 4) {
                     button4.setBackgroundColor(Color.GREEN);
+                    textViewScore.setVisibility(View.VISIBLE);
+                    textViewScore.setText("Added " + calculateScore(timeLeftInMilliseconds) + " to score");
                 }
             }
         });
@@ -303,6 +302,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             textViewScore.setVisibility(View.VISIBLE);
             textViewScore.setText("Added Score");
 
+
             final TextView timerText = (TextView) findViewById(R.id.countdown_text);
             timerText.setVisibility((View.INVISIBLE));
 
@@ -351,7 +351,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     public double calculateScore(long timeRemaining){
         double timeInSec = (timeRemaining)/1000.0;
-        return timeInSec*100;
+        return round(timeInSec*100, 2);
     }
     @Override
     public void onBackPressed(){
@@ -379,37 +379,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
             }
         } else {return;}
     }
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
 
-
-//    public double getHighScore() {
-//        float score;
-//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-//        score = sharedPreferences.getFloat(HIGH_SCORE, 12);
-//        return score;
-//    }
-//    public void checkNewHighScore(double curScore){
-//        if(curScore <= 0.0){
-//            return;
-//        }
-//        if(getHighScore() < curScore){
-//            setHighScore(curScore);
-//        }
-//    }
-//    public void setHighScore(double newScore){
-//        float truncSore = (float) round(newScore, 2);
-//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putFloat(HIGH_SCORE, truncSore);
-//        editor.apply();
-//    }
-//    public static double round(double value, int places) {
-//        if (places < 0) throw new IllegalArgumentException();
-//
-//        long factor = (long) Math.pow(10, places);
-//        value = value * factor;
-//        long tmp = Math.round(value);
-//        return (double) tmp / factor;
-//    }
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
 }
 
 
