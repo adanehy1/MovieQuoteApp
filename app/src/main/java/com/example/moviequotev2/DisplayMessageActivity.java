@@ -52,7 +52,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
     int randNum = (int) (Math.random() * 4) + 1;
     static final String SHARED_PREFS = "highScore";
     static final String HIGH_SCORE = "highScore";
-    final boolean debug  = true;
+    final boolean debug  = false;
+    //final boolean debug  = true;
     final String[] testNames = {"Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
     boolean firstRound = true;
 
@@ -140,7 +141,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 button1.setBackgroundColor(Color.RED);
                 //if statement makes it so color is different if correct
                 if(randNum == 1) {
-                    button1.setBackgroundColor(Color.DKGRAY);
+                    button1.setBackgroundColor(Color.GREEN);
                 }
                             }
         });
