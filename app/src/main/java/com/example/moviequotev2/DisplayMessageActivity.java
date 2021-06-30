@@ -134,6 +134,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 textViewScore.setVisibility(View.VISIBLE);
                 textViewScore.setText("Added Score");
                 //Makes the other 3 buttons unclickable
+                button1.setEnabled(false);
                 button2.setEnabled(false);
                 button3.setEnabled(false);
                 button4.setEnabled(false);
@@ -154,10 +155,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 button2.setBackgroundColor(Color.RED);
                 //Makes the other 3 buttons unclickable
                 button1.setEnabled(false);
+                button2.setEnabled(false);
                 button3.setEnabled(false);
                 button4.setEnabled(false);
                 if(randNum == 2) {
-                    button2.setBackgroundColor(Color.DKGRAY);
+                    button2.setBackgroundColor(Color.GREEN);
                 }
             }
         });
@@ -171,9 +173,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 //Makes the other 3 buttons unclickable
                 button1.setEnabled(false);
                 button2.setEnabled(false);
+                button3.setEnabled(false);
                 button4.setEnabled(false);
                 if(randNum == 3) {
-                    button3.setBackgroundColor(Color.DKGRAY);
+                    button3.setBackgroundColor(Color.GREEN);
                 }
             }
         });
@@ -188,8 +191,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 button1.setEnabled(false);
                 button2.setEnabled(false);
                 button3.setEnabled(false);
+                button4.setEnabled(false);
                 if(randNum == 4) {
-                    button4.setBackgroundColor(Color.DKGRAY);
+                    button4.setBackgroundColor(Color.GREEN);
                 }
             }
         });
@@ -288,6 +292,25 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         countdownText.setText(timeLeftText);
         if (seconds <= 0) {
+            final Button button1 = (Button)findViewById(R.id.button2);
+            final Button button2 = (Button)findViewById(R.id.button3);
+            final Button button3 = (Button)findViewById(R.id.button4);
+            final Button button4 = (Button)findViewById(R.id.button5);
+
+
+
+            final TextView textViewScore = (TextView) findViewById(R.id.addedScore);
+            textViewScore.setVisibility(View.VISIBLE);
+            textViewScore.setText("Added Score");
+
+            final TextView timerText = (TextView) findViewById(R.id.countdown_text);
+            timerText.setVisibility((View.INVISIBLE));
+
+            button1.setEnabled(false);
+            button2.setEnabled(false);
+            button3.setEnabled(false);
+            button4.setEnabled(false);
+
             stopTimer();
             startPauseTimer();
                }
