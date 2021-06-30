@@ -7,15 +7,21 @@ import java.util.List;
 
 public class globalClass extends Application {
     List<String> usedQuotes = new ArrayList<String>();
+    String[] selectedMovies;
     double score = 0.0;
     public void addQuote(String quote){
         usedQuotes.add(quote);
+    }
+    public String[] getSelectedMovies(){
+        return selectedMovies;
+    }
+    public void setSelectedMovies(String[] movies){
+        selectedMovies = movies;
     }
     public String getQuote(int i){
         return  usedQuotes.get(i);
     }
     public void printQuotes(){
-
         for(String quote : usedQuotes){
             System.out.println("Printing Quotes: " + quote);
         }
