@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -141,7 +143,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 if(randNum == 1) {
                     button1.setBackgroundColor(Color.GREEN);
                     textViewScore.setVisibility(View.VISIBLE);
-                    textViewScore.setText("Added " + calculateScore(timeLeftInMilliseconds) + " to score");
+                    Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
+                    textViewScore.startAnimation(plusScoreAnim);
+                    textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));
                 }
             }
         });
@@ -158,7 +162,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 if(randNum == 2) {
                     button2.setBackgroundColor(Color.GREEN);
                     textViewScore.setVisibility(View.VISIBLE);
-                    textViewScore.setText("Added " + calculateScore(timeLeftInMilliseconds) + " to score");
+                    Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
+                    textViewScore.startAnimation(plusScoreAnim);
+                    textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));
                 }
             }
         });
@@ -175,7 +181,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 if(randNum == 3) {
                     button3.setBackgroundColor(Color.GREEN);
                     textViewScore.setVisibility(View.VISIBLE);
-                    textViewScore.setText("Added " + calculateScore(timeLeftInMilliseconds) + " to score");
+                    Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
+                    textViewScore.startAnimation(plusScoreAnim);
+                    textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));
                 }
             }
         });
@@ -192,8 +200,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 if(randNum == 4) {
                     button4.setBackgroundColor(Color.GREEN);
                     textViewScore.setVisibility(View.VISIBLE);
-                    textViewScore.setText("Added " + calculateScore(timeLeftInMilliseconds) + " to score");
-                }
+                    Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
+                    textViewScore.startAnimation(plusScoreAnim);
+                    textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));                }
             }
         });
     }
