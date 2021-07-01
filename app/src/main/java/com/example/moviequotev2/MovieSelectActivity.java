@@ -49,10 +49,10 @@ public class MovieSelectActivity extends AppCompatActivity {
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(34);
 
-        final Button button2 = new Button(this);
-        button2.setText("Start Game");
-        button2.setEnabled(false);
-        button2.setHeight(400);
+        final Button startGameButton = new Button(this);
+        startGameButton.setText("Start Game");
+        startGameButton.setEnabled(false);
+        startGameButton.setHeight(400);
 
         ScrollView scroll = new ScrollView(this);
         scroll.setLayoutParams(new RelativeLayout.LayoutParams(
@@ -64,7 +64,7 @@ public class MovieSelectActivity extends AppCompatActivity {
 
         total.addView(textView);
         total.addView(scroll);
-        total.addView(button2);
+        total.addView(startGameButton);
         scroll.addView(layout);
         List<String> movieNames = new ArrayList<>();
         final List<String> finalMovieNames = new ArrayList<>();
@@ -80,23 +80,23 @@ public class MovieSelectActivity extends AppCompatActivity {
             System.out.println(movieNames.get(counter));
             LinearLayout row = new LinearLayout(this);
             row.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
-            final Button button = new Button(this);
+            final Button movieSelectButton = new Button(this);
             int id = counter;
-            button.setText(movieNames.get(counter));
-            button.setId(id);
-            button.setWidth(1000);
+            movieSelectButton.setText(movieNames.get(counter));
+            movieSelectButton.setId(id);
+            movieSelectButton.setWidth(1000);
             final int[] num = {3};
             final int finalCounter = counter;
             final List<String> finalMovieNames1 = movieNames;
-            button.setOnClickListener(new View.OnClickListener() {
+            movieSelectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (num[0] %2==0){
                         //First Click (ADD)
                         num[0]++;
                         //System.out.println(num[0]);
-                        button.setBackgroundColor(Color.WHITE);
-                        button.setTextColor(Color.BLACK);
+                        movieSelectButton.setBackgroundColor(Color.WHITE);
+                        movieSelectButton.setTextColor(Color.BLACK);
                         finalMovieNames.remove(finalMovieNames1.get(finalCounter));
                         System.out.println(finalMovieNames.toString());
                     }
@@ -104,28 +104,28 @@ public class MovieSelectActivity extends AppCompatActivity {
                         //Second Click (REMOVE)
                         num[0]++;
                         //System.out.println(num[0]);
-                        button.setBackgroundColor(Color.BLACK);
-                        button.setTextColor(Color.WHITE);
+                        movieSelectButton.setBackgroundColor(Color.BLACK);
+                        movieSelectButton.setTextColor(Color.WHITE);
                         finalMovieNames.add(finalMovieNames1.get(finalCounter));
                         System.out.println(finalMovieNames.toString());
                     }
                     final int size = finalMovieNames.size();
                     if(size >= 4){
-                        button2.setEnabled(true);
+                        startGameButton.setEnabled(true);
                     }
                     if(size == 3){
-                        button2.setEnabled(false);
+                        startGameButton.setEnabled(false);
                     }
                     }
             });
 
-            row.addView(button);
+            row.addView(movieSelectButton);
 
             layout.addView(row);
 
         }
 
-        button2.setOnClickListener(new View.OnClickListener() {
+        startGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                String[] selectedMovies = finalMovieNames.toArray(new String[0]);
