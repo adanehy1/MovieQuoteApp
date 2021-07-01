@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Movie;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.Gravity;
@@ -78,13 +79,12 @@ public class MovieSelectActivity extends AppCompatActivity {
         for (int counter = 0; counter < movieNames.size(); counter++) {
             System.out.println(movieNames.get(counter));
             LinearLayout row = new LinearLayout(this);
-
+            row.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
             final Button button = new Button(this);
-
             int id = counter;
             button.setText(movieNames.get(counter));
             button.setId(id);
-            button.setWidth(1200);
+            button.setWidth(1000);
             final int[] num = {3};
             final int finalCounter = counter;
             final List<String> finalMovieNames1 = movieNames;
