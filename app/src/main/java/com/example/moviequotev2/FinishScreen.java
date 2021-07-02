@@ -26,13 +26,14 @@ public class FinishScreen extends AppCompatActivity {
         ((globalClass) this.getApplication()).clear();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish_screen);
+        Stats stats = new Stats(getApplicationContext());
 
         TextView textView = (TextView) findViewById(R.id.finalScore);
         textView.setText(String.valueOf(((globalClass) this.getApplication()).getScore()));
         //string with the title of "globalClass" creates the score
 
         TextView textView1 = (TextView) findViewById(R.id.HS1);
-        textView1.setText("First High Score");
+        textView1.setText("First High Score: " + stats.getHighScore());
 
         TextView textView2 = (TextView) findViewById(R.id.HS2);
         textView2.setText("Second High Score");
