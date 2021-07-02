@@ -375,15 +375,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
             button3.setEnabled(false);
             button4.setEnabled(false);
 
-            //Stopping the animation on the button press
-            timerAnimation = (ImageView)findViewById(R.id.timerAnimation);
-            timerAnimation.post(new Runnable() {
-                @Override
-                public void run() {
-                    ((AnimationDrawable) timerAnimation.getBackground()).stop();
-                }
-            });
-
             stopTimer();
             startPauseTimer();
                }
