@@ -140,7 +140,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         //Intent intent = getIntent();
         startTimer();
         countdownText = findViewById(R.id.countdown_text);
-        countdownText.setVisibility(View.INVISIBLE);
 
         // Delay to transition to "incorrect" after 10 seconds
 
