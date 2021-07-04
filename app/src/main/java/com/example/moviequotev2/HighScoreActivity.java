@@ -16,7 +16,7 @@ public class HighScoreActivity extends AppCompatActivity {
         Stats stats = new Stats(getApplicationContext());
 
         TextView textView1 = (TextView) findViewById(R.id.HS1);
-        textView1.setText("First High Score");
+        textView1.setText("First High Score: " + stats.getHighScore());
 
         TextView textView2 = (TextView) findViewById(R.id.HS2);
         textView2.setText("Second High Score");

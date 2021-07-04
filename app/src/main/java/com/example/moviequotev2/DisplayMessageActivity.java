@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,13 +56,15 @@ public class DisplayMessageActivity extends AppCompatActivity {
     int randNum = (int) (Math.random() * 4) + 1;
     static final String SHARED_PREFS = "highScore";
     static final String HIGH_SCORE = "highScore";
-    final boolean debug  = true;
+    final boolean debug  = false;
    // final String[] testNames = {"Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
     boolean firstRound = true;
+    private ImageView timerAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+//Importing selected movies
         String[] selectedMovies = ((globalClass) this.getApplication()).getSelectedMovies();
         stats = new Stats(getApplicationContext()); 
         stats.incrRoundsPlayed();
@@ -74,6 +80,16 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
+
+        //Starting animation
+        timerAnimation = (ImageView)findViewById(R.id.timerAnimation);
+        timerAnimation.post(new Runnable() {
+            @Override
+            public void run() {
+                ((AnimationDrawable) timerAnimation.getBackground()).start();
+            }
+        });
+
 
         TextView TextView1 = (TextView) findViewById(R.id.textView);
         TextView1.setText("Welcome to Dynamic TextView");
@@ -137,11 +153,23 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 button4.setEnabled(false);
                 //initially sets color to red meaning incorrect
                 button1.setBackgroundColor(Color.RED);
+
+                //Stopping the animation on the button press
+                timerAnimation = (ImageView)findViewById(R.id.timerAnimation);
+                timerAnimation.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((AnimationDrawable) timerAnimation.getBackground()).stop();
+                    }
+                });
+
                 //if statement makes it so color is different if correct
                 if(randNum == 1) {
                     button1.setBackgroundColor(Color.GREEN);
                     textViewScore.setVisibility(View.VISIBLE);
-                    textViewScore.setText("Added " + calculateScore(timeLeftInMilliseconds) + " to score");
+                    Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
+                    textViewScore.startAnimation(plusScoreAnim);
+                    textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));
                 }
             }
         });
@@ -155,10 +183,22 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 button2.setEnabled(false);
                 button3.setEnabled(false);
                 button4.setEnabled(false);
+
+                //Stopping the animation on the button press
+                timerAnimation = (ImageView)findViewById(R.id.timerAnimation);
+                timerAnimation.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((AnimationDrawable) timerAnimation.getBackground()).stop();
+                    }
+                });
+
                 if(randNum == 2) {
                     button2.setBackgroundColor(Color.GREEN);
                     textViewScore.setVisibility(View.VISIBLE);
-                    textViewScore.setText("Added " + calculateScore(timeLeftInMilliseconds) + " to score");
+                    Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
+                    textViewScore.startAnimation(plusScoreAnim);
+                    textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));
                 }
             }
         });
@@ -172,10 +212,22 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 button2.setEnabled(false);
                 button3.setEnabled(false);
                 button4.setEnabled(false);
+
+                //Stopping the animation on the button press
+                timerAnimation = (ImageView)findViewById(R.id.timerAnimation);
+                timerAnimation.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((AnimationDrawable) timerAnimation.getBackground()).stop();
+                    }
+                });
+
                 if(randNum == 3) {
                     button3.setBackgroundColor(Color.GREEN);
                     textViewScore.setVisibility(View.VISIBLE);
-                    textViewScore.setText("Added " + calculateScore(timeLeftInMilliseconds) + " to score");
+                    Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
+                    textViewScore.startAnimation(plusScoreAnim);
+                    textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));
                 }
             }
         });
@@ -189,11 +241,22 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 button2.setEnabled(false);
                 button3.setEnabled(false);
                 button4.setEnabled(false);
+
+                //Stopping the animation on the button press
+                timerAnimation = (ImageView)findViewById(R.id.timerAnimation);
+                timerAnimation.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((AnimationDrawable) timerAnimation.getBackground()).stop();
+                    }
+                });
+
                 if(randNum == 4) {
                     button4.setBackgroundColor(Color.GREEN);
                     textViewScore.setVisibility(View.VISIBLE);
-                    textViewScore.setText("Added " + calculateScore(timeLeftInMilliseconds) + " to score");
-                }
+                    Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
+                    textViewScore.startAnimation(plusScoreAnim);
+                    textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));                }
             }
         });
     }
