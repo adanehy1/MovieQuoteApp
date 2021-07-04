@@ -1,8 +1,5 @@
 package com.example.moviequotev2;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -13,30 +10,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 
 public class DisplayMessageActivity extends AppCompatActivity {
@@ -56,15 +34,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
     int randNum = (int) (Math.random() * 4) + 1;
     static final String SHARED_PREFS = "highScore";
     static final String HIGH_SCORE = "highScore";
-    final boolean debug  = false;
-   // final String[] testNames = {"Hot Tub Time Machine", "Zoolander", "Super Bad", "Dodgeball"};
+    final boolean debug  = true;
     boolean firstRound = true;
     private ImageView timerAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-//Importing selected movies
+        //Importing selected movies
         String[] selectedMovies = ((globalClass) this.getApplication()).getSelectedMovies();
         stats = new Stats(getApplicationContext()); 
         stats.incrRoundsPlayed();
@@ -137,7 +114,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         button4.setText(buttonFourTxt);
 
         debug(button1, button2, button3, button4);
-        //Intent intent = getIntent();
         startTimer();
         countdownText = findViewById(R.id.countdown_text);
 
@@ -145,135 +121,28 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setBtns(1);
-                //Makes the other 3 buttons unclickable
-                button1.setEnabled(false);
-                button2.setEnabled(false);
-                button3.setEnabled(false);
-                button4.setEnabled(false);
-                //initially sets color to red meaning incorrect
-                button1.setBackgroundColor(Color.RED);
-
-                //Stopping the animation on the button press
-                timerAnimation = (ImageView)findViewById(R.id.timerAnimation);
-                timerAnimation.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((AnimationDrawable) timerAnimation.getBackground()).stop();
-                    }
-                });
-
-                //if statement makes it so color is different if correct
-                if(randNum == 1) {
-                    button1.setBackgroundColor(Color.GREEN);
-                    textViewScore.setVisibility(View.VISIBLE);
-                    Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
-                    textViewScore.startAnimation(plusScoreAnim);
-                    textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));
-                }
+                setBtns(1, button1, button2, button3, button4, textViewScore);
             }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setBtns(2);
-                button2.setBackgroundColor(Color.RED);
-                //Makes the other 3 buttons unclickable
-                button1.setEnabled(false);
-                button2.setEnabled(false);
-                button3.setEnabled(false);
-                button4.setEnabled(false);
-
-                //Stopping the animation on the button press
-                timerAnimation = (ImageView)findViewById(R.id.timerAnimation);
-                timerAnimation.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((AnimationDrawable) timerAnimation.getBackground()).stop();
-                    }
-                });
-
-                if(randNum == 2) {
-                    button2.setBackgroundColor(Color.GREEN);
-                    textViewScore.setVisibility(View.VISIBLE);
-                    Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
-                    textViewScore.startAnimation(plusScoreAnim);
-                    textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));
-                }
+                setBtns(2, button2, button1, button3, button4, textViewScore);
             }
         });
 
         button3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setBtns(3);
-                button3.setBackgroundColor(Color.RED);
-                //Makes the other 3 buttons unclickable
-                button1.setEnabled(false);
-                button2.setEnabled(false);
-                button3.setEnabled(false);
-                button4.setEnabled(false);
-
-                //Stopping the animation on the button press
-                timerAnimation = (ImageView)findViewById(R.id.timerAnimation);
-                timerAnimation.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((AnimationDrawable) timerAnimation.getBackground()).stop();
-                    }
-                });
-
-                if(randNum == 3) {
-                    button3.setBackgroundColor(Color.GREEN);
-                    textViewScore.setVisibility(View.VISIBLE);
-                    Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
-                    textViewScore.startAnimation(plusScoreAnim);
-                    textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));
-                }
+                setBtns(3, button3, button1, button2, button4, textViewScore);
             }
         });
 
         button4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setBtns(4);
-                button4.setBackgroundColor(Color.RED);
-                //Makes the other 3 buttons unclickable
-                button1.setEnabled(false);
-                button2.setEnabled(false);
-                button3.setEnabled(false);
-                button4.setEnabled(false);
-
-                //Stopping the animation on the button press
-                timerAnimation = (ImageView)findViewById(R.id.timerAnimation);
-                timerAnimation.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((AnimationDrawable) timerAnimation.getBackground()).stop();
-                    }
-                });
-
-                if(randNum == 4) {
-                    button4.setBackgroundColor(Color.GREEN);
-                    textViewScore.setVisibility(View.VISIBLE);
-                    Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
-                    textViewScore.startAnimation(plusScoreAnim);
-                    textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));                }
+                setBtns(4, button4, button1, button2, button3, textViewScore);
             }
         });
     }
-/*
-    public void movie1Button(View view) throws InterruptedException {
-        setBtns(1);
-    }
-    public void movie2Button(View view) throws FileNotFoundException {
-        setBtns(2);
-    }
-    public void movie3Button(View view) throws FileNotFoundException {
-        setBtns(3);
-    }
-    public void movie4Button(View view) throws FileNotFoundException {
-        setBtns(4);
-    }
-*/
     public void yesexitButton(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -304,7 +173,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         return quoteDict.get(quotesList.get(randIButtonFour));
     }
 
-    public void setBtns(int round){
+    public void setBtns(int round, Button primButton, Button secButton, Button thirdButton, Button fourtButton, TextView textViewScore){
         startPauseTimer();
         //Intent intent = new Intent(this, DisplayIncorrectActivity.class);
         if(randNum == round) {
@@ -318,7 +187,31 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         }
         stats.checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
-        //startActivity(intent);
+        //Makes the other 3 buttons unclickable
+        primButton.setEnabled(false);
+        secButton.setEnabled(false);
+        thirdButton.setEnabled(false);
+        fourtButton.setEnabled(false);
+        //initially sets color to red meaning incorrect
+        primButton.setBackgroundColor(Color.RED);
+
+        //Stopping the animation on the button press
+        timerAnimation = (ImageView)findViewById(R.id.timerAnimation);
+        timerAnimation.post(new Runnable() {
+            @Override
+            public void run() {
+                ((AnimationDrawable) timerAnimation.getBackground()).stop();
+            }
+        });
+
+        //if statement makes it so color is different if correct
+        if(randNum == round) {
+            primButton.setBackgroundColor(Color.GREEN);
+            textViewScore.setVisibility(View.VISIBLE);
+            Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
+            textViewScore.startAnimation(plusScoreAnim);
+            textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));
+        }
     }
     public void startTimer() {
         countDownTimer = new CountDownTimer(timeLeftInMilliseconds, timerLength) {
