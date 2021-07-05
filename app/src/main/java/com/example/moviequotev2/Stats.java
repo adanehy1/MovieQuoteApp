@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class Stats {
-    double score;
+    DoubleArray hsArray;
     int roundsPlayed;
     double avgPointsPerRound;
     long totalAccumPoints;
@@ -17,7 +17,8 @@ public class Stats {
     public Stats(Context cntx) {
         context = cntx;
         sharedPreferences = context.getSharedPreferences(SHARED_PREFS, context.MODE_PRIVATE);
-        score = round(sharedPreferences.getFloat("highScore", 0), 2);
+        hsArray = new DoubleArray(cntx);
+        //score = round(sharedPreferences.getFloat("highScore", 0), 2);
         roundsPlayed = sharedPreferences.getInt("roundsPlayed", 0);
         avgPointsPerRound = sharedPreferences.getFloat("avgPointsPerRound", 0);
         totalAccumPoints = sharedPreferences.getLong("totalAccumPoints", 0);
