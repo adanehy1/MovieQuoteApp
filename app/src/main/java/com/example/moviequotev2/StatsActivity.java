@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class HighScoreActivity extends AppCompatActivity {
+public class StatsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,19 +18,19 @@ public class HighScoreActivity extends AppCompatActivity {
         //stats.testMHS();
 
         TextView textView1 = (TextView) findViewById(R.id.HS1);
-        textView1.setText("First High Score: " + stats.getHighScore()[0]);
+        textView1.setText("First High Score: " + Util.round(stats.getHighScore()[0], 1));
 
         TextView textView2 = (TextView) findViewById(R.id.HS2);
-        textView2.setText("Second High Score: " + stats.getHighScore()[1]);
+        textView2.setText("Second High Score: " + Util.round(stats.getHighScore()[1], 1));
 
         TextView textView3 = (TextView) findViewById(R.id.HS3);
-        textView3.setText("Third High Score: " + stats.getHighScore()[2]);
+        textView3.setText("Third High Score: " + Util.round(stats.getHighScore()[2], 1));
 
         TextView textView4 = (TextView) findViewById(R.id.HS4);
-        textView4.setText("Fourth High Score: " + stats.getHighScore()[3]);
+        textView4.setText("Fourth High Score: " + Util.round(stats.getHighScore()[3], 1));
 
         TextView textView5 = (TextView) findViewById(R.id.HS5);
-        textView5.setText("Fifth High Score: " + stats.getHighScore()[4]);
+        textView5.setText("Fifth High Score: " + Util.round(stats.getHighScore()[4], 1));
 
         TextView stat1 = (TextView) findViewById(R.id.stat1);
         stat1.setText("Rounds Played");

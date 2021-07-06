@@ -130,7 +130,7 @@ public class MovieSelectActivity extends AppCompatActivity {
 
                String[] selectedMovies = finalMovieNames.toArray(new String[0]);
                 ((globalClass) MovieSelectActivity.this.getApplication()).setSelectedMovies(selectedMovies);
-                Intent myIntent = new Intent(MovieSelectActivity.this, DisplayMessageActivity.class);
+                Intent myIntent = new Intent(MovieSelectActivity.this, RoundActivity.class);
                 startActivity(myIntent);
 
             }

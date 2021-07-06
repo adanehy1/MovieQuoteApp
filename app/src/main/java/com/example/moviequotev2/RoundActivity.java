@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import org.json.JSONException;
 
-public class DisplayMessageActivity extends AppCompatActivity {
+public class RoundActivity extends AppCompatActivity {
     private TextView countdownText;
     private TextView round;
     private CountDownTimer countDownTimer;
@@ -206,7 +206,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         if(randNum == round) {
             primButton.setBackgroundColor(Color.GREEN);
             textViewScore.setVisibility(View.VISIBLE);
-            Animation plusScoreAnim = AnimationUtils.loadAnimation(DisplayMessageActivity.this,R.anim.bounce);
+            Animation plusScoreAnim = AnimationUtils.loadAnimation(RoundActivity.this,R.anim.bounce);
             textViewScore.startAnimation(plusScoreAnim);
             textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));
         }

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void highScore(View view) {
-        Intent intent2 = new Intent(this, HighScoreActivity.class);
+        Intent intent2 = new Intent(this, StatsActivity.class);
         startActivity(intent2);
     }
 
