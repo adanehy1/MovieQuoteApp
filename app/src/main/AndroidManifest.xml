@@ -13,14 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HighScoreActivity"></activity>
+        <activity android:name=".StatsActivity"></activity>
         <activity android:name=".MovieSelectActivity" />
         <activity android:name=".FinishScreen" />
         <activity android:name=".NextRoundCounter" />
         <activity android:name=".DisplayCorrectActivity" />
         <activity android:name=".DisplayIncorrectActivity" />
         <activity
-            android:name=".DisplayMessageActivity"
+            android:name=".RoundActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

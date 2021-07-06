@@ -51,13 +51,12 @@ public class NextRoundCounter extends AppCompatActivity {
 
     private void updateCountDownText(){
         int seconds = (int) mTimeLeftInMillis/1000;
-        System.out.println(seconds);
 
         String timeLeft;
         timeLeft = "" + seconds;
 
         mTextViewCountDown.setText(timeLeft);
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        Intent intent = new Intent(this, RoundActivity.class);
         if (seconds <= 0) {
             startActivity(intent);
             stopTimer();
@@ -71,7 +70,6 @@ public class NextRoundCounter extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         roundNums--;
-        System.out.println(roundNums);
         Intent finish = new Intent(this, FinishScreen.class);
         if (roundNums <= 0) {
             resetScoresToZero();

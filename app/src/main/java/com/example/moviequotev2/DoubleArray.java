@@ -31,9 +31,6 @@ public class DoubleArray {
         }
         return false;
     }
-    public double getFirstHS(){
-        return highScore[0];
-    }
     public double[] getHighScore(){
         return highScore;
     }
@@ -42,18 +39,8 @@ public class DoubleArray {
         refreshScores();
 
     }
-    public String toString(){
-        String ret = "[";
-        for(int s  = 0; s < size; s++){
-            ret += String.valueOf(highScore[s]);
-            ret += s != size - 1 ? ", " : "";
-        }
-        ret += "]";
-        return ret;
-    }
     private void shift(int start, double newScore){
-        double temp;
-        newScore = Util.round(newScore, 1);
+        double temp;;
         for(int i = start; i < size; i++){
             temp = highScore[i];
             highScore[i] = newScore;
@@ -70,5 +57,14 @@ public class DoubleArray {
         editor.putFloat("hs4", (float)highScore[3]);
         editor.putFloat("hs5", (float)highScore[4]);
         editor.apply();
+    }
+    public String toString(){
+        String ret = "[";
+        for(int s  = 0; s < size; s++){
+            ret += String.valueOf(highScore[s]);
+            ret += s != size - 1 ? ", " : "";
+        }
+        ret += "]";
+        return ret;
     }
 }
