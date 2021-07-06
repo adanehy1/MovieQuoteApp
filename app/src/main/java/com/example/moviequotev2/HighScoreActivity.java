@@ -15,6 +15,8 @@ public class HighScoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_high_score);
         Stats stats = new Stats(getApplicationContext());
 
+        //stats.testMHS();
+
         TextView textView1 = (TextView) findViewById(R.id.HS1);
         textView1.setText("First High Score: " + stats.getHighScore()[0]);
 
@@ -52,14 +54,13 @@ public class HighScoreActivity extends AppCompatActivity {
         insStat3.setText(String.valueOf(stats.getTotalPoints()));
 
         TextView insStat4 = (TextView) findViewById(R.id.actualStat4);
-        insStat4.setText(String.valueOf(stats.getCorrectGuessAvg()));
+        insStat4.setText(String.valueOf(stats.getCorrectGuessAvg()) + "%");
     }
     @Override
 
     public void onBackPressed(){
         Intent intent2 = new Intent(this, MainActivity.class);
                 startActivity(intent2);
-
     }
 
 }

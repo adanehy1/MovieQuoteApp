@@ -21,8 +21,8 @@ public class DoubleArray {
         highScore[3] = sharedPreferences.getFloat("hs4", 0);
         highScore[4] = sharedPreferences.getFloat("hs5", 0);
     }
-    public boolean addNewHS(double score){
-        if(highScore[highScore.length - 1] >= score){ return false; }
+    public boolean add(double score){
+        if(highScore[highScore.length - 1] >= score || Util.contains(highScore, score)){ return false; }
         for(int s = 0; s < size; s++){
             if(score > highScore[s]){
                 shift(s, score);
@@ -53,6 +53,7 @@ public class DoubleArray {
     }
     private void shift(int start, double newScore){
         double temp;
+        newScore = Util.round(newScore, 1);
         for(int i = start; i < size; i++){
             temp = highScore[i];
             highScore[i] = newScore;

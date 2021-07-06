@@ -2,7 +2,6 @@ package com.example.moviequotev2;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 public class Stats {
     DoubleArray hsArray;
@@ -23,8 +22,12 @@ public class Stats {
         avgPointsPerRound = sharedPreferences.getFloat("avgPointsPerRound", 0);
         totalAccumPoints = sharedPreferences.getLong("totalAccumPoints", 0);
         correctGuesses = sharedPreferences.getInt("correctGuesses", 0);
-        correctGuessAvg = (roundsPlayed > 0 ? (100 * round(correctGuesses / (double) roundsPlayed, 4)) : 0);
+        correctGuessAvg = (roundsPlayed > 0 ? (100 * Util.round(correctGuesses / (double) roundsPlayed, 4)) : 0);
 
+    }
+    public void testMHS(){
+        hsArray.add(123);
+        System.out.println(hsArray);
     }
     public void incrRoundsPlayed(){
         roundsPlayed ++;
@@ -48,18 +51,10 @@ public class Stats {
         editor.apply();
     }
     public boolean checkNewHighScore(double curScore) {
-        return hsArray.addNewHS(round(curScore, 2));
+        return hsArray.add(Util.round(curScore, 2));
     }
 
 
-    public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        long factor = (long) Math.pow(10, places);
-        value = value * factor;
-        long tmp = Math.round(value);
-        return (double) tmp / factor;
-    }
     public void resetScores() {
             hsArray.resetScores();
     }
@@ -109,6 +104,6 @@ public class Stats {
         return totalAccumPoints;
     }
     public double getCorrectGuessAvg(){
-        return correctGuessAvg;
+        return Util.round(correctGuessAvg, 4);
     }
 }
