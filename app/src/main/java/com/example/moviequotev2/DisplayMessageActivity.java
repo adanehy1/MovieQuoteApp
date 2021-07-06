@@ -1,4 +1,5 @@
 package com.example.moviequotev2;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.json.JSONException;
-
 
 public class DisplayMessageActivity extends AppCompatActivity {
     private TextView countdownText;
@@ -184,9 +184,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             ((globalClass) this.getApplication()).setScore(calculateScore(timeLeftInMilliseconds));
             stats.incrTotalAccumPoints(((globalClass) this.getApplication()).getScore());
             stats.incrCorrectGuesses();
-
         }
-        stats.checkNewHighScore((double)((globalClass) this.getApplication()).getScore());
         //Makes the other 3 buttons unclickable
         primButton.setEnabled(false);
         secButton.setEnabled(false);
@@ -307,7 +305,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     public double calculateScore(long timeRemaining){
         double timeInSec = (timeRemaining)/1000.0;
-        return round(timeInSec*100, 2);
+        return Util.round(timeInSec*100, 2);
     }
     @Override
     public void onBackPressed(){
@@ -334,14 +332,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 System.out.println("Error with debug randNum");
             }
         } else {return;}
-    }
-    public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        long factor = (long) Math.pow(10, places);
-        value = value * factor;
-        long tmp = Math.round(value);
-        return (double) tmp / factor;
     }
 }
 

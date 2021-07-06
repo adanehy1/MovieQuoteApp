@@ -15,20 +15,22 @@ public class HighScoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_high_score);
         Stats stats = new Stats(getApplicationContext());
 
+        //stats.testMHS();
+
         TextView textView1 = (TextView) findViewById(R.id.HS1);
-        textView1.setText("First High Score: " + stats.getHighScore());
+        textView1.setText("First High Score: " + stats.getHighScore()[0]);
 
         TextView textView2 = (TextView) findViewById(R.id.HS2);
-        textView2.setText("Second High Score");
+        textView2.setText("Second High Score: " + stats.getHighScore()[1]);
 
         TextView textView3 = (TextView) findViewById(R.id.HS3);
-        textView3.setText("Third High Score");
+        textView3.setText("Third High Score: " + stats.getHighScore()[2]);
 
         TextView textView4 = (TextView) findViewById(R.id.HS4);
-        textView4.setText("Fourth High Score");
+        textView4.setText("Fourth High Score: " + stats.getHighScore()[3]);
 
         TextView textView5 = (TextView) findViewById(R.id.HS5);
-        textView5.setText("Fifth High Score");
+        textView5.setText("Fifth High Score: " + stats.getHighScore()[4]);
 
         TextView stat1 = (TextView) findViewById(R.id.stat1);
         stat1.setText("Rounds Played");
@@ -52,14 +54,13 @@ public class HighScoreActivity extends AppCompatActivity {
         insStat3.setText(String.valueOf(stats.getTotalPoints()));
 
         TextView insStat4 = (TextView) findViewById(R.id.actualStat4);
-        insStat4.setText(String.valueOf(stats.getCorrectGuessAvg()));
+        insStat4.setText(String.valueOf(stats.getCorrectGuessAvg()) + "%");
     }
     @Override
 
     public void onBackPressed(){
         Intent intent2 = new Intent(this, MainActivity.class);
                 startActivity(intent2);
-
     }
 
 }

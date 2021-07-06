@@ -38,11 +38,11 @@ public class globalClass extends Application {
         usedQuotes.clear();
     }
     public double getScore(){
-        return Math.floor(score * 100) / 100;
+        return Util.round(Math.floor(score * 100) / 100, 1);
     }
     public void setScore(double newScore){
-        System.out.println("ADDING "+  newScore + " to score");
         score += newScore;
+        Util.round(score, 1);
     }
     public void scoreClear(){
         score = 0.0;

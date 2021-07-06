@@ -19,7 +19,6 @@ public class DisplayCorrectActivity extends AppCompatActivity {
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning; //true/false of whether the timer is running
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS; //Variable of the time left
-    static int roundNums = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,6 @@ public class DisplayCorrectActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.score);
         textView.setText(String.valueOf(((globalClass) this.getApplication()).getScore()));
         //string with the title of "globalClass" creates the score
-
     }
 
     private void startTimer() {
@@ -40,7 +38,6 @@ public class DisplayCorrectActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 mTimeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
-
             }
 
             @Override
