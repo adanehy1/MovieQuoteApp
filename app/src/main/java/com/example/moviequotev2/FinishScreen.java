@@ -2,16 +2,12 @@ package com.example.moviequotev2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.TextView;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class FinishScreen extends AppCompatActivity {
     private static final long START_TIME_IN_MILLIS = 3000; //Inital start time of the timer
@@ -33,25 +29,58 @@ public class FinishScreen extends AppCompatActivity {
         //string with the title of "globalClass" creates the score
         stats.checkNewHighScore(((globalClass) this.getApplication()).getScore());
 
-        TextView textView1 = (TextView) findViewById(R.id.HS1);
-        textView1.setText("First High Score: " + Util.round(stats.getHighScore()[0], 1));
+        Typeface boldTypeFace = Typeface.defaultFromStyle(Typeface.BOLD);
 
-        TextView textView2 = (TextView) findViewById(R.id.HS2);
-        textView2.setText("Second High Score: " + Util.round(stats.getHighScore()[1], 1));
+        //Setting Numbers and Bold
+        TextView textView1 = (TextView) findViewById(R.id.HS1num);
+        textView1.setText("1). ");
+        textView1.setTypeface(boldTypeFace);
 
-        TextView textView3 = (TextView) findViewById(R.id.HS3);
-        textView3.setText("Third High Score: " + Util.round(stats.getHighScore()[2], 1));
+        TextView textView2 = (TextView) findViewById(R.id.HS2num);
+        textView2.setText("2). ");
+        textView2.setTypeface(boldTypeFace);
 
-        TextView textView4 = (TextView) findViewById(R.id.HS4);
-        textView4.setText("Fourth High Score: " + Util.round(stats.getHighScore()[3], 1));
+        TextView textView3 = (TextView) findViewById(R.id.HS3num);
+        textView3.setText("3). ");
+        textView3.setTypeface(boldTypeFace);
 
-        TextView textView5 = (TextView) findViewById(R.id.HS5);
-        textView5.setText("Fifth High Score: " + Util.round(stats.getHighScore()[4], 1));
+        TextView textView4 = (TextView) findViewById(R.id.HS5num);
+        textView4.setText("4). ");
+        textView4.setTypeface(boldTypeFace);
+
+        TextView textView5 = (TextView) findViewById(R.id.HS4num);
+        textView5.setText("5). ");
+        textView5.setTypeface(boldTypeFace);
+
+        //Setting High Score values
+        TextView highScore1 = (TextView) findViewById(R.id.HS1);
+        highScore1.setText("" + Util.round(stats.getHighScore()[0], 1));
+
+        TextView highScore2 = (TextView) findViewById(R.id.HS2);
+        highScore2.setText("" + Util.round(stats.getHighScore()[1], 1));
+
+        TextView highScore3 = (TextView) findViewById(R.id.HS3);
+        highScore3.setText("" + Util.round(stats.getHighScore()[2], 1));
+
+        TextView highScore4 = (TextView) findViewById(R.id.HS5);
+        highScore4.setText("" + Util.round(stats.getHighScore()[3], 1));
+
+        TextView highScore5 = (TextView) findViewById(R.id.HS4);
+        highScore5.setText("" + Util.round(stats.getHighScore()[4], 1));
+
     }
 
     public void openButton(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+    public void restartButton(View view) {
+        Intent intent2 = new Intent(this, RoundActivity.class);
+        startActivity(intent2);
+    }
+    public void movieSelectButton(View view) {
+        Intent intent3 = new Intent(this, MovieSelectActivity.class);
+        startActivity(intent3);
     }
 
 

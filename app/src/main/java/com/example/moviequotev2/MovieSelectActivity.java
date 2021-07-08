@@ -91,7 +91,7 @@ public class MovieSelectActivity extends AppCompatActivity {
             movieSelectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (num[0] %2==0){
+                    if (num[0] % 2 == 0) {
                         //First Click (ADD)
                         num[0]++;
                         //System.out.println(num[0]);
@@ -99,8 +99,7 @@ public class MovieSelectActivity extends AppCompatActivity {
                         movieSelectButton.setTextColor(Color.BLACK);
                         finalMovieNames.remove(finalMovieNames1.get(finalCounter));
                         System.out.println(finalMovieNames.toString());
-                    }
-                    else{
+                    } else {
                         //Second Click (REMOVE)
                         num[0]++;
                         //System.out.println(num[0]);
@@ -110,13 +109,13 @@ public class MovieSelectActivity extends AppCompatActivity {
                         System.out.println(finalMovieNames.toString());
                     }
                     final int size = finalMovieNames.size();
-                    if(size >= 4){
+                    if (size >= 4) {
                         startGameButton.setEnabled(true);
                     }
-                    if(size == 3){
+                    if (size == 3) {
                         startGameButton.setEnabled(false);
                     }
-                    }
+                }
             });
 
             row.addView(movieSelectButton);
@@ -128,15 +127,21 @@ public class MovieSelectActivity extends AppCompatActivity {
         startGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-               String[] selectedMovies = finalMovieNames.toArray(new String[0]);
+                String[] selectedMovies = finalMovieNames.toArray(new String[0]);
                 ((globalClass) MovieSelectActivity.this.getApplication()).setSelectedMovies(selectedMovies);
                 Intent myIntent = new Intent(MovieSelectActivity.this, RoundActivity.class);
                 startActivity(myIntent);
 
             }
-            });
+        });
 
         setContentView(total);
 
     }
-}
+    @Override
+    public void onBackPressed(){
+        Intent back = new Intent(MovieSelectActivity.this, MainActivity.class);
+        startActivity(back);
+    }
+
+    }
