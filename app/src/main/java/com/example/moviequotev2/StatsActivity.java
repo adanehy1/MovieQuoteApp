@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class StatsActivity extends AppCompatActivity {
@@ -83,6 +84,13 @@ public class StatsActivity extends AppCompatActivity {
 
         TextView insStat4 = (TextView) findViewById(R.id.actualStat4);
         insStat4.setText(String.valueOf(stats.getCorrectGuessAvg()) + "%");
+    }
+
+    public void resetStats(View view) {
+        Stats stats = new Stats(getApplicationContext());
+        stats.resetAll();
+        Intent intent2 = new Intent(this, StatsActivity.class);
+        startActivity(intent2);
     }
     @Override
 

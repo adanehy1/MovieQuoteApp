@@ -220,6 +220,7 @@
         android:id="@+id/button9"
         android:layout_width="50dp"
         android:layout_height="30dp"
+        android:onClick="resetStats"
         android:text="Reset"
         android:textSize="8sp"
         app:layout_constraintEnd_toEndOf="parent"
