@@ -62,10 +62,10 @@ public class FinishScreen extends AppCompatActivity {
         TextView highScore3 = (TextView) findViewById(R.id.HS3);
         highScore3.setText("" + Util.round(stats.getHighScore()[2], 1));
 
-        TextView highScore4 = (TextView) findViewById(R.id.HS5);
+        TextView highScore4 = (TextView) findViewById(R.id.HS4);
         highScore4.setText("" + Util.round(stats.getHighScore()[3], 1));
 
-        TextView highScore5 = (TextView) findViewById(R.id.HS4);
+        TextView highScore5 = (TextView) findViewById(R.id.HS5);
         highScore5.setText("" + Util.round(stats.getHighScore()[4], 1));
 
     }
