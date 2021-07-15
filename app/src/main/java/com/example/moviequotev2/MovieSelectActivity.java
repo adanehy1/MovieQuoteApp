@@ -43,9 +43,11 @@ public class MovieSelectActivity extends AppCompatActivity {
 
         LinearLayout total = new LinearLayout(this);
         total.setOrientation(LinearLayout.VERTICAL);
+        total.setBackgroundColor(Color.DKGRAY);
 
         TextView textView = new TextView(this);
         textView.setText("Select 4 or More Movies");
+        textView.setTextColor(Color.WHITE);
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(34);
 
@@ -53,10 +55,12 @@ public class MovieSelectActivity extends AppCompatActivity {
         startGameButton.setText("Start Game");
         startGameButton.setEnabled(false);
         startGameButton.setHeight(400);
+        startGameButton.setBackground(getDrawable(R.drawable.movie_not_selected_button));
 
         ScrollView scroll = new ScrollView(this);
+        scroll.setBackgroundColor(Color.GRAY);
         scroll.setLayoutParams(new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.FILL_PARENT, 1500));
+                RelativeLayout.LayoutParams.FILL_PARENT, 1600));
         //This restricts the height of the scroll view. In this situtation the height is 1500
 
         LinearLayout layout = new LinearLayout(this);
@@ -85,6 +89,8 @@ public class MovieSelectActivity extends AppCompatActivity {
             movieSelectButton.setText(movieNames.get(counter));
             movieSelectButton.setId(id);
             movieSelectButton.setWidth(1000);
+            movieSelectButton.setHeight(150);
+            movieSelectButton.setBackground(getDrawable(R.drawable.movie_not_selected_button));
             final int[] num = {3};
             final int finalCounter = counter;
             final List<String> finalMovieNames1 = movieNames;
@@ -95,7 +101,7 @@ public class MovieSelectActivity extends AppCompatActivity {
                         //First Click (ADD)
                         num[0]++;
                         //System.out.println(num[0]);
-                        movieSelectButton.setBackgroundColor(Color.WHITE);
+                        movieSelectButton.setBackground(getDrawable(R.drawable.movie_not_selected_button));
                         movieSelectButton.setTextColor(Color.BLACK);
                         finalMovieNames.remove(finalMovieNames1.get(finalCounter));
                         System.out.println(finalMovieNames.toString());
@@ -103,7 +109,7 @@ public class MovieSelectActivity extends AppCompatActivity {
                         //Second Click (REMOVE)
                         num[0]++;
                         //System.out.println(num[0]);
-                        movieSelectButton.setBackgroundColor(Color.BLACK);
+                        movieSelectButton.setBackground(getDrawable(R.drawable.movie_selected_button));
                         movieSelectButton.setTextColor(Color.WHITE);
                         finalMovieNames.add(finalMovieNames1.get(finalCounter));
                         System.out.println(finalMovieNames.toString());

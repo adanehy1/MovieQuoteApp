@@ -34,7 +34,7 @@ public class RoundActivity extends AppCompatActivity {
     int randNum = (int) (Math.random() * 4) + 1;
     static final String SHARED_PREFS = "highScore";
     static final String HIGH_SCORE = "highScore";
-    final boolean debug  = true;
+    final boolean debug  = false;
     boolean firstRound = true;
     private ImageView timerAnimation;
 
