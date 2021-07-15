@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
@@ -58,6 +59,7 @@ public class RoundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
 
+
         //Starting animation
         timerAnimation = (ImageView)findViewById(R.id.timerAnimation);
         timerAnimation.post(new Runnable() {
@@ -96,6 +98,7 @@ public class RoundActivity extends AppCompatActivity {
         //string with the title of "globalClass" creates the score
 
         TextView1.setText(selectedQuote);
+        TextView1.setTextColor(Color.WHITE);
 
         final TextView textViewScore = (TextView) findViewById(R.id.addedScore);
         textViewScore.setVisibility(View.INVISIBLE);

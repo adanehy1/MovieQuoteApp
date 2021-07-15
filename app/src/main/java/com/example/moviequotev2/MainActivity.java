@@ -25,11 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
         Button button = (Button)findViewById(R.id.button);
         button.setText("Start");
+        button.setBackground(getDrawable(R.drawable.movie_not_selected_button));
 
         ImageView imageView = (ImageView)findViewById(R.id.imageView4);
 
         Button statsButton = (Button)findViewById(R.id.button7);
         statsButton.setText("Statistics");
+        statsButton.setBackground(getDrawable(R.drawable.movie_not_selected_button));
 
         //Animations
         Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_in);
