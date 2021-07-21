@@ -55,7 +55,9 @@ public class MovieSelectActivity extends AppCompatActivity {
         startGameButton.setText("Start Game");
         startGameButton.setEnabled(false);
         startGameButton.setHeight(400);
-        startGameButton.setBackground(getDrawable(R.drawable.movie_not_selected_button));
+        startGameButton.setBackground(getDrawable(R.drawable.start_game_movie_select_button));
+        startGameButton.setTextColor(Color.DKGRAY);
+        startGameButton.setTextSize(75);
 
         ScrollView scroll = new ScrollView(this);
         scroll.setBackgroundColor(Color.GRAY);
@@ -117,9 +119,11 @@ public class MovieSelectActivity extends AppCompatActivity {
                     final int size = finalMovieNames.size();
                     if (size >= 4) {
                         startGameButton.setEnabled(true);
+                        startGameButton.setTextColor(Color.WHITE);
                     }
                     if (size == 3) {
                         startGameButton.setEnabled(false);
+                        startGameButton.setTextColor(Color.DKGRAY);
                     }
                 }
             });
