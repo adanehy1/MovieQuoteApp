@@ -39,7 +39,7 @@ public class MovieSelectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //The linear layout Total includes the start game button, the select movies text view and the scroll view
-        // The order in which they are added to the total layout matters. The scroll view will overlap anything
+        //The order in which they are added to the total layout matters. The scroll view will overlap anything
 
         LinearLayout total = new LinearLayout(this);
         total.setOrientation(LinearLayout.VERTICAL);
