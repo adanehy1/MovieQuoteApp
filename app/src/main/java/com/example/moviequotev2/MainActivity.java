@@ -43,8 +43,7 @@ public class MainActivity extends AppCompatActivity {
         titleText2.setTextSize(50);
 
         Button statsButton = (Button)findViewById(R.id.button7);
-        statsButton.setText("Statistics");
-        statsButton.setBackground(getDrawable(R.drawable.movie_not_selected_button));
+        statsButton.setBackground(getDrawable(R.drawable.statisticsbutton));
 
         //Animations
         Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_in);

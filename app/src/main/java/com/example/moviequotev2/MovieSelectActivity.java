@@ -54,8 +54,11 @@ public class MovieSelectActivity extends AppCompatActivity {
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(34);
 
+        final Button selectAllButton = new Button(this);
+        selectAllButton.setText("Select All");
+
         final Button startGameButton = new Button(this);
-        startGameButton.setText("Start Game");
+        startGameButton.setText("Start");
         startGameButton.setEnabled(false);
         startGameButton.setHeight(400);
         //startGameButton.setVisibility(View.INVISIBLE);
@@ -67,12 +70,13 @@ public class MovieSelectActivity extends AppCompatActivity {
         scroll.setBackgroundColor(getResources().getColor(R.color.DarkCyan));
         scroll.setLayoutParams(new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.FILL_PARENT, 1600));
-        //This restricts the height of the scroll view. In this situtation the height is 1500
+        //This restricts the height of the scroll view. In this situtation the height is 1600
 
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
 
         total.addView(textView);
+        total.addView(selectAllButton);
         total.addView(scroll);
         total.addView(startGameButton);
         scroll.addView(layout);
