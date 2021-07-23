@@ -3,6 +3,7 @@ package com.example.moviequotev2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -26,14 +27,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button button = (Button)findViewById(R.id.button);
-        button.setText("Start");
-        button.setBackground(getDrawable(R.drawable.movie_not_selected_button));
+        //button.setText("Start");
+        button.setBackground(getDrawable(R.drawable.startgamebutton));
 
         TextView titleText = (TextView)findViewById(R.id.titleText);
         titleText.setTextColor(getResources().getColor(R.color.DarkCyan));
         titleText.setText("Fast Movies");
         titleText.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC));
         titleText.setTextSize(50);
+
+        TextView titleText2 = (TextView)findViewById(R.id.titleText2);
+        titleText2.setTextColor(Color.BLACK);
+        titleText2.setText("Fast Movies");
+        titleText2.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC));
+        titleText2.setTextSize(50);
 
         Button statsButton = (Button)findViewById(R.id.button7);
         statsButton.setText("Statistics");
@@ -46,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         Animation titleAnimation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.slide_down);
         titleText.startAnimation(titleAnimation);
+        titleText2.startAnimation(titleAnimation);
 
         ((globalClass) this.getApplication()).scoreClear();
     }
