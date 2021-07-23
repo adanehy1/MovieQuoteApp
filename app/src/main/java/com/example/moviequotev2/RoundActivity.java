@@ -94,6 +94,7 @@ public class RoundActivity extends AppCompatActivity {
         }
 
         TextView textView = (TextView) findViewById(R.id.textScore2);
+        textView.setTextColor(Color.WHITE);
         textView.setText("Score: " + String.valueOf(((globalClass) this.getApplication()).getScore()));
         //string with the title of "globalClass" creates the score
 
@@ -209,6 +210,7 @@ public class RoundActivity extends AppCompatActivity {
         if(randNum == round) {
             primButton.setBackgroundColor(Color.GREEN);
             textViewScore.setVisibility(View.VISIBLE);
+            textViewScore.setTextColor(Color.WHITE);
             Animation plusScoreAnim = AnimationUtils.loadAnimation(RoundActivity.this,R.anim.bounce);
             textViewScore.startAnimation(plusScoreAnim);
             textViewScore.setText("+" + calculateScore(timeLeftInMilliseconds));

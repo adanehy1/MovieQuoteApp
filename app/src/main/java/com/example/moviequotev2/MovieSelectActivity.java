@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -44,6 +46,7 @@ public class MovieSelectActivity extends AppCompatActivity {
         LinearLayout total = new LinearLayout(this);
         total.setOrientation(LinearLayout.VERTICAL);
         total.setBackgroundColor(Color.DKGRAY);
+        //total.setBackgroundColor(getResources().getColor(R.color.LightSteelBlue));
 
         TextView textView = new TextView(this);
         textView.setText("Select 4 or More Movies");
@@ -55,12 +58,13 @@ public class MovieSelectActivity extends AppCompatActivity {
         startGameButton.setText("Start Game");
         startGameButton.setEnabled(false);
         startGameButton.setHeight(400);
+        startGameButton.setVisibility(View.INVISIBLE);
         startGameButton.setBackground(getDrawable(R.drawable.start_game_movie_select_button));
-        startGameButton.setTextColor(Color.DKGRAY);
+        startGameButton.setTextColor((getResources().getColor(R.color.DarkCyan)));
         startGameButton.setTextSize(75);
 
         ScrollView scroll = new ScrollView(this);
-        scroll.setBackgroundColor(Color.GRAY);
+        scroll.setBackgroundColor(getResources().getColor(R.color.DarkCyan));
         scroll.setLayoutParams(new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.FILL_PARENT, 1600));
         //This restricts the height of the scroll view. In this situtation the height is 1500
@@ -120,10 +124,16 @@ public class MovieSelectActivity extends AppCompatActivity {
                     if (size >= 4) {
                         startGameButton.setEnabled(true);
                         startGameButton.setTextColor(Color.WHITE);
+                        Animation startGame = AnimationUtils.loadAnimation(MovieSelectActivity.this,R.anim.fade_in);
+                        startGameButton.startAnimation(startGame);
+                        startGameButton.setVisibility(View.VISIBLE);
                     }
                     if (size == 3) {
                         startGameButton.setEnabled(false);
-                        startGameButton.setTextColor(Color.DKGRAY);
+                        startGameButton.setTextColor(Color.WHITE);
+                        Animation startGame = AnimationUtils.loadAnimation(MovieSelectActivity.this,R.anim.fade_out);
+                        startGameButton.startAnimation(startGame);
+                        startGameButton.setVisibility(View.INVISIBLE);
                     }
                 }
             });

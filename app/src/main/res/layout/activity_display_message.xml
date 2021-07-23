@@ -5,22 +5,22 @@
     android:id="@+id/view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8C8C8C"
+    android:background="@color/DarkCyan"
     tools:context=".RoundActivity">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="1000dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/banner" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="400dp"
+        android:layout_width="0dp"
         android:layout_height="270dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,9 +109,9 @@
 
     <ImageView
         android:id="@+id/popup"
-        android:layout_width="307dp"
-        android:layout_height="164dp"
-        android:layout_marginTop="300dp"
+        android:layout_width="306dp"
+        android:layout_height="154dp"
+        android:layout_marginTop="325dp"
         android:background="#000000"
         android:foreground="@android:color/background_dark"
         android:visibility="invisible"

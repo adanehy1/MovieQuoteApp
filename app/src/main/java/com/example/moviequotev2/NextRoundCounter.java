@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -25,7 +29,11 @@ public class NextRoundCounter extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next_round_counter);
 
+        TextView nextRoundText = findViewById(R.id.nextround);
+        nextRoundText.setTextColor(getResources().getColor(R.color.DarkCyan));
+
         mTextViewCountDown = findViewById(R.id.counter); //This assigns the text view of "counter" in xml file to the variable we created
+        mTextViewCountDown.setTextColor(getResources().getColor(R.color.DarkCyan));
 
         startTimer();
 
