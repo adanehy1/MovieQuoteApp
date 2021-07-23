@@ -58,9 +58,9 @@ public class MovieSelectActivity extends AppCompatActivity {
         startGameButton.setText("Start Game");
         startGameButton.setEnabled(false);
         startGameButton.setHeight(400);
-        startGameButton.setVisibility(View.INVISIBLE);
-        startGameButton.setBackground(getDrawable(R.drawable.start_game_movie_select_button));
-        startGameButton.setTextColor((getResources().getColor(R.color.DarkCyan)));
+        //startGameButton.setVisibility(View.INVISIBLE);
+        startGameButton.setBackground(getDrawable(R.drawable.final_start_round_button_custom));
+        startGameButton.setTextColor(Color.WHITE);
         startGameButton.setTextSize(75);
 
         ScrollView scroll = new ScrollView(this);
@@ -123,17 +123,17 @@ public class MovieSelectActivity extends AppCompatActivity {
                     final int size = finalMovieNames.size();
                     if (size >= 4) {
                         startGameButton.setEnabled(true);
-                        startGameButton.setTextColor(Color.WHITE);
-                        Animation startGame = AnimationUtils.loadAnimation(MovieSelectActivity.this,R.anim.fade_in);
-                        startGameButton.startAnimation(startGame);
-                        startGameButton.setVisibility(View.VISIBLE);
+                        //startGameButton.setTextColor(Color.WHITE);
+                        //Animation startGame = AnimationUtils.loadAnimation(MovieSelectActivity.this,R.anim.fade_in);
+                        //startGameButton.startAnimation(startGame);
+                        //startGameButton.setVisibility(View.VISIBLE);
                     }
                     if (size == 3) {
                         startGameButton.setEnabled(false);
-                        startGameButton.setTextColor(Color.WHITE);
-                        Animation startGame = AnimationUtils.loadAnimation(MovieSelectActivity.this,R.anim.fade_out);
-                        startGameButton.startAnimation(startGame);
-                        startGameButton.setVisibility(View.INVISIBLE);
+                        //startGameButton.setTextColor(Color.WHITE);
+                        //Animation startGame = AnimationUtils.loadAnimation(MovieSelectActivity.this,R.anim.fade_out);
+                        //startGameButton.startAnimation(startGame);
+                        //startGameButton.setVisibility(View.INVISIBLE);
                     }
                 }
             });

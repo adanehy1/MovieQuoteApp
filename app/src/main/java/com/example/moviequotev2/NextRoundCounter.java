@@ -30,10 +30,12 @@ public class NextRoundCounter extends AppCompatActivity {
         setContentView(R.layout.activity_next_round_counter);
 
         TextView nextRoundText = findViewById(R.id.nextround);
-        nextRoundText.setTextColor(getResources().getColor(R.color.DarkCyan));
+        //nextRoundText.setTextColor(getResources().getColor(R.color.DarkCyan));
+        nextRoundText.setTextColor(Color.WHITE);
 
         mTextViewCountDown = findViewById(R.id.counter); //This assigns the text view of "counter" in xml file to the variable we created
-        mTextViewCountDown.setTextColor(getResources().getColor(R.color.DarkCyan));
+        //mTextViewCountDown.setTextColor(getResources().getColor(R.color.DarkCyan));
+        mTextViewCountDown.setTextColor(Color.WHITE);
 
         startTimer();
 
