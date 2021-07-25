@@ -6,8 +6,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Movie;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -56,6 +59,10 @@ public class MovieSelectActivity extends AppCompatActivity {
 
         final Button selectAllButton = new Button(this);
         selectAllButton.setText("Select All");
+        Drawable selectMovies = getResources().getDrawable(R.drawable.selectedmovieoff);
+        Bitmap bitmapSelect = ((BitmapDrawable) selectMovies).getBitmap();
+        Drawable selectAllMapped = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmapSelect, 500, 50, true));
+        selectAllButton.setBackground(selectAllMapped);
 
         final Button startGameButton = new Button(this);
         startGameButton.setText("Start");
@@ -100,10 +107,45 @@ public class MovieSelectActivity extends AppCompatActivity {
             movieSelectButton.setId(id);
             movieSelectButton.setWidth(1000);
             movieSelectButton.setHeight(150);
-            movieSelectButton.setBackground(getDrawable(R.drawable.movie_not_selected_button));
+
+            Drawable drawableOff = getResources().getDrawable(R.drawable.selectedmovieoff);
+            Bitmap bitmap = ((BitmapDrawable) drawableOff).getBitmap();
+            Drawable offMapped = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 500, 50, true));
+            movieSelectButton.setBackground(offMapped);
+
             final int[] num = {3};
             final int finalCounter = counter;
             final List<String> finalMovieNames1 = movieNames;
+
+            selectAllButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v1) {
+                    if (num[0] % 2 == 0) {
+                        //First Click (ADD)
+                        num[0]++;
+                        //System.out.println(num[0]);
+
+                        Drawable drawableOff = getResources().getDrawable(R.drawable.selectedmovieoff);
+                        Bitmap bitmap = ((BitmapDrawable) drawableOff).getBitmap();
+                        Drawable offMapped = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 500, 50, true));
+                        selectAllButton.setBackground(offMapped);
+
+                        selectAllButton.setTextColor(Color.BLACK);
+
+                    } else {
+                        //Second Click (REMOVE)
+                        num[0]++;
+                        //System.out.println(num[0]);
+
+                        Drawable drawableOn = getResources().getDrawable(R.drawable.selectedmovieon);
+                        Bitmap bitmap = ((BitmapDrawable) drawableOn).getBitmap();
+                        Drawable onMapped = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 500, 50, true));
+                        selectAllButton.setBackground(onMapped);
+
+                        selectAllButton.setTextColor(Color.WHITE);
+                }
+            }});
+
             movieSelectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -111,7 +153,12 @@ public class MovieSelectActivity extends AppCompatActivity {
                         //First Click (ADD)
                         num[0]++;
                         //System.out.println(num[0]);
-                        movieSelectButton.setBackground(getDrawable(R.drawable.movie_not_selected_button));
+
+                        Drawable drawableOff = getResources().getDrawable(R.drawable.selectedmovieoff);
+                        Bitmap bitmap = ((BitmapDrawable) drawableOff).getBitmap();
+                        Drawable offMapped = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 500, 50, true));
+                        movieSelectButton.setBackground(offMapped);
+
                         movieSelectButton.setTextColor(Color.BLACK);
                         finalMovieNames.remove(finalMovieNames1.get(finalCounter));
                         System.out.println(finalMovieNames.toString());
@@ -119,7 +166,12 @@ public class MovieSelectActivity extends AppCompatActivity {
                         //Second Click (REMOVE)
                         num[0]++;
                         //System.out.println(num[0]);
-                        movieSelectButton.setBackground(getDrawable(R.drawable.movie_selected_button));
+
+                        Drawable drawableOn = getResources().getDrawable(R.drawable.selectedmovieon);
+                        Bitmap bitmap = ((BitmapDrawable) drawableOn).getBitmap();
+                        Drawable onMapped = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 500, 50, true));
+                        movieSelectButton.setBackground(onMapped);
+
                         movieSelectButton.setTextColor(Color.WHITE);
                         finalMovieNames.add(finalMovieNames1.get(finalCounter));
                         System.out.println(finalMovieNames.toString());
