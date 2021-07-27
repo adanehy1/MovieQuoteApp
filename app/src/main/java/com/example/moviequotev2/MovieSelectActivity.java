@@ -88,10 +88,12 @@ public class MovieSelectActivity extends AppCompatActivity {
         total.addView(startGameButton);
         scroll.addView(layout);
         List<String> movieNames = new ArrayList<>();
+        List<String> allMovies;
         final List<String> finalMovieNames = new ArrayList<>();
         try {
             JsonQuotes jQuotes = new JsonQuotes(getApplicationContext());
             movieNames = jQuotes.getMovieNames();
+            allMovies = jQuotes.getMovieNames();
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -121,21 +123,22 @@ public class MovieSelectActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v1) {
                     if (num[0] % 2 == 0) {
-                        //First Click (ADD)
+                        //second Click (ADD)
                         num[0]++;
-                        //System.out.println(num[0]);
-
+                        finalMovieNames.clear();
+                        startGameButton.setEnabled(false);
                         Drawable drawableOff = getResources().getDrawable(R.drawable.selectedmovieoff);
                         Bitmap bitmap = ((BitmapDrawable) drawableOff).getBitmap();
                         Drawable offMapped = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 500, 50, true));
                         selectAllButton.setBackground(offMapped);
-
-                        selectAllButton.setTextColor(Color.BLACK);
-
                     } else {
-                        //Second Click (REMOVE)
+                        //first Click (REMOVE)
+                        selectAllButton.setTextColor(Color.BLACK);
+                        for(String mov : finalMovieNames1){
+                            finalMovieNames.add(mov);
+                        }
+                        startGameButton.setEnabled(true);
                         num[0]++;
-                        //System.out.println(num[0]);
 
                         Drawable drawableOn = getResources().getDrawable(R.drawable.selectedmovieon);
                         Bitmap bitmap = ((BitmapDrawable) drawableOn).getBitmap();
