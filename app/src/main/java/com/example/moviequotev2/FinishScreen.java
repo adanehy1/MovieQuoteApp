@@ -95,6 +95,7 @@ public class FinishScreen extends AppCompatActivity {
         startActivity(intent);
     }
     public void restartButton(View view) {
+        ((globalClass) this.getApplication()).scoreClear();
         Intent intent2 = new Intent(this, RoundActivity.class);
         startActivity(intent2);
     }
